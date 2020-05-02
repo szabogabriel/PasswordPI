@@ -1,4 +1,4 @@
-# Setup the keyboard mode
+# Setup RaspberryPI as USB keyboard
 
 The setup of the key emulation mode is based on [this](https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/) tutorial.
 
@@ -52,5 +52,16 @@ ls /sys/class/udc > UDC
 
 If everything was done correctly, then upon connecting the Raspberry PI to a PC, it should be recognized as a USB keyboard and we should be able to send USB HIB packets to the computer. The packet is 8 bytes long and is formatted as follows.
 
-* byte 1 - control byte. It contains the status of the control keys as bit flags (Shift, Ctrl etc). 
+* byte 0 - control byte. It contains the status of the control keys as bit flags (Shift, Ctrl etc).
+** bit 0 - Left CTRL
+** bit 1 - Left SHIFT
+** bit 2 - Left ALT
+** bit 3 - Left GUI (Windows Key, Super Key)
+** bit 4 - Right CTRL
+** bit 5 - Right SHIFT
+** bit 6 - Right ALT
+** bit 7 - Right GUI (Windows Key, Super Key)
+* byte 1 - reserved, must be empty (0x00)
+* byte (2-7) - Pressed  key codes
 
+Details regarding the USB HID protocol can be found [here](https://wiki.osdev.org/USB_Human_Interface_Devices).
