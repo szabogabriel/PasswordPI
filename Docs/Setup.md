@@ -1,3 +1,11 @@
+# Install Raspbian onto the Raspberry PI
+
+Detailed instruction regarding the installation can be found [here](https://www.raspberrypi.org/documentation/installation/installing-images/).
+
+# Installing Waveshare 1.44" libraries
+
+The libraries must be installed according to the information available [here](https://www.waveshare.com/wiki/1.44inch_LCD_HAT).
+
 # Setup RaspberryPI as USB keyboard
 
 The setup of the key emulation mode is based on [this](https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/) tutorial.
