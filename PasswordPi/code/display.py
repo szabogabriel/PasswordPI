@@ -35,8 +35,9 @@ class DisplayHandler:
         draw.rectangle((0,0,width,height), outline=0, fill=0)
         disp.LCD_ShowImage(image,0,0)
 
-        def DispHandler_clear():
-            disp.LCD_Clear()
+    def DispHandler_clear(self):
+        #disp.LCD_Clear()
+        draw.rectangle((0,0,width,height), outline=0, fill=0)
 
-        def DispHandler_write(message, linePosition):
-            draw.text((0, linePosition * lineHeight), "Number of call: " + str(counter), fill="BLUE")
+    def DispHandler_write(self, message, linePosition):
+        draw.text((0, linePosition * lineHeight), message, fill="BLUE")

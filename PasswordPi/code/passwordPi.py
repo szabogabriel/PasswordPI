@@ -4,6 +4,9 @@ import keyboard
 import display
 import keyUtil
 
+keyHandler = keyboard.KeyboardHandler()
+dispHandler = display.DisplayHandler()
+
 def buttonKeyUpCallback(channel):
     print("Key Up pressed.")
 
@@ -18,6 +21,8 @@ def buttonKeyRightCallback(channel):
 
 def buttonKeyCenterCallback(channel):
     print("Key Center pressed.")
+    dispHandler.DispHandler_clear()
+    dispHandler.DispHandler_write("Hello, world!", 2)
 
 def buttonKeyACallback(channel):
     print("Key A pressed.")
@@ -31,9 +36,9 @@ def buttonKeyCCallback(channel):
     print("Key C pressed.")
     keyUtil.write("'")
 
-keyHandler = keyboard.KeyboardHandler()
-dispHandler = display.DisplayHandler()
 
+
+keyHandler.addButtonKeyCenterCallback(buttonKeyCenterCallback)
 keyHandler.addButtonKeyACallback(buttonKeyACallback)
 keyHandler.addButtonKeyBCallback(buttonKeyBCallback)
 keyHandler.addButtonKeyCCallback(buttonKeyCCallback)
