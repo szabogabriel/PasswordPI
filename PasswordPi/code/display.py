@@ -25,6 +25,7 @@ class DisplayHandler:
 
         # Create blank image for drawing.
         # Make sure to create image with mode '1' for 1-bit color.
+        global image
         image = Image.new('RGB', (width, height))
 
         # Get drawing object to draw on image.
@@ -42,3 +43,5 @@ class DisplayHandler:
     def DispHandler_write(self, message, linePosition):
         draw.rectangle([(0,0),(10,10)], fill="RED")
         draw.text((0, linePosition * lineHeight), message, fill="BLUE")
+        #disp.LCD_Clear()
+        disp.LCD_ShowImage(image,0,0)
