@@ -2,6 +2,26 @@
 
 Detailed instruction regarding the installation can be found [here](https://www.raspberrypi.org/documentation/installation/installing-images/).
 
+# Setup ssh keys
+Generate a public SSH key.
+
+```Bash
+$ ssh-keygen -t rsa -b 2048
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/username/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/username/.ssh/id_rsa.
+Your public key has been saved in /home/username/.ssh/id_rsa.pub.
+```
+
+And copy it to your Raspberry PI device.
+
+```Bash
+$ ssh-copy-id pi@[raspberryPiUrl]
+pi@[raspberryPiUrl]'s password: 
+```
+
 # Installing Waveshare 1.44" libraries
 
 The libraries must be installed according to the information available [here](https://www.waveshare.com/wiki/1.44inch_LCD_HAT).
