@@ -38,6 +38,5 @@ keyHandler.addButtonKeyACallback(buttonKeyACallback)
 keyHandler.addButtonKeyBCallback(buttonKeyBCallback)
 keyHandler.addButtonKeyCCallback(buttonKeyCCallback)
 
-
 while 1:
     time.sleep(1000)
