@@ -1,4 +1,4 @@
-# PasswordPI
+# Password PI
 
 This project is a hardware password manager. It acts as a keyboard emulator for the host machine and sends the password as keyboard strokes.
 
