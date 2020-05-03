@@ -6,4 +6,4 @@ readonly targetDir=/home/pi/PasswordPi/code/boot
 
 ssh ${remoteUname}@${remoteIp} sudo chown -R ${remoteUname}:${remoteUname} ${targetDir}
 
-scp -r code/* ${remoteUname}@${remoteIp}:${targetDir}
+rsync -avh -e ssh code/* ${remoteUname}@${remoteIp}:${targetDir}

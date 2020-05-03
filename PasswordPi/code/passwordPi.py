@@ -22,7 +22,7 @@ def buttonKeyRightCallback(channel):
 def buttonKeyCenterCallback(channel):
     print("Key Center pressed.")
     dispHandler.DispHandler_clear()
-    dispHandler.DispHandler_write("Hello, world!", 2)
+    dispHandler.DispHandler_write("Hello, world!", 1)
 
 def buttonKeyACallback(channel):
     print("Key A pressed.")

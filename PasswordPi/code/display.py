@@ -40,4 +40,5 @@ class DisplayHandler:
         draw.rectangle((0,0,width,height), outline=0, fill=0)
 
     def DispHandler_write(self, message, linePosition):
+        draw.rectangle([(0,0),(10,10)], fill="RED")
         draw.text((0, linePosition * lineHeight), message, fill="BLUE")
