@@ -1,4 +1,4 @@
-package pi.password.manager.vault;
+package pi.password.manager.filesystem;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 import javax.swing.Timer;
 
 import pi.password.manager.PasswordEntity;
+import pi.password.manager.PasswordVault;
 
 public class FilesystemPasswordVault implements PasswordVault {
 
@@ -82,6 +84,11 @@ public class FilesystemPasswordVault implements PasswordVault {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<String> listPasswordEntityNames() {
+		return PROPERTIES.keySet().stream().map(o -> o.toString()).sorted().collect(Collectors.toList());
 	}
 
 }

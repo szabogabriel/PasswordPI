@@ -10,9 +10,13 @@ import pi.password.util.SystemUtil;
 
 public class SplashScreenButtonHandler extends ButtonHandler {
 	
+	public SplashScreenButtonHandler() {
+		super(ImageUtil.getSplashScreen());
+	}
+	
 	@Override
-	public void activateScreen() {
-		Display.INSTANCE.displayImage(ImageUtil.getSplashScreen());
+	public void activateHandler() {
+		Display.INSTANCE.displayImage(getBackground());
 		Display.INSTANCE.displayText(SystemUtil.getIpAddress().orElse("Offline"), Color.GREEN, Color.DARK_GRAY, TextFormat.SIZE_8_LINE_15, TextAlign.CENTER);
 	}
 
@@ -28,32 +32,27 @@ public class SplashScreenButtonHandler extends ButtonHandler {
 
 	@Override
 	public void handleJoystickUpPressed() {
-		// TODO Auto-generated method stub
-
+		ButtonHandler.PASSWORDS_SCREEN.activate();
 	}
 
 	@Override
 	public void handleJoystickDownPressed() {
-		// TODO Auto-generated method stub
-
+		ButtonHandler.PASSWORDS_SCREEN.activate();
 	}
 
 	@Override
 	public void handleJoysticlLeftPressed() {
-		// TODO Auto-generated method stub
-
+		ButtonHandler.PASSWORDS_SCREEN.activate();
 	}
 
 	@Override
 	public void handleJoystickRightPressed() {
-		// TODO Auto-generated method stub
-
+		ButtonHandler.PASSWORDS_SCREEN.activate();
 	}
 
 	@Override
 	public void handleJoystickCenterPressed() {
-		// TODO Auto-generated method stub
-
+		ButtonHandler.PASSWORDS_SCREEN.activate();
 	}
 
 }

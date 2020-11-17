@@ -8,11 +8,15 @@ import pi.password.hat.Display.TextFormat;
 import pi.password.util.ImageUtil;
 
 public class VaultManageScreenButtonHandler extends ButtonHandler {
+	
+	public VaultManageScreenButtonHandler() {
+		super(ImageUtil.getVaultBackground());
+	}
 
 	@Override
-	public void activateScreen() {
-		Display.INSTANCE.displayImage(ImageUtil.getVaultBackground());
-		Display.INSTANCE.displayText("Vaults", Color.GREEN, Color.BLACK, TextFormat.SIZE_16_LINE_0, TextAlign.CENTER);
+	public void activateHandler() {
+		Display.INSTANCE.displayImage(getBackground());
+		Display.INSTANCE.displayText("Vaults", Color.GREEN, Color.BLACK, TextFormat.SIZE_12_LINE_0, TextAlign.CENTER);
 	}
 
 	@Override

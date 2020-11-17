@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import com.waveshare.Hat;
 import com.waveshare.display.LcdGui;
+import com.waveshare.display.enums.DotPixel;
+import com.waveshare.display.enums.DrawFill;
 import com.waveshare.display.font.Font;
 import com.waveshare.display.font.Font12;
 import com.waveshare.display.font.Font16;
@@ -30,12 +32,12 @@ public enum Display {
 		SIZE_8_LINE_12(96, new Font8()), SIZE_8_LINE_13(104, new Font8()),
 		SIZE_8_LINE_14(112, new Font8()),SIZE_8_LINE_15(120, new Font8()),
 		
-		SIZE_12_LINE_0(0, new Font12()), SIZE_12_LINE_1(10, new Font12()),
-		SIZE_12_LINE_2(20, new Font12()), SIZE_12_LINE_3(30, new Font12()),
-		SIZE_12_LINE_4(40, new Font12()), SIZE_12_LINE_5(50, new Font12()),
-		SIZE_12_LINE_6(60, new Font12()), SIZE_12_LINE_7(70, new Font12()),
-		SIZE_12_LINE_8(80, new Font12()), SIZE_12_LINE_9(90, new Font12()),
-		SIZE_12_LINE_10(100, new Font12()), SIZE_12_LINE_11(110, new Font12()),
+		SIZE_12_LINE_0(0, new Font12()), SIZE_12_LINE_1(12, new Font12()),
+		SIZE_12_LINE_2(24, new Font12()), SIZE_12_LINE_3(36, new Font12()),
+		SIZE_12_LINE_4(48, new Font12()), SIZE_12_LINE_5(60, new Font12()),
+		SIZE_12_LINE_6(72, new Font12()), SIZE_12_LINE_7(84, new Font12()),
+		SIZE_12_LINE_8(96, new Font12()), SIZE_12_LINE_9(108, new Font12()),
+		SIZE_12_LINE_10(120, new Font12()),
 		
 		SIZE_16_LINE_0(0, new Font16()), SIZE_16_LINE_1(16, new Font16()),
 		SIZE_16_LINE_2(32, new Font16()), SIZE_16_LINE_3(48, new Font16()),
@@ -75,7 +77,7 @@ public enum Display {
 			switch (align) {
 			case CENTER: x = 64 - ((text.length() * textFormat.font.getWidth()) / 2); break;
 			case LEFT: x = 0; break;
-			case RIGHT: x = 128 - (text.length() * textFormat.font.getWidth()); break;
+			case RIGHT: x = 128 - ((text.length() + 1) * textFormat.font.getWidth()); break;
 			}
 			
 			int y = textFormat.startPosition;
@@ -88,6 +90,14 @@ public enum Display {
 	
 	public void flipBacklight() {
 		lcd.flipBacklight();
+	}
+	
+	public void drawSelection(int x, int y) {
+		try {
+			lcd.drawCircle(x, y, 5, Color.RED, DrawFill.FILLED, DotPixel.DOT_PIXEL_1_1);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

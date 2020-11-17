@@ -1,16 +1,16 @@
 package pi.password;
 
 import pi.password.hat.handlers.ButtonHandler;
+import pi.password.manager.PasswordVault;
+import pi.password.manager.filesystem.FilesystemPasswordVault;
 
 public class Main {
 	
-//	private static final String PASSWORD_VAULT = "./passwords.properties";
+	private static final String PASSWORD_VAULT = "./passwords.properties";
 	
-//	private PasswordManager passwordManager;
+	public static PasswordVault VAULT;
 	
 	private Main() {
-//		passwordManager = new PasswordManager(new FilesystemPasswordVault(PASSWORD_VAULT));
-
 		ButtonHandler.SPLASH_SCREEN.activate();
 		
 		try {
@@ -22,6 +22,7 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
+		VAULT = new FilesystemPasswordVault(PASSWORD_VAULT);
 		new Main();
 	}
 

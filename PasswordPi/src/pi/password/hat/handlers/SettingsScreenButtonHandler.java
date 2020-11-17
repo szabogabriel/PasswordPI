@@ -8,11 +8,15 @@ import pi.password.hat.Display.TextFormat;
 import pi.password.util.ImageUtil;
 
 public class SettingsScreenButtonHandler extends ButtonHandler {
+	
+	public SettingsScreenButtonHandler() {
+		super(ImageUtil.getSettingsBackground());
+	}
 
 	@Override
-	public void activateScreen() {
-		Display.INSTANCE.displayImage(ImageUtil.getSettingsBackground());
-		Display.INSTANCE.displayText("Settings", Color.GREEN, Color.BLACK, TextFormat.SIZE_16_LINE_0, TextAlign.CENTER);
+	public void activateHandler() {
+		Display.INSTANCE.displayImage(getBackground());
+		Display.INSTANCE.displayText("Settings", Color.GREEN, Color.BLACK, TextFormat.SIZE_12_LINE_0, TextAlign.CENTER);
 	}
 
 	@Override
