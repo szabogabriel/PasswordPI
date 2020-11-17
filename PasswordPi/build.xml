@@ -1,0 +1,40 @@
+<project name="1.44inch-LCD-HAT-native-java-lib" basedir="." default="package">
+	
+	<property name="dir.src" value="${basedir}/src"/>
+	<property name="dir.bin" value="${basedir}/bin"/>
+	<property name="dir.lib" value="${basedir}/lib"/>
+	<property name="dir.release" value="${basedir}/release"/>
+	<property name="version" value="0.1.0_SNAPSHOT"/>
+	
+	<property name="file.jar" value="${dir.release}/pi.password-${version}.jar"/>
+	<property name="file.zip" value="${dir.release}/pi.password-${version}.zip"/>
+	
+	<target name="clean" unless="skip.clean">
+		<delete file="${file.jar}" quiet="true"/>
+		<delete file="${file.zip}" quiet="true"/>
+	</target>
+		
+	<target name="compile" depends="clean" unless="skip.compile">
+		<javac srcdir="${dir.src}" destdir="${dir.bin}" source="1.8">
+			<classpath>
+				<fileset dir="${dir.lib}" includes="*.jar"/>
+			</classpath>
+		</javac>
+	</target>
+		
+	<target name="package" depends="compile" unless="skip.package">
+		<jar destfile="${file.jar}" basedir="${dir.bin}"/>
+	</target>
+	
+	<target name="release" depends="package">
+		<zip destfile="${file.zip}" compress="false">
+			<zipfileset dir="${dir.lib}" includes="*.jar" prefix="lib"/>
+			<zipfileset file="${file.jar}" prefix="lib"/>
+			<zipfileset dir="${dir.release}">
+				<include name="*.sh"/>
+				<include name="*.bmp"/>
+			</zipfileset>
+		</zip>
+	</target>
+	
+</project>
