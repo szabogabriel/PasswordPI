@@ -18,7 +18,7 @@ public enum Display {
 	public final int WIDTH = 128;
 	public final int HEIGHT = 128;
 	public final int TITLE_BAR_HEIGHT = 16;
-	public final int BODY_ELEMENT_BORDER = 2;
+	public final int BODY_ELEMENT_BORDER = 3;
 
 	private final Font TITLE_FONT = new Font("Verdana", Font.BOLD, 8);
 	private final Font BODY_FONT = new Font("Verdana", Font.PLAIN, 12);
