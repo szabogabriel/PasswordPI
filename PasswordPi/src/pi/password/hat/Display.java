@@ -10,6 +10,8 @@ import javax.swing.JComponent;
 import com.waveshare.display.LcdDisplay;
 
 import pi.password.Main;
+import pi.password.util.ImageUtil;
+import pi.password.util.SystemUtil;
 
 public enum Display {
 
@@ -51,17 +53,14 @@ public enum Display {
 		lcd.displayBitmap(image, 0, 0);
 	}
 
-	public void displayTitle(String text, boolean drawActionIcons) {
+	public void displayTitle(String text) {
 		int y = (TITLE_BAR_HEIGHT + TITLE_FONT.getSize() - 1) / 2;
-				
+
 		lcd.drawRectangle(0, 0, WIDTH, TITLE_BAR_HEIGHT, Color.BLACK, true, 1);
-		if (drawActionIcons) {
-			// TODO we don't have icons yet. Put drawing of the status icon here in the
-			// future.
-		} else {
-			int centerPosition = centerStartPosition(TITLE_FONT, text);
-			lcd.displayString(text, centerPosition, y, Color.GREEN, TITLE_FONT);
-		}
+		BufferedImage image = SystemUtil.getIpAddress().map(a -> ImageUtil.getWifiOn()).orElse(ImageUtil.getWifiOff());
+		lcd.displayBitmap(image, WIDTH - image.getWidth(), 0);
+		int centerPosition = centerStartPosition(TITLE_FONT, text);
+		lcd.displayString(text, centerPosition, y, Color.GREEN, TITLE_FONT);
 	}
 
 	public void displayText(String text, Color textColor, int row, TextAlign align) {
@@ -82,7 +81,8 @@ public enum Display {
 		}
 
 		// Compute the position on the Y axis based on the row number
-		y = ((BODY_FONT.getSize() + (BODY_ELEMENT_BORDER * 2)) * row) + BODY_ELEMENT_BORDER + TITLE_BAR_HEIGHT + BODY_FONT.getSize();
+		y = ((BODY_FONT.getSize() + (BODY_ELEMENT_BORDER * 2)) * row) + BODY_ELEMENT_BORDER + TITLE_BAR_HEIGHT
+				+ BODY_FONT.getSize();
 
 		lcd.displayString(text, x, y, textColor, BODY_FONT);
 	}
@@ -110,8 +110,8 @@ public enum Display {
 		int h = BODY_FONT.getSize() + (2 * BODY_ELEMENT_BORDER);
 		int x = 2;
 		int y = TITLE_BAR_HEIGHT + (row * (BODY_FONT.getSize() + 2 * BODY_ELEMENT_BORDER));
-		
-		lcd.drawRectangle(x, y,  w, h, Color.RED, false, 2);
+
+		lcd.drawRectangle(x, y, w, h, Color.RED, false, 2);
 	}
 
 }

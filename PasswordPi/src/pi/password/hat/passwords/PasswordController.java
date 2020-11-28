@@ -3,6 +3,7 @@ package pi.password.hat.passwords;
 import pi.password.Main;
 import pi.password.config.Config;
 import pi.password.hat.AbstractController;
+import pi.password.hat.splash.SplashController;
 import pi.password.manager.filesystem.FilesystemPasswordVault;
 
 public class PasswordController extends AbstractController {
@@ -18,8 +19,7 @@ public class PasswordController extends AbstractController {
 
 	@Override
 	public void handleButtonAPressed() {
-		//TODO
-		
+		new SplashController().activate();
 	}
 	
 	@Override
@@ -81,26 +81,26 @@ public class PasswordController extends AbstractController {
 
 	@Override
 	public void handleJoystickUpReleased() {
-		// TODO Auto-generated method stub
 		model.decreaseSelection();
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
-		// TODO Auto-generated method stub
 		model.increaseSelection();
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < view.MAX_ROW_NUM; i++) {
+			model.decreaseSelection();
+		}
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < view.MAX_ROW_NUM; i++) {
+			model.increaseSelection();
+		}		
 	}
 
 	@Override

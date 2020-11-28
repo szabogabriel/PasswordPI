@@ -10,7 +10,7 @@ import pi.password.util.ImageUtil;
 public class PasswordView extends AbstractView {
 
 	private final int ROW_HEIGHT = 12;
-	private final int MAX_ROW_NUM = DISPLAY.getMaxAmountOfBodyRows();
+	public final int MAX_ROW_NUM = DISPLAY.getMaxAmountOfBodyRows();
 	
 	private String[] keys = new String[] {};
 	private int selected = 0;
@@ -37,7 +37,7 @@ public class PasswordView extends AbstractView {
 	@Override
 	public void paint() {
 		DISPLAY.displayImage(getBackground());
-		DISPLAY.displayTitle("Passwords", false);
+		DISPLAY.displayTitle("Passwords");
 		
 		for (int i = 0 ; i < MAX_ROW_NUM; i++) {
 			if (keys.length + offset > i) {

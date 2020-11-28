@@ -8,6 +8,10 @@ public class SplashController extends AbstractController {
 	private SplashView view;
 	private SplashModel model;
 	
+	public void turnOffDisplay() {
+		model.setBacklight(false);
+	}
+	
 	@Override
 	public void activateHandler() {
 		view = new SplashView();
@@ -17,7 +21,6 @@ public class SplashController extends AbstractController {
 	
 	@Override
 	public void handleButtonAPressed() {
-		//TODO
 		
 	}
 
@@ -83,31 +86,26 @@ public class SplashController extends AbstractController {
 
 	@Override
 	public void handleJoystickUpReleased() {
-		// TODO Auto-generated method stub
-		
+		new PasswordController().activate();		
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
-		// TODO Auto-generated method stub
-		
+		new PasswordController().activate();		
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		// TODO Auto-generated method stub
-		
+		new PasswordController().activate();		
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		// TODO Auto-generated method stub
-		
+		new PasswordController().activate();		
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		// TODO Auto-generated method stub
 		new PasswordController().activate();
 	}
 

@@ -13,6 +13,8 @@ public class ImageUtil {
 	private static BufferedImage BACKGROUND;
 	private static BufferedImage VAULT;
 	private static BufferedImage SETTINGS;
+	private static BufferedImage WIFI_ON;
+	private static BufferedImage WIFI_OFF;
 	
 	public static BufferedImage getSplashScreen() {
 		if (SPLASH == null) {
@@ -40,6 +42,20 @@ public class ImageUtil {
 			SETTINGS = ImageUtil.loadImage(Config.BACKGROUND_SCREEN_SETTINGS.toString());
 		}
 		return SETTINGS;
+	}
+	
+	public static BufferedImage getWifiOn() {
+		if (WIFI_ON == null) {
+			WIFI_ON = ImageUtil.loadImage(Config.ICON_WIFI_ON.toString());
+		}
+		return WIFI_ON;
+	}
+	
+	public static BufferedImage getWifiOff() {
+		if (WIFI_OFF == null) {
+			WIFI_OFF = ImageUtil.loadImage(Config.ICON_WIFI_OFF.toString());
+		}
+		return WIFI_OFF;
 	}
 	
 	public static BufferedImage loadImage(String image) {

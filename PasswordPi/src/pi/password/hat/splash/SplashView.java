@@ -13,7 +13,7 @@ public class SplashView extends AbstractView {
 	@Override
 	public void paint() {
 		DISPLAY.displayImage(getBackground());
-		DISPLAY.displayTitle(SystemUtil.getIpAddress().orElse("Offline"), false);
+		DISPLAY.displayTitle(SystemUtil.getIpAddress().orElse("Offline"));
 	}
 
 }

@@ -14,6 +14,9 @@ public enum Config {
 	BACKGROUND_SCREEN_SETTINGS("background.screen.settings", "img/settings.bmp"),
 	BACKGROUND_SCREEN_VAULT("background.screen.vault", "img/vault.bmp"),
 	
+	ICON_WIFI_ON("icon.wifi.on", "img/icon_wifi_on.png"),
+	ICON_WIFI_OFF("icon.wifi.off", "img/icon_wifi_off.png"),
+	
 	VAULT_FILESYSTEM_FILE("vault.filesystem.file", "passwords.properties"),
 	;
 	
