@@ -1,35 +1,59 @@
 package pi.password.hat;
 
-import com.waveshare.Hat;
-import com.waveshare.keyboard.KeyboardHat;
-import com.waveshare.keyboard.KeyboardHat.Keys;
+import com.waveshare.keyboard.HatKey;
+import com.waveshare.keyboard.HatKeyboard;
+import com.waveshare.keyboard.listener.KeyInputListener;
 
-import pi.password.hat.handlers.ButtonHandler;
+import pi.password.Main;
 
 public enum Keyboard {
 
 	INSTANCE;
 	
-	private KeyboardHat hat = Hat.INSTANCE.keyboardHat;
+	private HatKeyboard hat = Main.hat.keyboardHat;
 	
-	private ButtonHandler handler;
+	private AbstractController handler;
 	
 	private Keyboard() {
-		hat.setListener(Keys.KEY_A, S -> { if (S.isLow()) getButonHandler().handleButtonAPressed(); });
-		hat.setListener(Keys.KEY_B, S -> { if (S.isLow()) getButonHandler().handleButtonBPressed(); });
-		hat.setListener(Keys.KEY_C, S -> { if (S.isLow()) getButonHandler().handleButtonCPressed(); });
-		hat.setListener(Keys.JOYSTICK_UP, S -> { if (S.isLow()) getButonHandler().handleJoystickUpPressed(); });
-		hat.setListener(Keys.JOYSTICK_DOWN, S -> { if (S.isLow()) getButonHandler().handleJoystickDownPressed(); });
-		hat.setListener(Keys.JOYSTICK_LEFT, S -> { if (S.isLow()) getButonHandler().handleJoysticlLeftPressed(); });
-		hat.setListener(Keys.JOYSTICK_RIGHT, S -> { if (S.isLow()) getButonHandler().handleJoystickRightPressed(); });
-		hat.setListener(Keys.JOYSTICK_CENTER, S -> { if (S.isLow()) getButonHandler().handleJoystickCenterPressed(); });
+		hat.setListener(new KeyInputListener() {
+			
+			@Override
+			public void keyReleased(HatKey key) {
+				switch (key) {
+				case JOYSTICK_CENTER: getButtonHandler().handleJoystickCenterReleased(); break;
+				case JOYSTICK_DOWN: getButtonHandler().handleJoystickDownReleased(); break;
+				case JOYSTICK_LEFT: getButtonHandler().handleJoystickLeftReleased(); break;
+				case JOYSTICK_RIGHT: getButtonHandler().handleJoystickRightReleased(); break;
+				case JOYSTICK_UP: getButtonHandler().handleJoystickUpReleased(); break;
+				case KEY_A: getButtonHandler().handleButtonAReleased(); break;
+				case KEY_B: getButtonHandler().handleButtonBReleased(); break;
+				case KEY_C: getButtonHandler().handleButtonCReleased(); break;
+				default: break;
+				}
+			}
+			
+			@Override
+			public void keyPressed(HatKey key) {
+				switch (key) {
+				case JOYSTICK_CENTER: getButtonHandler().handleJoystickCenterPressed(); break;
+				case JOYSTICK_DOWN: getButtonHandler().handleJoystickDownPressed(); break;
+				case JOYSTICK_LEFT: getButtonHandler().handleJoystickLeftPressed(); break;
+				case JOYSTICK_RIGHT: getButtonHandler().handleJoystickRightPressed(); break;
+				case JOYSTICK_UP: getButtonHandler().handleJoystickUpPressed(); break;
+				case KEY_A: getButtonHandler().handleButtonAPressed(); break;
+				case KEY_B: getButtonHandler().handleButtonBPressed(); break;
+				case KEY_C: getButtonHandler().handleButtonCPressed(); break;
+				default: break;
+				}
+			}
+		});
 	}
-
-	private ButtonHandler getButonHandler() {
+	
+	private AbstractController getButtonHandler() {
 		return handler;
 	}
 	
-	public void setButtonHandler(ButtonHandler buttonHandler) {
+	public void setButtonHandler(AbstractController buttonHandler) {
 		this.handler = buttonHandler;
 	}
 }
