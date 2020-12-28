@@ -14,7 +14,7 @@ import pi.password.util.ImageUtil;
 import pi.password.util.SystemUtil;
 
 public enum Display {
-
+	
 	INSTANCE;
 
 	public final int WIDTH = 128;
@@ -33,7 +33,7 @@ public enum Display {
 		LEFT, CENTER, RIGHT;
 	};
 
-	private LcdDisplay lcd = Main.SERVICE_FACTORY.getServiceImpl(LcdDisplay.class).orElse(null);
+	private LcdDisplay lcd = Main.SERVICE_FACTORY.getServiceImpl(LcdDisplay.class).get();
 
 	private final Canvas CANVAS = new Canvas();
 
