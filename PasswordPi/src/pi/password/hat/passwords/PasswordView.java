@@ -9,7 +9,6 @@ import pi.password.util.ImageUtil;
 
 public class PasswordView extends AbstractView {
 
-	private final int ROW_HEIGHT = 12;
 	public final int MAX_ROW_NUM = DISPLAY.getMaxAmountOfBodyRows();
 	
 	private String[] keys = new String[] {};
@@ -41,7 +40,7 @@ public class PasswordView extends AbstractView {
 		
 		for (int i = 0 ; i < MAX_ROW_NUM; i++) {
 			if (keys.length + offset > i) {
-				DISPLAY.displayText(keys[i + offset], Color.WHITE, i, TextAlign.LEFT);
+				DISPLAY.displayText(keys[i + offset], Color.WHITE, i, TextAlign.LEFT, -1);
 				if (selected == i + offset) {
 					DISPLAY.drawSelection(selected - offset);
 				}

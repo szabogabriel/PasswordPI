@@ -6,7 +6,7 @@ import com.waveshare.Hat;
 import com.waveshare.display.LcdFactories;
 import com.waveshare.keyboard.KeyboardFactories;
 
-import pi.password.hat.splash.SplashController;
+import pi.password.hat.screenlock.ScreenlockController;
 import pi.password.keyboard.Keyboard;
 import pi.password.keyboard.mock.MockKeyboard;
 import pi.password.keyboard.us.KeyboardUs;
@@ -23,7 +23,7 @@ public class Main {
 	public static Keyboard keyboard;
 	
 	private Main() {
-		new SplashController().activate();
+		new ScreenlockController().activate();
 		
 		try {
 			while (true)

@@ -1,114 +1,91 @@
-package pi.password.hat.passwords;
+package pi.password.hat.screenlock;
 
-import pi.password.Main;
-import pi.password.config.Config;
+import com.waveshare.keyboard.HatKey;
+
 import pi.password.hat.AbstractController;
 import pi.password.hat.splash.SplashController;
-import pi.password.manager.filesystem.FilesystemPasswordVault;
 
-public class PasswordController extends AbstractController {
+public class ScreenlockController extends AbstractController {
 
-	private PasswordView view;
-	private PasswordModel model;
-
+	private ScreenlockView view;
+	private ScreenlockModel model;
+	
 	@Override
 	public void activateHandler() {
-		view = new PasswordView();
-		model = new PasswordModel(new FilesystemPasswordVault(Config.VAULT_FILESYSTEM_FILE.toString()), view);
+		view = new ScreenlockView();
+		model = new ScreenlockModel(view);
 	}
 
 	@Override
 	public void handleButtonAPressed() {
-		new SplashController().activate();
 	}
-	
+
 	@Override
 	public void handleButtonBPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleButtonCPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleJoystickUpPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleJoystickDownPressed() {
-		//TODO 
 	}
 
 	@Override
 	public void handleJoystickLeftPressed() {
-		// not defined
 	}
 
 	@Override
 	public void handleJoystickRightPressed() {
-		// not defined
 	}
 
 	@Override
 	public void handleJoystickCenterPressed() {
-		// TODO Auto-generated method stub
-		
 	}
-	
+
 	@Override
 	public void handleButtonAReleased() {
-		// TODO Auto-generated method stub
-		
+		model.addSequence(HatKey.KEY_A);
 	}
 
 	@Override
 	public void handleButtonBReleased() {
-		// TODO Auto-generated method stub
-		
+		model.addSequence(HatKey.KEY_B);
 	}
 
 	@Override
 	public void handleButtonCReleased() {
-		// TODO Auto-generated method stub
-		
+		model.addSequence(HatKey.KEY_C);
 	}
 
 	@Override
 	public void handleJoystickUpReleased() {
-		model.decreaseSelection();
+		model.addSequence(HatKey.JOYSTICK_UP);
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
-		model.increaseSelection();
+		model.addSequence(HatKey.JOYSTICK_DOWN);
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		for (int i = 0; i < view.MAX_ROW_NUM; i++) {
-			model.decreaseSelection();
-		}
+		model.addSequence(HatKey.JOYSTICK_LEFT);
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		for (int i = 0; i < view.MAX_ROW_NUM; i++) {
-			model.increaseSelection();
-		}		
+		model.addSequence(HatKey.JOYSTICK_RIGHT);
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		String selected = model.getSelectedPassword();
-		if (selected != null) {
-			Main.keyboard.sendText(selected);
-		}
+		new SplashController().activate();	
 	}
-	
+
 }

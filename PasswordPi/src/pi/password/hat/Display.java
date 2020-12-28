@@ -63,7 +63,7 @@ public enum Display {
 		lcd.displayString(text, centerPosition, y, Color.GREEN, TITLE_FONT);
 	}
 
-	public void displayText(String text, Color textColor, int row, TextAlign align) {
+	public void displayText(String text, Color textColor, int row, TextAlign align, int fontSelector) {
 		int x = 0;
 		int y = 0;
 

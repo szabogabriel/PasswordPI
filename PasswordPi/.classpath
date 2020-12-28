@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="lib/pi4j-gpio-extension.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/1.44inch-LCD-HAT-native-java-lib"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/1.44inch-LCD-mock"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/H2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

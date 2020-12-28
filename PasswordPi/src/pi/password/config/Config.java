@@ -17,6 +17,7 @@ public enum Config {
 	ICON_WIFI_ON("icon.wifi.on", "img/icon_wifi_on.png"),
 	ICON_WIFI_OFF("icon.wifi.off", "img/icon_wifi_off.png"),
 	
+	VAULT_TYPE("vault.type", "filesystem"),
 	VAULT_FILESYSTEM_FILE("vault.filesystem.file", "passwords.properties"),
 	;
 	
