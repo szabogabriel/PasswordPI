@@ -8,9 +8,9 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import pi.password.keyboard.Keyboard;
+import pi.password.keyboard.KeyboardService;
 
-public class KeyboardUs implements Keyboard {
+public class KeyboardUs implements KeyboardService {
 
 	private static final File KEYBOARD_OUTPUT_FILE = new File("/dev/hidg0");
 	

@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.Timer;
 
+import pi.password.config.Config;
 import pi.password.manager.PasswordEntity;
 import pi.password.manager.PasswordVault;
 
@@ -25,8 +26,8 @@ public class FilesystemPasswordVault implements PasswordVault {
 	
 	private long lastLoaded;
 
-	public FilesystemPasswordVault(String fileName) {
-		VAULT = new File(fileName);
+	public FilesystemPasswordVault() {
+		VAULT = new File(Config.VAULT_FILESYSTEM_FILE.toString());
 		PROPERTIES = new Properties();
 		loadPasswords();
 		new Timer(300000, new ActionListener() {

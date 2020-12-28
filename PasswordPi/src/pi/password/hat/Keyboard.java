@@ -10,7 +10,7 @@ public enum Keyboard {
 
 	INSTANCE;
 	
-	private HatKeyboard hat = Main.hat.keyboardHat;
+	private HatKeyboard hat = Main.SERVICE_FACTORY.getServiceImpl(HatKeyboard.class).orElse(null);
 	
 	private AbstractController handler;
 	

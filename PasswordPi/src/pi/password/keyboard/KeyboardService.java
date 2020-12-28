@@ -1,6 +1,6 @@
 package pi.password.keyboard;
 
-public interface Keyboard {
+public interface KeyboardService {
 
 	boolean sendText(String text);
 	

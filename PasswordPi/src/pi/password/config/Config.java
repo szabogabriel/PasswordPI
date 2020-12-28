@@ -5,9 +5,21 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 import java.util.Properties;
 
+import com.waveshare.display.buffered.BufferedLcdDisplay;
+import com.waveshare.keyboard.hat.HatKeyboardImpl;
+
+import pi.password.keyboard.us.KeyboardUs;
+import pi.password.manager.filesystem.FilesystemPasswordVault;
+
 public enum Config {
+	
+	DI_IMPL_LCD_DISPLAY("impl.com.waveshare.display.LcdDisplay", BufferedLcdDisplay.class.getCanonicalName()),
+	DI_IMPL_HAT_KEYBOARD("impl.com.waveshare.keyboard.HatKeyboard", HatKeyboardImpl.class.getCanonicalName()),
+	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.keyboard.KeyboardService", KeyboardUs.class.getCanonicalName()),
+	DI_IMPL_PASSWORD_VAULT("impl.pi.password.manager.PasswordVault", FilesystemPasswordVault.class.getCanonicalName()),
 	
 	BACKGROUND_SCREEN_LOCEKD("background.screen.locked", "img/lock.bmp"),
 	BACKGROUND_SCREEN_PASSWORD("background.screen.password", "img/background.bmp"),
@@ -48,4 +60,12 @@ public enum Config {
 		return CONFIG_VALUES.getProperty(key, defaultValue);
 	}
 
+	public static Optional<String> get(String key) {
+		Optional<String> ret = Optional.empty();
+		if (key != null && CONFIG_VALUES.containsKey(key)) {
+			ret = Optional.of(CONFIG_VALUES.getProperty(key));
+		}
+		return ret;
+	}
+	
 }
