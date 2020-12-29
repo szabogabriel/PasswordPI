@@ -10,11 +10,11 @@ import javax.swing.JComponent;
 import com.waveshare.display.LcdDisplay;
 
 import pi.password.Main;
-import pi.password.util.ImageUtil;
-import pi.password.util.SystemUtil;
+import pi.password.service.util.ImageUtilService;
+import pi.password.service.util.SystemUtil;
 
 public class DisplayServiceWaveshareHat implements DisplayService {
-	
+
 	private final int WIDTH = 128;
 	private final int HEIGHT = 128;
 	private final int TITLE_BAR_HEIGHT = 16;
@@ -59,7 +59,9 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 		int y = (TITLE_BAR_HEIGHT + TITLE_FONT.getSize() - 1) / 2;
 
 		lcd.drawRectangle(0, 0, WIDTH, TITLE_BAR_HEIGHT, Color.BLACK, true, 1);
-		BufferedImage image = SystemUtil.getIpAddress().map(a -> ImageUtil.getWifiOn()).orElse(ImageUtil.getWifiOff());
+		BufferedImage image = Main.DI.getServiceImpl(SystemUtil.class).get().getIpAddress()
+				.map(a -> Main.DI.getServiceImpl(ImageUtilService.class).get().getWifiOn())
+				.orElse(Main.DI.getServiceImpl(ImageUtilService.class).get().getWifiOff());
 		lcd.displayBitmap(image, WIDTH - image.getWidth(), 0);
 		int centerPosition = centerStartPosition(TITLE_FONT, text);
 		lcd.displayString(text, centerPosition, y, Color.GREEN, TITLE_FONT);
@@ -88,7 +90,7 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 				+ BODY_FONT.getSize();
 
 		lcd.displayString(text, x, y, textColor, BODY_FONT);
-		
+
 		if (fontSelector >= 0) {
 			drawCharSelector(text, row, fontSelector);
 		}
@@ -96,7 +98,7 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 
 	private void drawCharSelector(String text, int row, int fontSelector) {
 		String substringA, substringB;
-		
+
 		if (fontSelector == 0) {
 			substringA = "";
 			substringB = text.substring(0, 1);
@@ -104,11 +106,11 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 			substringA = text.substring(0, fontSelector);
 			substringB = text.substring(0, fontSelector + 1);
 		}
-		
+
 		int startx, width;
 		startx = textWidth(BODY_FONT, substringA);
 		width = textWidth(BODY_FONT, substringB) - startx;
-		
+
 		lcd.drawRectangle(startx + getRowOffsetStart() + 1, getRowY(row), width, getRowHeight(), Color.RED, false, 1);
 	}
 
@@ -141,19 +143,19 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 
 		lcd.drawRectangle(x, y, w, h, Color.RED, false, 2);
 	}
-	
+
 	private int getRowOffsetStart() {
 		return 2;
 	}
-	
+
 	private int getRowOffsetEnd() {
 		return WIDTH - 4;
 	}
-	
+
 	private int getRowY(int row) {
 		return TITLE_BAR_HEIGHT + (row * (BODY_FONT.getSize() + 2 * BODY_ELEMENT_BORDER));
 	}
-	
+
 	private int getRowHeight() {
 		return BODY_FONT.getSize() + (2 * BODY_ELEMENT_BORDER);
 	}

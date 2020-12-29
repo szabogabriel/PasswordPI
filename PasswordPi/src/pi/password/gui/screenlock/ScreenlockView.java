@@ -6,19 +6,20 @@ import java.util.List;
 
 import com.waveshare.keyboard.HatKey;
 
+import pi.password.Main;
 import pi.password.gui.AbstractView;
 import pi.password.service.hat.DisplayServiceWaveshareHat.TextAlign;
-import pi.password.util.ImageUtil;
-import pi.password.util.SystemUtil;
+import pi.password.service.util.ImageUtilService;
+import pi.password.service.util.SystemUtil;
 
 public class ScreenlockView extends AbstractView {
-	
+
 	private List<String> keys = new ArrayList<>();
 
 	public ScreenlockView() {
-		super(ImageUtil.getMainBackground());
+		super(Main.DI.getServiceImpl(ImageUtilService.class).get().getMainBackground());
 	}
-	
+
 	public void sequenceChanged(List<HatKey> keys) {
 		this.keys.clear();
 		int counter = 0;
@@ -35,7 +36,7 @@ public class ScreenlockView extends AbstractView {
 			this.keys.add(tmp.trim());
 		}
 	}
-	
+
 	private String keyToString(HatKey key) {
 		String ret;
 		switch (key) {
@@ -70,12 +71,12 @@ public class ScreenlockView extends AbstractView {
 	@Override
 	public void paint() {
 		DISPLAY.displayImage(getBackground());
-		DISPLAY.displayTitle(SystemUtil.getIpAddress().orElse("Offline"));
-		
+		DISPLAY.displayTitle(Main.DI.getServiceImpl(SystemUtil.class).get().getIpAddress().orElse("Offline"));
+
 		DISPLAY.displayText("Locked", Color.GREEN, 1, TextAlign.CENTER, -1);
 		for (int i = 0; i < keys.size(); i++) {
 			DISPLAY.displayText(keys.get(i), Color.GREEN, 3 + i, TextAlign.CENTER, -1);
 		}
 	}
-	
+
 }

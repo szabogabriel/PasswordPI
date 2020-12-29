@@ -2,10 +2,10 @@ package pi.password.gui.passwords;
 
 import java.awt.Color;
 
+import pi.password.Main;
 import pi.password.gui.AbstractView;
-import pi.password.service.hat.DisplayServiceWaveshareHat;
 import pi.password.service.hat.DisplayServiceWaveshareHat.TextAlign;
-import pi.password.util.ImageUtil;
+import pi.password.service.util.ImageUtilService;
 
 public class PasswordView extends AbstractView {
 
@@ -16,7 +16,7 @@ public class PasswordView extends AbstractView {
 	private int offset = 0; 
 	
 	public PasswordView() {
-		super(ImageUtil.getMainBackground());
+		super(Main.DI.getServiceImpl(ImageUtilService.class).get().getMainBackground());
 	}
 	
 	public void setKeys(String[] keys) {

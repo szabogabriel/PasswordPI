@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -15,16 +16,20 @@ import com.waveshare.keyboard.hat.HatKeyboardImpl;
 import pi.password.service.hat.DisplayServiceWaveshareHat;
 import pi.password.service.hat.KeyInputServiceWaveshareHat;
 import pi.password.service.keyboard.KeyboardServiceUs;
+import pi.password.service.lock.LockServiceFileSystem;
 import pi.password.service.password.PasswordVaultServiceFileSystem;
+import pi.password.service.util.ImageUtilServiceFileSystem;
 
 public enum Config {
 	
-	DI_IMPL_DISPLAY_SERVICE("impl.pi.password.service.hat.DisplayService", DisplayServiceWaveshareHat.class.getCanonicalName()),
-	DI_IMPL_KEY_INPUT_SERVICE("impl.pi.password.service.hat.KeyInputService", KeyInputServiceWaveshareHat.class.getCanonicalName()),
 	DI_IMPL_LCD_DISPLAY("impl.com.waveshare.display.LcdDisplay", BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl.com.waveshare.keyboard.HatKeyboard", HatKeyboardImpl.class.getCanonicalName()),
+	DI_IMPL_DISPLAY_SERVICE("impl.pi.password.service.hat.DisplayService", DisplayServiceWaveshareHat.class.getCanonicalName()),
+	DI_IMPL_IMAGE_UTIL_SERVICE("impl.pi.password.service.util.ImageUtilService", ImageUtilServiceFileSystem.class.getCanonicalName()),
+	DI_IMPL_KEY_INPUT_SERVICE("impl.pi.password.service.hat.KeyInputService", KeyInputServiceWaveshareHat.class.getCanonicalName()),
 	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.service.keyboard.KeyboardService", KeyboardServiceUs.class.getCanonicalName()),
 	DI_TYPE_KEYBOARD_SERVICE("type.pi.password.service.keyboard.KeyboardService", ServiceClassType.MULTITON.toString()),
+	DI_IMPL_LOCK_SERVICE("impl.pi.password.service.lock.LockService", LockServiceFileSystem.class.getCanonicalName()),
 	DI_IMPL_PASSWORD_VAULT("impl.pi.password.service.password.PasswordVaultService", PasswordVaultServiceFileSystem.class.getCanonicalName()),
 	
 	BACKGROUND_SCREEN_LOCEKD("background.screen.locked", "img/lock.bmp"),
@@ -34,6 +39,8 @@ public enum Config {
 	
 	ICON_WIFI_ON("icon.wifi.on", "img/icon_wifi_on.png"),
 	ICON_WIFI_OFF("icon.wifi.off", "img/icon_wifi_off.png"),
+	
+	LOCK_DIRECTORY("lock.dir", "."),
 	
 	VAULT_TYPE("vault.type", "filesystem"),
 	VAULT_FILESYSTEM_FILE("vault.filesystem.file", "passwords.properties"),
@@ -67,11 +74,11 @@ public enum Config {
 	}
 
 	public static Optional<String> get(String key) {
-		Optional<String> ret = Optional.empty();
-		if (key != null && CONFIG_VALUES.containsKey(key)) {
-			ret = Optional.of(CONFIG_VALUES.getProperty(key));
-		}
-		return ret;
+		return Arrays.asList(values())
+				.stream()
+				.filter(v -> v.key.equals(key))
+				.map(v -> v.toString())
+				.findAny();
 	}
 	
 }

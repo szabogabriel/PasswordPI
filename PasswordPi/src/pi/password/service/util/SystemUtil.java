@@ -1,4 +1,4 @@
-package pi.password.util;
+package pi.password.service.util;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import com.pi4j.system.NetworkInfo;
 
 public class SystemUtil {
 	
-	public static Optional<String> getIpAddress() {
+	public Optional<String> getIpAddress() {
 		StringBuilder ret = new StringBuilder();
         try {
 			for (String ipAddress : NetworkInfo.getIPAddresses()) {
