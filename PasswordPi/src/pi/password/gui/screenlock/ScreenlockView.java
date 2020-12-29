@@ -7,7 +7,7 @@ import java.util.List;
 import com.waveshare.keyboard.HatKey;
 
 import pi.password.gui.AbstractView;
-import pi.password.hat.Display.TextAlign;
+import pi.password.service.hat.DisplayServiceWaveshareHat.TextAlign;
 import pi.password.util.ImageUtil;
 import pi.password.util.SystemUtil;
 

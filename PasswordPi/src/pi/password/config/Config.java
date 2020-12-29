@@ -12,11 +12,15 @@ import com.jdi.ServiceClassType;
 import com.waveshare.display.buffered.BufferedLcdDisplay;
 import com.waveshare.keyboard.hat.HatKeyboardImpl;
 
+import pi.password.service.hat.DisplayServiceWaveshareHat;
+import pi.password.service.hat.KeyInputServiceWaveshareHat;
 import pi.password.service.keyboard.KeyboardServiceUs;
 import pi.password.service.password.PasswordVaultServiceFileSystem;
 
 public enum Config {
 	
+	DI_IMPL_DISPLAY_SERVICE("impl.pi.password.service.hat.DisplayService", DisplayServiceWaveshareHat.class.getCanonicalName()),
+	DI_IMPL_KEY_INPUT_SERVICE("impl.pi.password.service.hat.KeyInputService", KeyInputServiceWaveshareHat.class.getCanonicalName()),
 	DI_IMPL_LCD_DISPLAY("impl.com.waveshare.display.LcdDisplay", BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl.com.waveshare.keyboard.HatKeyboard", HatKeyboardImpl.class.getCanonicalName()),
 	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.service.keyboard.KeyboardService", KeyboardServiceUs.class.getCanonicalName()),

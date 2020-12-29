@@ -1,4 +1,4 @@
-package pi.password.hat;
+package pi.password.service.hat;
 
 import com.waveshare.keyboard.HatKey;
 import com.waveshare.keyboard.HatKeyboard;
@@ -7,15 +7,13 @@ import com.waveshare.keyboard.listener.KeyInputListener;
 import pi.password.Main;
 import pi.password.gui.AbstractController;
 
-public enum Keyboard {
+public class KeyInputServiceWaveshareHat implements KeyInputService {
 
-	INSTANCE;
-	
 	private HatKeyboard hat = Main.DI.getServiceImpl(HatKeyboard.class).get();
 	
 	private AbstractController handler;
 	
-	private Keyboard() {
+	public KeyInputServiceWaveshareHat() {
 		hat.setListener(new KeyInputListener() {
 			
 			@Override
@@ -54,6 +52,7 @@ public enum Keyboard {
 		return handler;
 	}
 	
+	@Override
 	public void setButtonHandler(AbstractController buttonHandler) {
 		this.handler = buttonHandler;
 	}

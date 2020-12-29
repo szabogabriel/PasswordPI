@@ -3,8 +3,8 @@ package pi.password.gui.passwords;
 import java.awt.Color;
 
 import pi.password.gui.AbstractView;
-import pi.password.hat.Display;
-import pi.password.hat.Display.TextAlign;
+import pi.password.service.hat.DisplayServiceWaveshareHat;
+import pi.password.service.hat.DisplayServiceWaveshareHat.TextAlign;
 import pi.password.util.ImageUtil;
 
 public class PasswordView extends AbstractView {

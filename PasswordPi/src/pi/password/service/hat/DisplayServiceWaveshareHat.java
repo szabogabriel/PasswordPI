@@ -1,4 +1,4 @@
-package pi.password.hat;
+package pi.password.service.hat;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -13,14 +13,12 @@ import pi.password.Main;
 import pi.password.util.ImageUtil;
 import pi.password.util.SystemUtil;
 
-public enum Display {
+public class DisplayServiceWaveshareHat implements DisplayService {
 	
-	INSTANCE;
-
-	public final int WIDTH = 128;
-	public final int HEIGHT = 128;
-	public final int TITLE_BAR_HEIGHT = 16;
-	public final int BODY_ELEMENT_BORDER = 3;
+	private final int WIDTH = 128;
+	private final int HEIGHT = 128;
+	private final int TITLE_BAR_HEIGHT = 16;
+	private final int BODY_ELEMENT_BORDER = 3;
 
 	private final Font TITLE_FONT = new Font("Verdana", Font.BOLD, 8);
 	private final Font BODY_FONT = new Font("Verdana", Font.PLAIN, 12);
@@ -37,22 +35,26 @@ public enum Display {
 
 	private final Canvas CANVAS = new Canvas();
 
-	private Display() {
+	public DisplayServiceWaveshareHat() {
 		lcd.setBackground(Color.BLACK);
 	}
 
+	@Override
 	public void clearScreen() {
 		lcd.clear();
 	}
 
+	@Override
 	public void print(JComponent component) {
 		lcd.print(component);
 	}
 
+	@Override
 	public void displayImage(BufferedImage image) {
 		lcd.displayBitmap(image, 0, 0);
 	}
 
+	@Override
 	public void displayTitle(String text) {
 		int y = (TITLE_BAR_HEIGHT + TITLE_FONT.getSize() - 1) / 2;
 
@@ -63,6 +65,7 @@ public enum Display {
 		lcd.displayString(text, centerPosition, y, Color.GREEN, TITLE_FONT);
 	}
 
+	@Override
 	public void displayText(String text, Color textColor, int row, TextAlign align, int fontSelector) {
 		int x = 0;
 		int y = 0;
@@ -109,6 +112,7 @@ public enum Display {
 		lcd.drawRectangle(startx + getRowOffsetStart() + 1, getRowY(row), width, getRowHeight(), Color.RED, false, 1);
 	}
 
+	@Override
 	public int getMaxAmountOfBodyRows() {
 		int ret = ((HEIGHT - TITLE_BAR_HEIGHT) / (BODY_FONT.getSize() + (2 * BODY_ELEMENT_BORDER)));
 		return ret;
@@ -122,11 +126,13 @@ public enum Display {
 		return CANVAS.getFontMetrics(font).charsWidth(text.toCharArray(), 0, text.length());
 	}
 
+	@Override
 	public void flipBacklight() {
 		// XXX: Not supported currently
 //		lcd.flipBacklight();
 	}
 
+	@Override
 	public void drawSelection(int row) {
 		int w = getRowOffsetEnd();
 		int h = getRowHeight();

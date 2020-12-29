@@ -1,7 +1,7 @@
 package pi.password.gui;
 
 import pi.password.Main;
-import pi.password.hat.Keyboard;
+import pi.password.service.hat.KeyInputService;
 import pi.password.service.keyboard.KeyboardService;
 import pi.password.service.password.PasswordVaultService;
 
@@ -16,7 +16,7 @@ public abstract class AbstractController {
 	}
 	
 	public void activate() {
-		Keyboard.INSTANCE.setButtonHandler(this);
+		Main.DI.getServiceImpl(KeyInputService.class).get().setButtonHandler(this);
 		activateHandler();
 	}
 	
