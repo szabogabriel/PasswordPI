@@ -1,6 +1,6 @@
-package pi.password.hat.splash;
+package pi.password.gui.splash;
 
-import pi.password.hat.AbstractModel;
+import pi.password.gui.AbstractModel;
 
 public class SplashModel extends AbstractModel {
 	

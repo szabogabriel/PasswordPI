@@ -1,17 +1,18 @@
-package pi.password.hat;
+package pi.password.gui;
 
 import pi.password.Main;
-import pi.password.keyboard.KeyboardService;
-import pi.password.manager.PasswordVault;
+import pi.password.hat.Keyboard;
+import pi.password.service.keyboard.KeyboardService;
+import pi.password.service.password.PasswordVaultService;
 
 public abstract class AbstractController {
 	
 	protected KeyboardService getKeyboardService() {
-		return Main.SERVICE_FACTORY.getServiceImpl(KeyboardService.class).get();
+		return Main.DI.getServiceImpl(KeyboardService.class).get();
 	}
 	
-	protected PasswordVault getPasswordVault() {
-		return Main.SERVICE_FACTORY.getServiceImpl(PasswordVault.class).get();
+	protected PasswordVaultService getPasswordVault() {
+		return Main.DI.getServiceImpl(PasswordVaultService.class).get();
 	}
 	
 	public void activate() {

@@ -1,6 +1,6 @@
-package pi.password.hat.settings;
+package pi.password.gui.settings;
 
-import pi.password.hat.AbstractController;
+import pi.password.gui.AbstractController;
 
 public class SettingsController extends AbstractController {
 	

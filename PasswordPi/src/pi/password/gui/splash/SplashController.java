@@ -1,24 +1,29 @@
-package pi.password.hat.passwords;
+package pi.password.gui.splash;
 
-import pi.password.hat.AbstractController;
-import pi.password.hat.splash.SplashController;
+import pi.password.gui.AbstractController;
+import pi.password.gui.passwords.PasswordController;
 
-public class PasswordController extends AbstractController {
-
-	private PasswordView view;
-	private PasswordModel model;
+public class SplashController extends AbstractController {
+	
+	private SplashView view;
+	private SplashModel model;
+	
+	public void turnOffDisplay() {
+		model.setBacklight(false);
+	}
 	
 	@Override
 	public void activateHandler() {
-		view = new PasswordView();
-		model = new PasswordModel(getPasswordVault(), view);
-	}
-
-	@Override
-	public void handleButtonAPressed() {
-		new SplashController().activate();
+		view = new SplashView();
+		model = new SplashModel(view);
+		view.paint();
 	}
 	
+	@Override
+	public void handleButtonAPressed() {
+		
+	}
+
 	@Override
 	public void handleButtonBPressed() {
 		//TODO
@@ -39,25 +44,28 @@ public class PasswordController extends AbstractController {
 
 	@Override
 	public void handleJoystickDownPressed() {
-		//TODO 
+		//TODO
+		
 	}
 
 	@Override
 	public void handleJoystickLeftPressed() {
-		// not defined
+		//TODO
+		
 	}
 
 	@Override
 	public void handleJoystickRightPressed() {
-		// not defined
+		//TODO
+		
 	}
 
 	@Override
 	public void handleJoystickCenterPressed() {
-		// TODO Auto-generated method stub
+		//TODO
 		
 	}
-	
+
 	@Override
 	public void handleButtonAReleased() {
 		// TODO Auto-generated method stub
@@ -78,34 +86,27 @@ public class PasswordController extends AbstractController {
 
 	@Override
 	public void handleJoystickUpReleased() {
-		model.decreaseSelection();
+		new PasswordController().activate();		
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
-		model.increaseSelection();
+		new PasswordController().activate();		
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		for (int i = 0; i < view.MAX_ROW_NUM; i++) {
-			model.decreaseSelection();
-		}
+		new PasswordController().activate();		
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		for (int i = 0; i < view.MAX_ROW_NUM; i++) {
-			model.increaseSelection();
-		}		
+		new PasswordController().activate();		
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		String selected = model.getSelectedPassword();
-		if (selected != null) {
-			getKeyboardService().sendText(selected);
-		}
+		new PasswordController().activate();
 	}
-	
+
 }

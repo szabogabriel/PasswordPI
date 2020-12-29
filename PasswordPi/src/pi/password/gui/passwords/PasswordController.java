@@ -1,20 +1,24 @@
-package pi.password.hat.vaultManager;
+package pi.password.gui.passwords;
 
-import pi.password.hat.AbstractController;
+import pi.password.gui.AbstractController;
+import pi.password.gui.splash.SplashController;
 
-public class VaultManageController extends AbstractController {
+public class PasswordController extends AbstractController {
+
+	private PasswordView view;
+	private PasswordModel model;
 	
 	@Override
 	public void activateHandler() {
-		//TODO
-	}
-	
-	@Override
-	public void handleButtonAPressed() {
-		//TODO
-		
+		view = new PasswordView();
+		model = new PasswordModel(getPasswordVault(), view);
 	}
 
+	@Override
+	public void handleButtonAPressed() {
+		new SplashController().activate();
+	}
+	
 	@Override
 	public void handleButtonBPressed() {
 		//TODO
@@ -29,26 +33,23 @@ public class VaultManageController extends AbstractController {
 
 	@Override
 	public void handleJoystickUpPressed() {
-		// TODO Auto-generated method stub
+		//TODO
 		
 	}
 
 	@Override
 	public void handleJoystickDownPressed() {
-		// TODO Auto-generated method stub
-		
+		//TODO 
 	}
 
 	@Override
 	public void handleJoystickLeftPressed() {
-		// TODO Auto-generated method stub
-		
+		// not defined
 	}
 
 	@Override
 	public void handleJoystickRightPressed() {
-		// TODO Auto-generated method stub
-		
+		// not defined
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class VaultManageController extends AbstractController {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public void handleButtonAReleased() {
 		// TODO Auto-generated method stub
@@ -77,32 +78,34 @@ public class VaultManageController extends AbstractController {
 
 	@Override
 	public void handleJoystickUpReleased() {
-		// TODO Auto-generated method stub
-		
+		model.decreaseSelection();
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
-		// TODO Auto-generated method stub
-		
+		model.increaseSelection();
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < view.MAX_ROW_NUM; i++) {
+			model.decreaseSelection();
+		}
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < view.MAX_ROW_NUM; i++) {
+			model.increaseSelection();
+		}		
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		// TODO Auto-generated method stub
-		
+		String selected = model.getSelectedPassword();
+		if (selected != null) {
+			getKeyboardService().sendText(selected);
+		}
 	}
-
+	
 }

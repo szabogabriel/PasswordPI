@@ -1,4 +1,4 @@
-package pi.password.manager;
+package pi.password.entity;
 
 public class PasswordEntity {
 	

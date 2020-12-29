@@ -1,6 +1,6 @@
-package pi.password.hat.splash;
+package pi.password.gui.splash;
 
-import pi.password.hat.AbstractView;
+import pi.password.gui.AbstractView;
 import pi.password.util.ImageUtil;
 import pi.password.util.SystemUtil;
 

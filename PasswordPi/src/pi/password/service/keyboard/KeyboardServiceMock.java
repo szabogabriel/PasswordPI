@@ -1,4 +1,4 @@
-package pi.password.keyboard;
+package pi.password.service.keyboard;
 
 public class KeyboardServiceMock implements KeyboardService {
 	

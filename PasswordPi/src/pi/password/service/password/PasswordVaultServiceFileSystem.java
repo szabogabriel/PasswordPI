@@ -1,4 +1,4 @@
-package pi.password.manager.filesystem;
+package pi.password.service.password;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,10 +15,9 @@ import java.util.stream.Collectors;
 import javax.swing.Timer;
 
 import pi.password.config.Config;
-import pi.password.manager.PasswordEntity;
-import pi.password.manager.PasswordVault;
+import pi.password.entity.PasswordEntity;
 
-public class FilesystemPasswordVault implements PasswordVault {
+public class PasswordVaultServiceFileSystem implements PasswordVaultService {
 
 	private final File VAULT;
 
@@ -26,7 +25,7 @@ public class FilesystemPasswordVault implements PasswordVault {
 	
 	private long lastLoaded;
 
-	public FilesystemPasswordVault() {
+	public PasswordVaultServiceFileSystem() {
 		VAULT = new File(Config.VAULT_FILESYSTEM_FILE.toString());
 		PROPERTIES = new Properties();
 		loadPasswords();

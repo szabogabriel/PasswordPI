@@ -1,8 +1,8 @@
-package pi.password.hat.passwords;
+package pi.password.gui.passwords;
 
 import java.awt.Color;
 
-import pi.password.hat.AbstractView;
+import pi.password.gui.AbstractView;
 import pi.password.hat.Display;
 import pi.password.hat.Display.TextAlign;
 import pi.password.util.ImageUtil;

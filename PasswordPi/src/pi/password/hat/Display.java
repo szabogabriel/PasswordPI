@@ -33,7 +33,7 @@ public enum Display {
 		LEFT, CENTER, RIGHT;
 	};
 
-	private LcdDisplay lcd = Main.SERVICE_FACTORY.getServiceImpl(LcdDisplay.class).get();
+	private LcdDisplay lcd = Main.DI.getServiceImpl(LcdDisplay.class).get();
 
 	private final Canvas CANVAS = new Canvas();
 

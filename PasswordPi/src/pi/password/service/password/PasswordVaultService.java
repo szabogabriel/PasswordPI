@@ -1,10 +1,12 @@
-package pi.password.manager;
+package pi.password.service.password;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public interface PasswordVault {
+import pi.password.entity.PasswordEntity;
+
+public interface PasswordVaultService {
 	
 	List<String> listPasswordEntityNames();
 	

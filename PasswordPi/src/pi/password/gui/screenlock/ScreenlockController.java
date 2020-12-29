@@ -1,112 +1,91 @@
-package pi.password.hat.splash;
+package pi.password.gui.screenlock;
 
-import pi.password.hat.AbstractController;
-import pi.password.hat.passwords.PasswordController;
+import com.waveshare.keyboard.HatKey;
 
-public class SplashController extends AbstractController {
-	
-	private SplashView view;
-	private SplashModel model;
-	
-	public void turnOffDisplay() {
-		model.setBacklight(false);
-	}
+import pi.password.gui.AbstractController;
+import pi.password.gui.splash.SplashController;
+
+public class ScreenlockController extends AbstractController {
+
+	private ScreenlockView view;
+	private ScreenlockModel model;
 	
 	@Override
 	public void activateHandler() {
-		view = new SplashView();
-		model = new SplashModel(view);
-		view.paint();
+		view = new ScreenlockView();
+		model = new ScreenlockModel(view);
 	}
-	
+
 	@Override
 	public void handleButtonAPressed() {
-		
 	}
 
 	@Override
 	public void handleButtonBPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleButtonCPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleJoystickUpPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleJoystickDownPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleJoystickLeftPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleJoystickRightPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleJoystickCenterPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleButtonAReleased() {
-		// TODO Auto-generated method stub
-		
+		model.addSequence(HatKey.KEY_A);
 	}
 
 	@Override
 	public void handleButtonBReleased() {
-		// TODO Auto-generated method stub
-		
+		model.addSequence(HatKey.KEY_B);
 	}
 
 	@Override
 	public void handleButtonCReleased() {
-		// TODO Auto-generated method stub
-		
+		model.addSequence(HatKey.KEY_C);
 	}
 
 	@Override
 	public void handleJoystickUpReleased() {
-		new PasswordController().activate();		
+		model.addSequence(HatKey.JOYSTICK_UP);
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
-		new PasswordController().activate();		
+		model.addSequence(HatKey.JOYSTICK_DOWN);
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		new PasswordController().activate();		
+		model.addSequence(HatKey.JOYSTICK_LEFT);
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		new PasswordController().activate();		
+		model.addSequence(HatKey.JOYSTICK_RIGHT);
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		new PasswordController().activate();
+		new SplashController().activate();	
 	}
 
 }

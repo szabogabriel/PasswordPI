@@ -12,16 +12,16 @@ import com.jdi.ServiceClassType;
 import com.waveshare.display.buffered.BufferedLcdDisplay;
 import com.waveshare.keyboard.hat.HatKeyboardImpl;
 
-import pi.password.keyboard.KeyboardServiceUs;
-import pi.password.manager.filesystem.FilesystemPasswordVault;
+import pi.password.service.keyboard.KeyboardServiceUs;
+import pi.password.service.password.PasswordVaultServiceFileSystem;
 
 public enum Config {
 	
 	DI_IMPL_LCD_DISPLAY("impl.com.waveshare.display.LcdDisplay", BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl.com.waveshare.keyboard.HatKeyboard", HatKeyboardImpl.class.getCanonicalName()),
-	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.keyboard.KeyboardService", KeyboardServiceUs.class.getCanonicalName()),
-	DI_TYPE_KEYBOARD_SERVICE("type.pi.password.keyboard.KeyboardService", ServiceClassType.MULTITON.toString()),
-	DI_IMPL_PASSWORD_VAULT("impl.pi.password.manager.PasswordVault", FilesystemPasswordVault.class.getCanonicalName()),
+	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.service.keyboard.KeyboardService", KeyboardServiceUs.class.getCanonicalName()),
+	DI_TYPE_KEYBOARD_SERVICE("type.pi.password.service.keyboard.KeyboardService", ServiceClassType.MULTITON.toString()),
+	DI_IMPL_PASSWORD_VAULT("impl.pi.password.service.password.PasswordVaultService", PasswordVaultServiceFileSystem.class.getCanonicalName()),
 	
 	BACKGROUND_SCREEN_LOCEKD("background.screen.locked", "img/lock.bmp"),
 	BACKGROUND_SCREEN_PASSWORD("background.screen.password", "img/background.bmp"),

@@ -1,4 +1,4 @@
-package pi.password.hat.screenlock;
+package pi.password.gui.screenlock;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.waveshare.keyboard.HatKey;
 
-import pi.password.hat.AbstractView;
+import pi.password.gui.AbstractView;
 import pi.password.hat.Display.TextAlign;
 import pi.password.util.ImageUtil;
 import pi.password.util.SystemUtil;

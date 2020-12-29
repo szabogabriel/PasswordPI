@@ -1,6 +1,8 @@
-package pi.password.hat;
+package pi.password.gui;
 
 import java.awt.image.BufferedImage;
+
+import pi.password.hat.Display;
 
 public abstract class AbstractView {
 	

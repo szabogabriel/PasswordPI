@@ -1,11 +1,11 @@
-package pi.password.hat.screenlock;
+package pi.password.gui.screenlock;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.waveshare.keyboard.HatKey;
 
-import pi.password.hat.AbstractModel;
+import pi.password.gui.AbstractModel;
 
 public class ScreenlockModel extends AbstractModel {
 	

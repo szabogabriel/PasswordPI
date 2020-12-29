@@ -1,15 +1,15 @@
-package pi.password.hat.passwords;
+package pi.password.gui.passwords;
 
-import pi.password.hat.AbstractModel;
-import pi.password.manager.PasswordVault;
+import pi.password.gui.AbstractModel;
+import pi.password.service.password.PasswordVaultService;
 
 public class PasswordModel extends AbstractModel {
 
 	private final PasswordView VIEW;
-	private final PasswordVault PASSWORDS;
+	private final PasswordVaultService PASSWORDS;
 	private int selected;
 	
-	public PasswordModel(PasswordVault passwords, PasswordView view) {
+	public PasswordModel(PasswordVaultService passwords, PasswordView view) {
 		this.PASSWORDS = passwords;
 		this.VIEW = view;
 		this.selected = 0;

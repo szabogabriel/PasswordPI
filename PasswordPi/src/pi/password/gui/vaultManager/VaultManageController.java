@@ -1,91 +1,108 @@
-package pi.password.hat.screenlock;
+package pi.password.gui.vaultManager;
 
-import com.waveshare.keyboard.HatKey;
+import pi.password.gui.AbstractController;
 
-import pi.password.hat.AbstractController;
-import pi.password.hat.splash.SplashController;
-
-public class ScreenlockController extends AbstractController {
-
-	private ScreenlockView view;
-	private ScreenlockModel model;
+public class VaultManageController extends AbstractController {
 	
 	@Override
 	public void activateHandler() {
-		view = new ScreenlockView();
-		model = new ScreenlockModel(view);
+		//TODO
 	}
-
+	
 	@Override
 	public void handleButtonAPressed() {
+		//TODO
+		
 	}
 
 	@Override
 	public void handleButtonBPressed() {
+		//TODO
+		
 	}
 
 	@Override
 	public void handleButtonCPressed() {
+		//TODO
+		
 	}
 
 	@Override
 	public void handleJoystickUpPressed() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleJoystickDownPressed() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleJoystickLeftPressed() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleJoystickRightPressed() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleJoystickCenterPressed() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleButtonAReleased() {
-		model.addSequence(HatKey.KEY_A);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleButtonBReleased() {
-		model.addSequence(HatKey.KEY_B);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleButtonCReleased() {
-		model.addSequence(HatKey.KEY_C);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleJoystickUpReleased() {
-		model.addSequence(HatKey.JOYSTICK_UP);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
-		model.addSequence(HatKey.JOYSTICK_DOWN);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		model.addSequence(HatKey.JOYSTICK_LEFT);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		model.addSequence(HatKey.JOYSTICK_RIGHT);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		new SplashController().activate();	
+		// TODO Auto-generated method stub
+		
 	}
 
 }
