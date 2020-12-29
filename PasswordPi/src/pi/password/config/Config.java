@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.Properties;
 
+import com.jdi.ServiceClassType;
 import com.waveshare.display.buffered.BufferedLcdDisplay;
 import com.waveshare.keyboard.hat.HatKeyboardImpl;
 
@@ -19,6 +20,7 @@ public enum Config {
 	DI_IMPL_LCD_DISPLAY("impl.com.waveshare.display.LcdDisplay", BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl.com.waveshare.keyboard.HatKeyboard", HatKeyboardImpl.class.getCanonicalName()),
 	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.keyboard.KeyboardService", KeyboardUs.class.getCanonicalName()),
+	DI_TYPE_KEYBOARD_SERVICE("type.pi.password.keyboard.KeyboardService", ServiceClassType.MULTITON.toString()),
 	DI_IMPL_PASSWORD_VAULT("impl.pi.password.manager.PasswordVault", FilesystemPasswordVault.class.getCanonicalName()),
 	
 	BACKGROUND_SCREEN_LOCEKD("background.screen.locked", "img/lock.bmp"),

@@ -1,6 +1,18 @@
 package pi.password.hat;
 
+import pi.password.Main;
+import pi.password.keyboard.KeyboardService;
+import pi.password.manager.PasswordVault;
+
 public abstract class AbstractController {
+	
+	protected KeyboardService getKeyboardService() {
+		return Main.SERVICE_FACTORY.getServiceImpl(KeyboardService.class).get();
+	}
+	
+	protected PasswordVault getPasswordVault() {
+		return Main.SERVICE_FACTORY.getServiceImpl(PasswordVault.class).get();
+	}
 	
 	public void activate() {
 		Keyboard.INSTANCE.setButtonHandler(this);

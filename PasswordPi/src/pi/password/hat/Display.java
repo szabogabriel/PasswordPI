@@ -85,6 +85,28 @@ public enum Display {
 				+ BODY_FONT.getSize();
 
 		lcd.displayString(text, x, y, textColor, BODY_FONT);
+		
+		if (fontSelector >= 0) {
+			drawCharSelector(text, row, fontSelector);
+		}
+	}
+
+	private void drawCharSelector(String text, int row, int fontSelector) {
+		String substringA, substringB;
+		
+		if (fontSelector == 0) {
+			substringA = "";
+			substringB = text.substring(0, 1);
+		} else {
+			substringA = text.substring(0, fontSelector);
+			substringB = text.substring(0, fontSelector + 1);
+		}
+		
+		int startx, width;
+		startx = textWidth(BODY_FONT, substringA);
+		width = textWidth(BODY_FONT, substringB) - startx;
+		
+		lcd.drawRectangle(startx + getRowOffsetStart() + 1, getRowY(row), width, getRowHeight(), Color.RED, false, 1);
 	}
 
 	public int getMaxAmountOfBodyRows() {
@@ -106,12 +128,28 @@ public enum Display {
 	}
 
 	public void drawSelection(int row) {
-		int w = WIDTH - 4;
-		int h = BODY_FONT.getSize() + (2 * BODY_ELEMENT_BORDER);
-		int x = 2;
-		int y = TITLE_BAR_HEIGHT + (row * (BODY_FONT.getSize() + 2 * BODY_ELEMENT_BORDER));
+		int w = getRowOffsetEnd();
+		int h = getRowHeight();
+		int x = getRowOffsetStart();
+		int y = getRowY(row);
 
 		lcd.drawRectangle(x, y, w, h, Color.RED, false, 2);
+	}
+	
+	private int getRowOffsetStart() {
+		return 2;
+	}
+	
+	private int getRowOffsetEnd() {
+		return WIDTH - 4;
+	}
+	
+	private int getRowY(int row) {
+		return TITLE_BAR_HEIGHT + (row * (BODY_FONT.getSize() + 2 * BODY_ELEMENT_BORDER));
+	}
+	
+	private int getRowHeight() {
+		return BODY_FONT.getSize() + (2 * BODY_ELEMENT_BORDER);
 	}
 
 }

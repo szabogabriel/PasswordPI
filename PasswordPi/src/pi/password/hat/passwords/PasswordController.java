@@ -1,24 +1,17 @@
 package pi.password.hat.passwords;
 
-import pi.password.Main;
-import pi.password.config.Config;
 import pi.password.hat.AbstractController;
-import pi.password.keyboard.KeyboardService;
 import pi.password.hat.splash.SplashController;
-import pi.password.manager.PasswordVault;
-import pi.password.manager.filesystem.FilesystemPasswordVault;
 
 public class PasswordController extends AbstractController {
 
-	private final KeyboardService KEYBOARD = Main.SERVICE_FACTORY.getServiceImpl(KeyboardService.class).get(); 
-	
 	private PasswordView view;
 	private PasswordModel model;
 	
 	@Override
 	public void activateHandler() {
 		view = new PasswordView();
-		model = new PasswordModel(Main.SERVICE_FACTORY.getServiceImpl(PasswordVault.class).get(), view);
+		model = new PasswordModel(getPasswordVault(), view);
 	}
 
 	@Override
@@ -111,7 +104,7 @@ public class PasswordController extends AbstractController {
 	public void handleJoystickCenterReleased() {
 		String selected = model.getSelectedPassword();
 		if (selected != null) {
-			KEYBOARD.sendText(selected);
+			getKeyboardService().sendText(selected);
 		}
 	}
 	
