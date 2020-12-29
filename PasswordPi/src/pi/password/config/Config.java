@@ -13,6 +13,10 @@ import com.jdi.ServiceClassType;
 import com.waveshare.display.buffered.BufferedLcdDisplay;
 import com.waveshare.keyboard.hat.HatKeyboardImpl;
 
+import pi.password.gui.passwords.PasswordController;
+import pi.password.gui.screenlock.ScreenlockController;
+import pi.password.gui.splash.SplashController;
+import pi.password.gui.vaultManager.VaultManagerController;
 import pi.password.service.hat.DisplayServiceWaveshareHat;
 import pi.password.service.hat.KeyInputServiceWaveshareHat;
 import pi.password.service.keyboard.KeyboardServiceUs;
@@ -25,6 +29,16 @@ public enum Config {
 	DI_IMPL_LCD_DISPLAY("impl.com.waveshare.display.LcdDisplay", BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl.com.waveshare.keyboard.HatKeyboard", HatKeyboardImpl.class.getCanonicalName()),
 	DI_IMPL_DISPLAY_SERVICE("impl.pi.password.service.hat.DisplayService", DisplayServiceWaveshareHat.class.getCanonicalName()),
+	DI_IMPL_GUI_PASSWORD("impl.pi.password.gui.passwords.PasswordController", PasswordController.class.getCanonicalName()),
+	DI_TYPE_GUI_PASSWORD("type.pi.password.gui.passwords.PasswordController", ServiceClassType.MULTITON.toString()),
+	DI_IMPL_GUI_SCREENLOCK("impl.pi.password.gui.screenlock.ScreenlockController", ScreenlockController.class.getCanonicalName()),
+	DI_TYPE_GUI_SCREENLOCK("type.pi.password.gui.screenlock.ScreenlockController", ServiceClassType.MULTITON.toString()),
+	DI_IMPL_GUI_SETTINGS("impl.pi.password.gui.screenlock.ScreenlockController", ScreenlockController.class.getCanonicalName()),
+	DI_TYPE_GUI_SETTINGS("type.pi.password.gui.screenlock.ScreenlockController", ServiceClassType.MULTITON.toString()),
+	DI_IMPL_GUI_SPLASH("impl.pi.password.gui.splash.SplashController", SplashController.class.getCanonicalName()),
+	DI_TYPE_GUI_SPLASH("type.pi.password.gui.splash.SplashController", ServiceClassType.MULTITON.toString()),
+	DI_IMPL_GUI_VAULT("impl.pi.password.gui.vaultManager.VaultManagerController", VaultManagerController.class.getCanonicalName()),
+	DI_TYPE_GUI_VAULT("type.pi.password.gui.vaultManager.VaultManagerController", ServiceClassType.MULTITON.toString()),
 	DI_IMPL_IMAGE_UTIL_SERVICE("impl.pi.password.service.util.ImageUtilService", ImageUtilServiceFileSystem.class.getCanonicalName()),
 	DI_IMPL_KEY_INPUT_SERVICE("impl.pi.password.service.hat.KeyInputService", KeyInputServiceWaveshareHat.class.getCanonicalName()),
 	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.service.keyboard.KeyboardService", KeyboardServiceUs.class.getCanonicalName()),

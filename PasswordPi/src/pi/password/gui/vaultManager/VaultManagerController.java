@@ -2,7 +2,7 @@ package pi.password.gui.vaultManager;
 
 import pi.password.gui.AbstractController;
 
-public class VaultManageController extends AbstractController {
+public class VaultManagerController extends AbstractController {
 	
 	@Override
 	public void activateHandler() {

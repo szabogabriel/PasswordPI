@@ -1,12 +1,18 @@
 package pi.password.gui.settings;
 
+import pi.password.Main;
 import pi.password.gui.AbstractController;
+import pi.password.gui.splash.SplashController;
 
 public class SettingsController extends AbstractController {
 	
+	private SettingsModel model;
+	private SettingsView view;
+	
 	@Override
 	public void activateHandler() {
-		
+		model = new SettingsModel();
+		view = new SettingsView();
 	}
 	
 	@Override
@@ -59,8 +65,7 @@ public class SettingsController extends AbstractController {
 
 	@Override
 	public void handleButtonAReleased() {
-		// TODO Auto-generated method stub
-		
+		Main.getInstance(SplashController.class).activate();
 	}
 
 	@Override

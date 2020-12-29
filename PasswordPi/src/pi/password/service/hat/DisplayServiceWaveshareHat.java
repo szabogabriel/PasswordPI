@@ -62,8 +62,11 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 		BufferedImage image = Main.getInstance(SystemUtil.class).getIpAddress()
 				.map(a -> Main.getInstance(ImageUtilService.class).getWifiOn())
 				.orElse(Main.getInstance(ImageUtilService.class).getWifiOff());
+		
 		lcd.displayBitmap(image, WIDTH - image.getWidth(), 0);
+		
 		int centerPosition = centerStartPosition(TITLE_FONT, text);
+		
 		lcd.displayString(text, centerPosition, y, Color.GREEN, TITLE_FONT);
 	}
 
