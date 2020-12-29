@@ -1,4 +1,4 @@
-package pi.password.keyboard.us;
+package pi.password.keyboard;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,9 +8,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import pi.password.keyboard.KeyboardService;
-
-public class KeyboardUs implements KeyboardService {
+public class KeyboardServiceUs implements KeyboardService {
 
 	private static final File KEYBOARD_OUTPUT_FILE = new File("/dev/hidg0");
 	
