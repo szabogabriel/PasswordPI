@@ -2,18 +2,30 @@ package pi.password.gui.screenlock;
 
 import com.waveshare.keyboard.HatKey;
 
+import pi.password.Main;
 import pi.password.gui.AbstractController;
 import pi.password.gui.splash.SplashController;
+import pi.password.service.lock.LockService;
 
 public class ScreenlockController extends AbstractController {
 
 	private ScreenlockView view;
 	private ScreenlockModel model;
 	
+	private LockService lockService;
+	
+	public ScreenlockController(LockService lockService) {
+		this.lockService = lockService;
+	}
+	
 	@Override
 	public void activateHandler() {
 		view = new ScreenlockView();
 		model = new ScreenlockModel(view);
+		
+		if (!lockService.isLocked()) {
+			Main.getInstance(SplashController.class).activate();
+		}
 	}
 
 	@Override

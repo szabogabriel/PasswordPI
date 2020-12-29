@@ -15,7 +15,7 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException {
-		new ScreenlockController().activate();
+		getInstance(ScreenlockController.class).activate();
 	}
 	
 }

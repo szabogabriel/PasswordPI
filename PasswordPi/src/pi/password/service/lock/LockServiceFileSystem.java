@@ -34,7 +34,7 @@ public class LockServiceFileSystem implements LockService {
 
 	@Override
 	public boolean isLocked() {
-		return locked;
+		return isLockSet() && locked;
 	}
 
 	@Override
