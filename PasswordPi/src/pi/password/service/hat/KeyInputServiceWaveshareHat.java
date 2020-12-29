@@ -9,7 +9,7 @@ import pi.password.gui.AbstractController;
 
 public class KeyInputServiceWaveshareHat implements KeyInputService {
 
-	private HatKeyboard hat = Main.DI.getServiceImpl(HatKeyboard.class).get();
+	private HatKeyboard hat = Main.getInstance(HatKeyboard.class);
 	
 	private AbstractController handler;
 	

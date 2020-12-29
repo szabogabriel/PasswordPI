@@ -12,7 +12,7 @@ public abstract class AbstractView {
 	
 	public AbstractView(BufferedImage background) {
 		this.BACKGROUND = background;
-		this.DISPLAY = Main.DI.getServiceImpl(DisplayService.class).get();
+		this.DISPLAY = Main.getInstance(DisplayService.class);
 	}
 	
 	protected BufferedImage getBackground() {

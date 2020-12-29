@@ -8,15 +8,15 @@ import pi.password.service.password.PasswordVaultService;
 public abstract class AbstractController {
 	
 	protected KeyboardService getKeyboardService() {
-		return Main.DI.getServiceImpl(KeyboardService.class).get();
+		return Main.getInstance(KeyboardService.class);
 	}
 	
 	protected PasswordVaultService getPasswordVault() {
-		return Main.DI.getServiceImpl(PasswordVaultService.class).get();
+		return Main.getInstance(PasswordVaultService.class);
 	}
 	
 	public void activate() {
-		Main.DI.getServiceImpl(KeyInputService.class).get().setButtonHandler(this);
+		Main.getInstance(KeyInputService.class).setButtonHandler(this);
 		activateHandler();
 	}
 	

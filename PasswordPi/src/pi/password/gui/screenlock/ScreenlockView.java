@@ -17,7 +17,7 @@ public class ScreenlockView extends AbstractView {
 	private List<String> keys = new ArrayList<>();
 
 	public ScreenlockView() {
-		super(Main.DI.getServiceImpl(ImageUtilService.class).get().getMainBackground());
+		super(Main.getInstance(ImageUtilService.class).getMainBackground());
 	}
 
 	public void sequenceChanged(List<HatKey> keys) {
@@ -71,7 +71,7 @@ public class ScreenlockView extends AbstractView {
 	@Override
 	public void paint() {
 		DISPLAY.displayImage(getBackground());
-		DISPLAY.displayTitle(Main.DI.getServiceImpl(SystemUtil.class).get().getIpAddress().orElse("Offline"));
+		DISPLAY.displayTitle(Main.getInstance(SystemUtil.class).getIpAddress().orElse("Offline"));
 
 		DISPLAY.displayText("Locked", Color.GREEN, 1, TextAlign.CENTER, -1);
 		for (int i = 0; i < keys.size(); i++) {

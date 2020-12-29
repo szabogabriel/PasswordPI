@@ -31,7 +31,7 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 		LEFT, CENTER, RIGHT;
 	};
 
-	private LcdDisplay lcd = Main.DI.getServiceImpl(LcdDisplay.class).get();
+	private LcdDisplay lcd = Main.getInstance(LcdDisplay.class);
 
 	private final Canvas CANVAS = new Canvas();
 
@@ -59,9 +59,9 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 		int y = (TITLE_BAR_HEIGHT + TITLE_FONT.getSize() - 1) / 2;
 
 		lcd.drawRectangle(0, 0, WIDTH, TITLE_BAR_HEIGHT, Color.BLACK, true, 1);
-		BufferedImage image = Main.DI.getServiceImpl(SystemUtil.class).get().getIpAddress()
-				.map(a -> Main.DI.getServiceImpl(ImageUtilService.class).get().getWifiOn())
-				.orElse(Main.DI.getServiceImpl(ImageUtilService.class).get().getWifiOff());
+		BufferedImage image = Main.getInstance(SystemUtil.class).getIpAddress()
+				.map(a -> Main.getInstance(ImageUtilService.class).getWifiOn())
+				.orElse(Main.getInstance(ImageUtilService.class).getWifiOff());
 		lcd.displayBitmap(image, WIDTH - image.getWidth(), 0);
 		int centerPosition = centerStartPosition(TITLE_FONT, text);
 		lcd.displayString(text, centerPosition, y, Color.GREEN, TITLE_FONT);

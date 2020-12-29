@@ -8,10 +8,14 @@ import pi.password.gui.screenlock.ScreenlockController;
 
 public class Main {
 	
-	public static final ServiceFactory DI = new ServiceFactoryImpl(new JdiConfigService());
+	private static final ServiceFactory DI = new ServiceFactoryImpl(new JdiConfigService());
+	
+	public static <T> T getInstance(Class<T> clss) {
+		return DI.getServiceImpl(clss).orElse(null);
+	}
 	
 	public static void main(String[] args) throws ClassNotFoundException {
 		new ScreenlockController().activate();
 	}
-
+	
 }

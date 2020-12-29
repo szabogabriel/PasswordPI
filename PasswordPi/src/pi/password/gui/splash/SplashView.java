@@ -8,13 +8,13 @@ import pi.password.service.util.SystemUtil;
 public class SplashView extends AbstractView {
 
 	public SplashView() {
-		super(Main.DI.getServiceImpl(ImageUtilService.class).get().getSplashScreen());
+		super(Main.getInstance(ImageUtilService.class).getSplashScreen());
 	}
 
 	@Override
 	public void paint() {
 		DISPLAY.displayImage(getBackground());
-		DISPLAY.displayTitle(Main.DI.getServiceImpl(SystemUtil.class).get().getIpAddress().orElse("Offline"));
+		DISPLAY.displayTitle(Main.getInstance(SystemUtil.class).getIpAddress().orElse("Offline"));
 	}
 
 }

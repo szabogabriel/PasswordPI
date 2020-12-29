@@ -75,7 +75,7 @@ public class LockServiceFileSystem implements LockService {
 	}
 	
 	private boolean createLockFile(String key) {
-		String salt = Main.DI.getServiceImpl(RandomUtil.class).get().getSalt();
+		String salt = Main.getInstance(RandomUtil.class).getSalt();
 		File targetFile = new File(LOCK_DIR.getAbsolutePath() + "/" + salt + LOCK_FILE_POSTFIX);
 		
 		String dataToBeHashed = key + salt;

@@ -16,7 +16,7 @@ public class PasswordView extends AbstractView {
 	private int offset = 0; 
 	
 	public PasswordView() {
-		super(Main.DI.getServiceImpl(ImageUtilService.class).get().getMainBackground());
+		super(Main.getInstance(ImageUtilService.class).getMainBackground());
 	}
 	
 	public void setKeys(String[] keys) {
