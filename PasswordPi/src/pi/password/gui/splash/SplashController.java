@@ -1,7 +1,9 @@
 package pi.password.gui.splash;
 
+import pi.password.Main;
 import pi.password.gui.AbstractController;
 import pi.password.gui.passwords.PasswordController;
+import pi.password.gui.settings.SettingsController;
 
 public class SplashController extends AbstractController {
 	
@@ -80,33 +82,32 @@ public class SplashController extends AbstractController {
 
 	@Override
 	public void handleButtonCReleased() {
-		// TODO Auto-generated method stub
-		
+		Main.getInstance(SettingsController.class).activate();
 	}
 
 	@Override
 	public void handleJoystickUpReleased() {
-		new PasswordController().activate();		
+		Main.getInstance(PasswordController.class).activate();		
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
-		new PasswordController().activate();		
+		Main.getInstance(PasswordController.class).activate();		
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		new PasswordController().activate();		
+		Main.getInstance(PasswordController.class).activate();		
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		new PasswordController().activate();		
+		Main.getInstance(PasswordController.class).activate();		
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		new PasswordController().activate();
+		Main.getInstance(PasswordController.class).activate();
 	}
 
 }

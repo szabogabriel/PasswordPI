@@ -19,6 +19,8 @@ public interface DisplayService {
 	
 	void displayText(String text, Color textColor, int row, TextAlign align, int fontSelector);
 	
+	void displayKeyValue(String key, String value, Color keyColor, Color valueColor, int row);
+	
 	int getMaxAmountOfBodyRows();
 	
 	void flipBacklight();

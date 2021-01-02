@@ -22,9 +22,11 @@ import pi.password.service.hat.KeyInputServiceWaveshareHat;
 import pi.password.service.keyboard.KeyboardServiceUs;
 import pi.password.service.lock.LockServiceFileSystem;
 import pi.password.service.password.PasswordVaultServiceFileSystem;
+import pi.password.service.settings.SettingsServiceFilesystem;
 import pi.password.service.util.ImageUtilServiceFileSystem;
+import pi.password.service.webserver.WebserverServiceImpl;
 
-public enum Config {
+public enum RuntimeConfig {
 	
 	DI_IMPL_LCD_DISPLAY("impl.com.waveshare.display.LcdDisplay", BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl.com.waveshare.keyboard.HatKeyboard", HatKeyboardImpl.class.getCanonicalName()),
@@ -44,7 +46,9 @@ public enum Config {
 	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.service.keyboard.KeyboardService", KeyboardServiceUs.class.getCanonicalName()),
 	DI_TYPE_KEYBOARD_SERVICE("type.pi.password.service.keyboard.KeyboardService", ServiceClassType.MULTITON.toString()),
 	DI_IMPL_LOCK_SERVICE("impl.pi.password.service.lock.LockService", LockServiceFileSystem.class.getCanonicalName()),
+	DI_IMPL_SETTINGS_SERVICE("impl.pi.password.service.settings.SettingsService", SettingsServiceFilesystem.class.getCanonicalName()),
 	DI_IMPL_PASSWORD_VAULT("impl.pi.password.service.password.PasswordVaultService", PasswordVaultServiceFileSystem.class.getCanonicalName()),
+	DI_IMPL_WEBSERVER_SERVICE("impl.pi.password.service.webserver.WebserverService", WebserverServiceImpl.class.getCanonicalName()),
 	
 	BACKGROUND_SCREEN_LOCEKD("background.screen.locked", "img/lock.bmp"),
 	BACKGROUND_SCREEN_PASSWORD("background.screen.password", "img/background.bmp"),
@@ -54,13 +58,13 @@ public enum Config {
 	ICON_WIFI_ON("icon.wifi.on", "img/icon_wifi_on.png"),
 	ICON_WIFI_OFF("icon.wifi.off", "img/icon_wifi_off.png"),
 	
-	LOCK_DIRECTORY("lock.dir", "."),
+	WORKING_DIRECTORY("working.dir", "."),
 	
 	VAULT_TYPE("vault.type", "filesystem"),
 	VAULT_FILESYSTEM_FILE("vault.filesystem.file", "passwords.properties"),
 	;
 	
-	private static final File PROPERTIES_FILE = new File("./settings.properties");
+	private static final File PROPERTIES_FILE = new File("./runtime.properties");
 	private static final Properties CONFIG_VALUES = new Properties();
 	
 	static {
@@ -78,9 +82,13 @@ public enum Config {
 	private final String key;
 	private final String defaultValue;
 	
-	private Config(String key, String defaultValue) {
+	private RuntimeConfig(String key, String defaultValue) {
 		this.key = key;
 		this.defaultValue = defaultValue;
+	}
+	
+	public String getKey() {
+		return key;
 	}
 	
 	public String toString() {

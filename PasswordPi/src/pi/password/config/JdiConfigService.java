@@ -8,7 +8,7 @@ public class JdiConfigService implements ConfigService {
 
 	@Override
 	public Optional<String> get(String key) {
-		return Config.get(key);
+		return RuntimeConfig.get(key);
 	}
 
 }

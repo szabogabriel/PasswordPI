@@ -81,16 +81,15 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 			x = centerStartPosition(BODY_FONT, text);
 			break;
 		case LEFT:
-			x = BODY_ELEMENT_BORDER;
+			x = leftStartPosition();
 			break;
 		case RIGHT:
-			x = WIDTH - textWidth(BODY_FONT, text) - BODY_ELEMENT_BORDER;
+			x = rightStartPosition(text);
 			break;
 		}
 
 		// Compute the position on the Y axis based on the row number
-		y = ((BODY_FONT.getSize() + (BODY_ELEMENT_BORDER * 2)) * row) + BODY_ELEMENT_BORDER + TITLE_BAR_HEIGHT
-				+ BODY_FONT.getSize();
+		y = rowStartPosition(row);
 
 		lcd.displayString(text, x, y, textColor, BODY_FONT);
 
@@ -99,36 +98,21 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 		}
 	}
 
-	private void drawCharSelector(String text, int row, int fontSelector) {
-		String substringA, substringB;
-
-		if (fontSelector == 0) {
-			substringA = "";
-			substringB = text.substring(0, 1);
-		} else {
-			substringA = text.substring(0, fontSelector);
-			substringB = text.substring(0, fontSelector + 1);
-		}
-
-		int startx, width;
-		startx = textWidth(BODY_FONT, substringA);
-		width = textWidth(BODY_FONT, substringB) - startx;
-
-		lcd.drawRectangle(startx + getRowOffsetStart() + 1, getRowY(row), width, getRowHeight(), Color.RED, false, 1);
+	@Override
+	public void displayKeyValue(String key, String value, Color keyColor, Color valueColor, int row) {
+		int y = rowStartPosition(row);
+		
+		int keyX = leftStartPosition();
+		int valueX = rightStartPosition(value);
+		
+		lcd.displayString(key, keyX, y, keyColor, BODY_FONT);
+		lcd.displayString(value, valueX, y, valueColor, BODY_FONT);
 	}
 
 	@Override
 	public int getMaxAmountOfBodyRows() {
 		int ret = ((HEIGHT - TITLE_BAR_HEIGHT) / (BODY_FONT.getSize() + (2 * BODY_ELEMENT_BORDER)));
 		return ret;
-	}
-
-	private int centerStartPosition(Font font, String text) {
-		return (int) ((WIDTH / 2) - (textWidth(font, text) / 2));
-	}
-
-	private int textWidth(Font font, String text) {
-		return CANVAS.getFontMetrics(font).charsWidth(text.toCharArray(), 0, text.length());
 	}
 
 	@Override
@@ -161,6 +145,45 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 
 	private int getRowHeight() {
 		return BODY_FONT.getSize() + (2 * BODY_ELEMENT_BORDER);
+	}
+	
+	private int centerStartPosition(Font font, String text) {
+		return (int) ((WIDTH / 2) - (textWidth(font, text) / 2));
+	}
+
+	private int textWidth(Font font, String text) {
+		return CANVAS.getFontMetrics(font).charsWidth(text.toCharArray(), 0, text.length());
+	}
+	
+	private void drawCharSelector(String text, int row, int fontSelector) {
+		String substringA, substringB;
+
+		if (fontSelector == 0) {
+			substringA = "";
+			substringB = text.substring(0, 1);
+		} else {
+			substringA = text.substring(0, fontSelector);
+			substringB = text.substring(0, fontSelector + 1);
+		}
+
+		int startx, width;
+		startx = textWidth(BODY_FONT, substringA);
+		width = textWidth(BODY_FONT, substringB) - startx;
+
+		lcd.drawRectangle(startx + getRowOffsetStart() + 1, getRowY(row), width, getRowHeight(), Color.RED, false, 1);
+	}
+	
+	private int leftStartPosition() {
+		return BODY_ELEMENT_BORDER;
+	}
+	
+	private int rightStartPosition(String text) {
+		return WIDTH - textWidth(BODY_FONT, text) - BODY_ELEMENT_BORDER;
+	}
+	
+	private int rowStartPosition(int row) {
+		return ((BODY_FONT.getSize() + (BODY_ELEMENT_BORDER * 2)) * row) + BODY_ELEMENT_BORDER + TITLE_BAR_HEIGHT
+				+ BODY_FONT.getSize();
 	}
 
 }

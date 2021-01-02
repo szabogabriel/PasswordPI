@@ -7,14 +7,14 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import pi.password.Main;
-import pi.password.config.Config;
+import pi.password.config.RuntimeConfig;
 import pi.password.service.util.RandomUtil;
 
 public class LockServiceFileSystem implements LockService {
 	
 	private static final String LOCK_FILE_POSTFIX = ".lock";
 	
-	private final File LOCK_DIR = new File(Config.LOCK_DIRECTORY.toString());
+	private final File LOCK_DIR = new File(RuntimeConfig.WORKING_DIRECTORY.toString());
 	
 	private Optional<File> lockFile = Optional.empty();
 	

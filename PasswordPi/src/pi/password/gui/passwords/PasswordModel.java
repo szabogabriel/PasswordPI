@@ -12,7 +12,9 @@ public class PasswordModel extends AbstractModel {
 	public PasswordModel(PasswordVaultService passwords, PasswordView view) {
 		this.PASSWORDS = passwords;
 		this.VIEW = view;
+		
 		this.selected = 0;
+		
 		this.VIEW.setKeys(getSortedPasswordKeys());
 		this.VIEW.setSelection(selected);
 		this.VIEW.paint();
