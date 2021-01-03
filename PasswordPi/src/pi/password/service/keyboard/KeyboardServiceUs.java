@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
-import pi.password.entity.SettingsEntity;
 import pi.password.service.settings.SettingsService;
 
 public class KeyboardServiceUs extends KeyboardService {
