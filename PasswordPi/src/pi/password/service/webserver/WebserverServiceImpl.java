@@ -8,18 +8,22 @@ import java.util.Optional;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
+import pi.password.service.dialog.DialogService;
 import pi.password.service.util.SystemUtil;
 
 public class WebserverServiceImpl implements WebserverService {
 	
+	private final DialogService DIALOG_SERVICE;
 	private final SystemUtil SYSTEM_UTIL;
+	
 	private HttpServer server;
 	private int port = 0;
 	
 	private boolean running = false;
 	
-	public WebserverServiceImpl(SystemUtil sysUtil) {
-		SYSTEM_UTIL = sysUtil;
+	public WebserverServiceImpl(DialogService dialogService, SystemUtil sysUtil) {
+		this.DIALOG_SERVICE = dialogService;
+		this.SYSTEM_UTIL = sysUtil;
 	}
 
 	@Override
@@ -70,10 +74,14 @@ public class WebserverServiceImpl implements WebserverService {
 	}
 	
 	private void handleIndex(HttpExchange exchange) throws IOException {
-		String response = "yesss";
-		exchange.sendResponseHeaders(200, response.length());
-		exchange.getResponseBody().write(response.getBytes());
-		exchange.getResponseBody().close();
+		if (DIALOG_SERVICE.showYesNoDialog("Accept incoming web request?")) {
+			String response = "yesss";
+			exchange.sendResponseHeaders(200, response.length());
+			exchange.getResponseBody().write(response.getBytes());
+			exchange.getResponseBody().close();
+		} else {
+			unsupportedRequest(exchange);
+		}
 	}
 
 }

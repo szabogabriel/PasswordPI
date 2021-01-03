@@ -130,6 +130,11 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 
 		lcd.drawRectangle(x, y, w, h, Color.RED, false, 2);
 	}
+	
+	@Override
+	public boolean isFullyVisibleLine(String text) {
+		return textWidth(BODY_FONT, text) < (WIDTH - BODY_ELEMENT_BORDER * 2);
+	}
 
 	private int getRowOffsetStart() {
 		return 2;

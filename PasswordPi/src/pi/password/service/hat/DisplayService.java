@@ -27,4 +27,6 @@ public interface DisplayService {
 	
 	void drawSelection(int row);
 	
+	boolean isFullyVisibleLine(String text);
+	
 }

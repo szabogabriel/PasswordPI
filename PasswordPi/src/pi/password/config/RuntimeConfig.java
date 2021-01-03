@@ -17,6 +17,7 @@ import pi.password.gui.passwords.PasswordController;
 import pi.password.gui.screenlock.ScreenlockController;
 import pi.password.gui.splash.SplashController;
 import pi.password.gui.vaultManager.VaultManagerController;
+import pi.password.service.dialog.DialogServiceImpl;
 import pi.password.service.hat.DisplayServiceWaveshareHat;
 import pi.password.service.hat.KeyInputServiceWaveshareHat;
 import pi.password.service.keyboard.KeyboardServiceUs;
@@ -30,6 +31,7 @@ public enum RuntimeConfig {
 	
 	DI_IMPL_LCD_DISPLAY("impl.com.waveshare.display.LcdDisplay", BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl.com.waveshare.keyboard.HatKeyboard", HatKeyboardImpl.class.getCanonicalName()),
+	DI_IMPL_DIALOG_SERVICE("impl.pi.password.service.dialog.DialogService", DialogServiceImpl.class.getCanonicalName()),
 	DI_IMPL_DISPLAY_SERVICE("impl.pi.password.service.hat.DisplayService", DisplayServiceWaveshareHat.class.getCanonicalName()),
 	DI_IMPL_GUI_PASSWORD("impl.pi.password.gui.passwords.PasswordController", PasswordController.class.getCanonicalName()),
 	DI_TYPE_GUI_PASSWORD("type.pi.password.gui.passwords.PasswordController", ServiceClassType.MULTITON.toString()),
