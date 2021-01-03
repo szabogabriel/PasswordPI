@@ -70,8 +70,7 @@ public class SplashController extends AbstractController {
 
 	@Override
 	public void handleButtonAReleased() {
-		// TODO Auto-generated method stub
-		
+		model.setBacklight(!model.getBacklight());
 	}
 
 	@Override
@@ -82,32 +81,44 @@ public class SplashController extends AbstractController {
 
 	@Override
 	public void handleButtonCReleased() {
+		turnOnBacklight();
 		Main.getInstance(SettingsController.class).activate();
 	}
 
 	@Override
 	public void handleJoystickUpReleased() {
+		turnOnBacklight();
 		Main.getInstance(PasswordController.class).activate();		
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
+		turnOnBacklight();
 		Main.getInstance(PasswordController.class).activate();		
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
+		turnOnBacklight();
 		Main.getInstance(PasswordController.class).activate();		
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
+		turnOnBacklight();
 		Main.getInstance(PasswordController.class).activate();		
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
+		turnOnBacklight();
 		Main.getInstance(PasswordController.class).activate();
+	}
+	
+	private void turnOnBacklight() {
+		if (!model.getBacklight()) {
+			model.setBacklight(true);
+		}
 	}
 
 }

@@ -116,9 +116,8 @@ public class DisplayServiceWaveshareHat implements DisplayService {
 	}
 
 	@Override
-	public void flipBacklight() {
-		// XXX: Not supported currently
-//		lcd.flipBacklight();
+	public void setBacklight(boolean backlight) {
+		lcd.setBacklight(backlight);
 	}
 
 	@Override

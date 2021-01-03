@@ -10,6 +10,10 @@ public class SplashView extends AbstractView {
 	public SplashView() {
 		super(Main.getInstance(ImageUtilService.class).getSplashScreen());
 	}
+	
+	public void setBacklight(boolean backlight) {
+		DISPLAY.setBacklight(backlight);
+	}
 
 	@Override
 	public void paint() {

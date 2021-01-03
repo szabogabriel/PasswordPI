@@ -23,7 +23,7 @@ public interface DisplayService {
 	
 	int getMaxAmountOfBodyRows();
 	
-	void flipBacklight();
+	void setBacklight(boolean backlight);
 	
 	void drawSelection(int row);
 	

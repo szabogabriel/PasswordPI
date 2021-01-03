@@ -15,9 +15,10 @@ public class SplashModel extends AbstractModel {
 	
 	public void setBacklight(boolean backlight) {
 		this.backlight = backlight;
+		VIEW.setBacklight(backlight);
 	}
 	
-	public boolean getBacklight(boolean backlight) {
+	public boolean getBacklight() {
 		return this.backlight;
 	}
 
