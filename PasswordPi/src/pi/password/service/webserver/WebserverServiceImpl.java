@@ -1,23 +1,79 @@
 package pi.password.service.webserver;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.util.Optional;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpServer;
+
+import pi.password.service.util.SystemUtil;
+
 public class WebserverServiceImpl implements WebserverService {
+	
+	private final SystemUtil SYSTEM_UTIL;
+	private HttpServer server;
+	private int port = 0;
+	
+	private boolean running = false;
+	
+	public WebserverServiceImpl(SystemUtil sysUtil) {
+		SYSTEM_UTIL = sysUtil;
+	}
 
 	@Override
 	public void startWebserver() {
-		// TODO Auto-generated method stub
-		System.out.println("Start webserver.");
+		Optional<String> ipAddress = SYSTEM_UTIL.getIpAddress();
+		if (!running && ipAddress.isPresent() && port > 0) {
+			try {
+				InetSocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(ipAddress.get()), port);
+				
+				server = HttpServer.create(socketAddress, port);
+
+				server.createContext("/index", this::handleIndex);
+				server.createContext("/", this::unsupportedRequest);
+				
+				server.start();
+				running = true;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public void stopWebserver() {
-		// TODO Auto-generated method stub
-		System.out.println("Stop webserver.");
+		if (running) {
+			server.stop(1);
+			running = false;
+		}
 	}
 
 	@Override
 	public void setPort(int port) {
-		// TODO Auto-generated method stub
-		System.out.println("Set port: " + port);
+		if (port > 0 && port < 65536) {
+			this.port = port;
+	
+			if (running) {
+				stopWebserver();
+				startWebserver();
+			}
+		}
+	}
+	
+	private void unsupportedRequest(HttpExchange exchange) throws IOException {
+		String response = "noooo";
+		exchange.sendResponseHeaders(404, response.length());
+		exchange.getResponseBody().write(response.getBytes());
+		exchange.getResponseBody().close();
+	}
+	
+	private void handleIndex(HttpExchange exchange) throws IOException {
+		String response = "yesss";
+		exchange.sendResponseHeaders(200, response.length());
+		exchange.getResponseBody().write(response.getBytes());
+		exchange.getResponseBody().close();
 	}
 
 }

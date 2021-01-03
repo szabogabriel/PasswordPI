@@ -15,7 +15,10 @@ public abstract class SettingsService {
 	}
 	
 	protected void init() {
-		getSettings().stream().forEach(this::handleValueChange);
+		getSettings()
+			.stream()
+			.sorted((k1, k2) -> k1.getKey().ordinal() - k2.getKey().ordinal())
+			.forEach(this::handleValueChange);
 	}
 	
 	protected void handleValueChange(SettingsEntity entity) {
