@@ -78,6 +78,7 @@ public class SettingsServiceFilesystem extends SettingsService {
 		if (setting.getKey() != null && setting.getValue() != null) {
 			props.put(setting.getKey().name(), setting.getValue());
 			saveSettings();
+			handleValueChange(setting);
 		}
 	}
 
