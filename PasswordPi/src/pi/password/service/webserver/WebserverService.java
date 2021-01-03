@@ -7,5 +7,7 @@ public interface WebserverService {
 	void stopWebserver();
 	
 	void setPort(int port);
+	
+	void setStrict(boolean strict);
 
 }

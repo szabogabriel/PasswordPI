@@ -6,16 +6,19 @@ import java.util.stream.Collectors;
 import pi.password.entity.SettingsEntity;
 import pi.password.gui.AbstractModel;
 import pi.password.service.settings.SettingsService;
+import pi.password.service.settings.SettingsUpdatePropagatorService;
 
 public class SettingsModel extends AbstractModel {
 	
 	private final SettingsView VIEW;
 	private final SettingsService SETTINGS_SERVICE;
+	private final SettingsUpdatePropagatorService SETTINGS_UPDATE_PROPAGATOR_SERVICE;
 	private int selected;
 	
-	public SettingsModel(SettingsView view, SettingsService service) {
+	public SettingsModel(SettingsView view, SettingsService service, SettingsUpdatePropagatorService updatePropagatorService) {
 		this.VIEW = view;
 		this.SETTINGS_SERVICE = service;
+		this.SETTINGS_UPDATE_PROPAGATOR_SERVICE = updatePropagatorService;
 		
 		selected = 0;
 		
@@ -64,6 +67,7 @@ public class SettingsModel extends AbstractModel {
 		
 		if (newSettings != null) {
 			updateSetting(newSettings);
+			SETTINGS_UPDATE_PROPAGATOR_SERVICE.handleSettingUpdate(newSettings);
 		}
 	}
 	
@@ -92,6 +96,7 @@ public class SettingsModel extends AbstractModel {
 		
 		if (newSettings != null) {
 			updateSetting(newSettings);
+			SETTINGS_UPDATE_PROPAGATOR_SERVICE.handleSettingUpdate(newSettings);
 		}
 	}
 	
@@ -120,6 +125,7 @@ public class SettingsModel extends AbstractModel {
 		
 		if (newSettings != null) {
 			updateSetting(newSettings);
+			SETTINGS_UPDATE_PROPAGATOR_SERVICE.handleSettingUpdate(newSettings);
 		}
 	}
 	

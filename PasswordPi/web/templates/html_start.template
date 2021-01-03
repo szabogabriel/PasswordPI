@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="{{current.locale}}">
+  <head>
+    <title>{{string.page.title}}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="res/bootstrap.min.css">
+    <link rel="stylesheet" href="res/bootstrap-theme.min.css">
+    <script src="res/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">

@@ -24,6 +24,8 @@ import pi.password.service.keyboard.KeyboardServiceUs;
 import pi.password.service.lock.LockServiceFileSystem;
 import pi.password.service.password.PasswordVaultServiceFileSystem;
 import pi.password.service.settings.SettingsServiceFilesystem;
+import pi.password.service.settings.SettingsUpdatePropagatorServiceImpl;
+import pi.password.service.template.TemplateServiceMustache;
 import pi.password.service.util.ImageUtilServiceFileSystem;
 import pi.password.service.webserver.WebserverServiceImpl;
 
@@ -48,8 +50,10 @@ public enum RuntimeConfig {
 	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.service.keyboard.KeyboardService", KeyboardServiceUs.class.getCanonicalName()),
 	DI_TYPE_KEYBOARD_SERVICE("type.pi.password.service.keyboard.KeyboardService", ServiceClassType.MULTITON.toString()),
 	DI_IMPL_LOCK_SERVICE("impl.pi.password.service.lock.LockService", LockServiceFileSystem.class.getCanonicalName()),
-	DI_IMPL_SETTINGS_SERVICE("impl.pi.password.service.settings.SettingsService", SettingsServiceFilesystem.class.getCanonicalName()),
 	DI_IMPL_PASSWORD_VAULT("impl.pi.password.service.password.PasswordVaultService", PasswordVaultServiceFileSystem.class.getCanonicalName()),
+	DI_IMPL_SETTINGS_SERVICE("impl.pi.password.service.settings.SettingsService", SettingsServiceFilesystem.class.getCanonicalName()),
+	DI_IMPL_SETTINGS_UPDATE_SERVICE("impl.pi.password.service.settings.SettingsUpdatePropagatorService", SettingsUpdatePropagatorServiceImpl.class.getCanonicalName()),
+	DI_IMPL_TEMPLATE_SERVICE("impl.pi.password.service.template.TemplateService", TemplateServiceMustache.class.getCanonicalName()),
 	DI_IMPL_WEBSERVER_SERVICE("impl.pi.password.service.webserver.WebserverService", WebserverServiceImpl.class.getCanonicalName()),
 	
 	BACKGROUND_SCREEN_LOCEKD("background.screen.locked", "img/lock.bmp"),
@@ -61,6 +65,8 @@ public enum RuntimeConfig {
 	ICON_WIFI_OFF("icon.wifi.off", "img/icon_wifi_off.png"),
 	
 	WORKING_DIRECTORY("working.dir", "."),
+	
+	WEB_DIRECTORY("web.dir", "./web/"),
 	
 	VAULT_TYPE("vault.type", "filesystem"),
 	VAULT_FILESYSTEM_FILE("vault.filesystem.file", "passwords.properties"),

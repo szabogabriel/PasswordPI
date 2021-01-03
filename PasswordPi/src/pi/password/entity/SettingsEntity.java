@@ -18,6 +18,7 @@ public class SettingsEntity {
 		KEYSTROKE_LENGTH(Type.NUMBERS, "Keystroke", "50", null),
 		TYPE_DELAY_MIN(Type.NUMBERS, "Delay min", "30", null),
 		TYPE_DELAY_MAX(Type.NUMBERS, "Delay max", "120", null),
+		WEBSERVER_STRICT(Type.OPTIONS, "Web strict", "Off", new String [] {"Off", "On"}),
 		WEBSERVER_PORT(Type.NUMBERS, "Web port", "80", null),
 		WEBSERVER_ENABLED(Type.OPTIONS, "Webserver", "Off", new String [] {"Off", "On"}),
 		;

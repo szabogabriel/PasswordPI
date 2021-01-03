@@ -4,6 +4,7 @@ import pi.password.Main;
 import pi.password.gui.AbstractController;
 import pi.password.gui.splash.SplashController;
 import pi.password.service.settings.SettingsService;
+import pi.password.service.settings.SettingsUpdatePropagatorService;
 
 public class SettingsController extends AbstractController {
 	
@@ -16,7 +17,7 @@ public class SettingsController extends AbstractController {
 	@Override
 	public void activateHandler() {
 		view = new SettingsView();
-		model = new SettingsModel(view, Main.getInstance(SettingsService.class));
+		model = new SettingsModel(view, Main.getInstance(SettingsService.class), Main.getInstance(SettingsUpdatePropagatorService.class));
 		view.paint();
 	}
 	

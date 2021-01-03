@@ -1,0 +1,16 @@
+{{>html_start.template}}
+
+{{>html_menu.template}}
+      
+      {{{content}}}
+      
+      {{#showEntriesList}}
+        {{#entriesList}}<p><a href="page?category={{currentCategory}}&name={{entryFile}}&locale={{current.locale}}">{{entryFileHR}}</p>
+        {{/entriesList}}
+      {{/showEntriesList}}
+      
+      {{#showIndex}}
+        {{>index.template}}
+      {{/showIndex}}
+
+{{>html_stop.template}}

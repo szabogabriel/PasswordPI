@@ -15,22 +15,18 @@ import com.jdi.ConfigService;
 
 import pi.password.config.RuntimeConfig;
 import pi.password.entity.SettingsEntity;
-import pi.password.service.webserver.WebserverService;
 
-public class SettingsServiceFilesystem extends SettingsService {
+public class SettingsServiceFilesystem implements SettingsService {
 
 	private File settings;
 	
 	private Properties props = new Properties();
 	
-	public SettingsServiceFilesystem(ConfigService configService, WebserverService webserverService) {
-		super(webserverService);
+	public SettingsServiceFilesystem(ConfigService configService) {
 		String workingDirectory = configService.get(RuntimeConfig.WORKING_DIRECTORY.getKey()).orElse(".");
 		settings = new File(workingDirectory + "/settings.properties");
 		
 		loadSettings();
-		
-		init();
 	}
 	
 	private void loadSettings() {
@@ -78,7 +74,6 @@ public class SettingsServiceFilesystem extends SettingsService {
 		if (setting.getKey() != null && setting.getValue() != null) {
 			props.put(setting.getKey().name(), setting.getValue());
 			saveSettings();
-			handleValueChange(setting);
 		}
 	}
 
