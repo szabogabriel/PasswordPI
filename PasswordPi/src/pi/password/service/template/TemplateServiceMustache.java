@@ -49,6 +49,12 @@ public class TemplateServiceMustache implements TemplateService {
 		case INDEX:
 			ret = "page.template";
 			break;
+		case PASSWORDS:
+			ret = "passwords.template";
+			break;
+		case SETTINGS:
+			ret = "settings.template";
+			break;
 		default:
 			break;
 		}

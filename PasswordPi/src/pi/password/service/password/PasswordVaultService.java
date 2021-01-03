@@ -17,5 +17,9 @@ public interface PasswordVaultService {
 	boolean isKnownPasswordEntity(String name);
 	
 	void update(String name, String password);
+	
+	void remove(String name);
+	
+	boolean add(String name, String password);
 
 }

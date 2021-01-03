@@ -4,6 +4,8 @@ public enum Templates {
 	
 	ERROR,
 	INDEX,
+	PASSWORDS,
+	SETTINGS,
 	;
 
 }

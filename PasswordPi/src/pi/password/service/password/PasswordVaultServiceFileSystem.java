@@ -52,6 +52,14 @@ public class PasswordVaultServiceFileSystem implements PasswordVaultService {
 			e.printStackTrace();
 		}
 	}
+	
+	private void saveProperties() {
+		try {
+			PROPERTIES.store(new FileOutputStream(VAULT), "");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public Set<PasswordEntity> listPasswordEntities() {
@@ -79,16 +87,31 @@ public class PasswordVaultServiceFileSystem implements PasswordVaultService {
 		
 		PROPERTIES.put(name, password);
 		
-		try {
-			PROPERTIES.store(new FileOutputStream(VAULT), "");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		saveProperties();
 	}
 
 	@Override
 	public List<String> listPasswordEntityNames() {
 		return PROPERTIES.keySet().stream().map(o -> o.toString()).sorted().collect(Collectors.toList());
+	}
+
+	@Override
+	public void remove(String name) {
+		if (PROPERTIES.containsKey(name)) {
+			PROPERTIES.remove(name);
+			saveProperties();
+		}
+	}
+
+	@Override
+	public boolean add(String name, String password) {
+		boolean ret = false;
+		if (!PROPERTIES.contains(name)) {
+			PROPERTIES.put(name, password);
+			saveProperties();
+			ret = true;
+		}
+		return ret;
 	}
 
 }
