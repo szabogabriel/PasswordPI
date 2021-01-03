@@ -7,8 +7,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
-public class KeyboardServiceUs implements KeyboardService {
+import pi.password.entity.SettingsEntity;
+import pi.password.service.settings.SettingsService;
+
+public class KeyboardServiceUs extends KeyboardService {
 
 	private static final File KEYBOARD_OUTPUT_FILE = new File("/dev/hidg0");
 	
@@ -118,6 +122,10 @@ public class KeyboardServiceUs implements KeyboardService {
 		KEYS.put("?", new byte[] { 0x02, 0x00, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00 });
 	}
 	
+	public KeyboardServiceUs(SettingsService settings) {
+		super(settings);
+	}
+	
 	public boolean sendText(String text) {
 		try (OutputStream os = new FileOutputStream(KEYBOARD_OUTPUT_FILE)){
 			int len = text.length();
@@ -125,12 +133,9 @@ public class KeyboardServiceUs implements KeyboardService {
 				String key = text.substring(i, i + 1);
 				if (KEYS.containsKey(key)) {
 					os.write(KEYS.get(key));
-					try {
-						Thread.sleep(50);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					keystrokeLength();
 					os.write(KEY_RELEASE);
+					keystrokeDelay();
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -140,5 +145,5 @@ public class KeyboardServiceUs implements KeyboardService {
 		}
 		return true;
 	}
-
+	
 }

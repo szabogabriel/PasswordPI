@@ -54,6 +54,7 @@ public class SettingsServiceFilesystem extends SettingsService {
 		return props.keySet()
 				.stream()
 				.map(k -> k.toString())
+				.map(k -> SettingsEntity.Keys.valueOf(k))
 				.map(this::getSetting)
 				.filter(e -> e.isPresent())
 				.map(e -> e.get())
@@ -61,13 +62,12 @@ public class SettingsServiceFilesystem extends SettingsService {
 	}
 
 	@Override
-	public Optional<SettingsEntity> getSetting(String key) {
+	public Optional<SettingsEntity> getSetting(SettingsEntity.Keys key) {
 		Optional<SettingsEntity> ret = Optional.empty();
 		
-		Optional<SettingsEntity.Keys> keyInstance = SettingsEntity.Keys.getKey(key);
-		if (props.containsKey(key) && keyInstance.isPresent()) {
-			String value = props.getProperty(key).toString();
-			ret = Optional.of(new SettingsEntity(keyInstance.get(), value));
+		if (key != null && props.containsKey(key.name())) {
+			String value = props.getProperty(key.name()).toString();
+			ret = Optional.of(new SettingsEntity(key, value));
 		}
 		
 		return ret;

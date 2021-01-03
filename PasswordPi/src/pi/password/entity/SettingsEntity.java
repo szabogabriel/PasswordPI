@@ -15,6 +15,9 @@ public class SettingsEntity {
 	}
 	
 	public enum Keys {
+		KEYSTROKE_LENGTH(Type.NUMBERS, "Keystroke", "50", null),
+		TYPE_DELAY_MIN(Type.NUMBERS, "Delay min", "30", null),
+		TYPE_DELAY_MAX(Type.NUMBERS, "Delay max", "120", null),
 		WEBSERVER_PORT(Type.NUMBERS, "Web port", "80", null),
 		WEBSERVER_ENABLED(Type.OPTIONS, "Webserver", "Off", new String [] {"Off", "On"}),
 		;

@@ -34,6 +34,12 @@ public abstract class SettingsService {
 		case WEBSERVER_PORT:
 			WEBSERVER_SERVICE.setPort(entity.getValueInteger());
 			break;
+		case KEYSTROKE_LENGTH:
+			break;
+		case TYPE_DELAY_MAX:
+			break;
+		case TYPE_DELAY_MIN:
+			break;
 		default:
 			break;
 		}
@@ -41,7 +47,7 @@ public abstract class SettingsService {
 	
 	public abstract Set<SettingsEntity> getSettings();
 	
-	public abstract Optional<SettingsEntity> getSetting(String key);
+	public abstract Optional<SettingsEntity> getSetting(SettingsEntity.Keys key);
 	
 	public abstract void setValue(SettingsEntity setting);
 	
