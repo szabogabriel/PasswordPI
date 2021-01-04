@@ -48,6 +48,8 @@ This project is a hardware password manager. It acts as a keyboard emulator for 
 
 ![alt text](MockChange.png "Mock - change value via web")
 
+![alt text](PaPiWeb.png "Web interface")
+
 ## Implementation details
 
 The programming language used is Java 8. It was tested on OpenJDK.
