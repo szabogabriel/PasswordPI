@@ -90,6 +90,8 @@ The web interface is done via the HTTP server implementation available directly 
   
   - Add WiFi management via the device. Currently the Raspberry PI must be connected to the WiFi to be able to use it. No management via the device is possible.
   
+  - Create a nice case for the device.
+  
 ## Development environment
 
 I used Eclipse to build this app. No special tools were necessary. The LCD HAT mock provides a convenient way of working, without the need to deploy the application to the Raspberry PI device all the time. As for build, a Ant `build.xml` is present to generate a single jar file and a `deploy.sh` is also available, which deploys it. Feel free to use it.
