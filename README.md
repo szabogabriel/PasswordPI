@@ -20,13 +20,19 @@ This project is a hardware password manager. It acts as a keyboard emulator for 
 
 ![alt text](Mock.png "Mock - splash screen")
 
+![alt text](PaPi01.jpg "Real - splash screen")
+
   - Sending of the keystrokes is implemented. Currently only the english keyboard layout is supported. From the splash screen use the joystick to activate the accounts view and use the joystick center button to send the associated password to the keyboard. A randomized keystroke interval is present as well.
   
 ![alt text](MockPasswords.png "Mock - passwords")
+
+![alt text](PaPi02.jpg "Real - passwords")
   
   - Runtime configuration with the exception of the account management can be performed via the controls available on the device. Settings is activated via the 'C' key. Navigate and set values via the joystick. Account management is planned to be activated via the 'B' key.
   
 ![alt text](MockSettings.png "Mock - settings")
+
+![alt text](PaPi03.jpg "Real - settings")
   
   - Turning off the display is possible via the 'A' key.
   
@@ -37,6 +43,8 @@ This project is a hardware password manager. It acts as a keyboard emulator for 
   - Web interface is implemented. It can be activated directly on the device and also approval of all the requests and changes performed via the web interface.
   
 ![alt text](MockWeb.png "Mock - web access")
+
+![alt text](PaPi04.jpg "Real - web access")
 
 ![alt text](MockChange.png "Mock - change value via web")
 
