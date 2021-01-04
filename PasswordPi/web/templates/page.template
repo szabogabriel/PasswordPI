@@ -2,15 +2,8 @@
 
 {{>html_menu.template}}
       
-      {{{content}}}
+      <h1>Password PI web interface</h1>
       
-      {{#showEntriesList}}
-        {{#entriesList}}<p><a href="page?category={{currentCategory}}&name={{entryFile}}&locale={{current.locale}}">{{entryFileHR}}</p>
-        {{/entriesList}}
-      {{/showEntriesList}}
-      
-      {{#showIndex}}
-        {{>index.template}}
-      {{/showIndex}}
+      <img src="/res/password.jpeg"></img>
 
 {{>html_stop.template}}

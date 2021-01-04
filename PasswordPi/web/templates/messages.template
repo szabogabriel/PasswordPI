@@ -1,0 +1,11 @@
+      {{#alert.message.present}}
+      <div class="alert alert-success">
+        <strong>{{alert.message.header}}</strong> {{alert.message.content}}
+      </div>
+      {{/alert.message.present}}
+      
+      {{#error.message.present}}
+      <div class="alert alert-danger">
+        <strong>{{error.message.header}}</strong> {{error.message.content}}
+      </div>
+      {{/error.message.present}}
