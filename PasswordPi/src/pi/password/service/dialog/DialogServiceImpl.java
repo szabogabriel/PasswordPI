@@ -2,10 +2,10 @@ package pi.password.service.dialog;
 
 import java.util.Optional;
 
-import pi.password.gui.dialog.DialogCallback;
-import pi.password.gui.dialog.DialogController;
-import pi.password.gui.dialog.DialogResult;
-import pi.password.gui.dialog.DialogType;
+import pi.password.gui.components.dialog.DialogCallback;
+import pi.password.gui.components.dialog.DialogController;
+import pi.password.gui.components.dialog.DialogResult;
+import pi.password.gui.components.dialog.DialogType;
 
 public class DialogServiceImpl implements DialogService {
 

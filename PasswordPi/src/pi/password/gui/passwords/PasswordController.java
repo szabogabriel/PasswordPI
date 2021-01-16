@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import pi.password.Main;
 import pi.password.gui.AbstractController;
-import pi.password.gui.list.ListModel;
-import pi.password.gui.list.ListView;
-import pi.password.gui.list.StringDisplayable;
+import pi.password.gui.components.list.ListModel;
+import pi.password.gui.components.list.ListView;
+import pi.password.gui.components.list.StringDisplayable;
 import pi.password.gui.settings.SettingsController;
 import pi.password.gui.splash.SplashController;
 import pi.password.service.password.PasswordVaultService;

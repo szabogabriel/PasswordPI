@@ -3,7 +3,7 @@ package pi.password.gui.settings;
 import java.awt.Color;
 
 import pi.password.entity.SettingsEntity;
-import pi.password.gui.list.ListBodyDisplayable;
+import pi.password.gui.components.list.ListBodyDisplayable;
 import pi.password.service.hat.DisplayService;
 
 public class SettingsEntityDisplayable implements ListBodyDisplayable {

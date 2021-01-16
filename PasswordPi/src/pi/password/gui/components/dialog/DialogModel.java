@@ -1,4 +1,4 @@
-package pi.password.gui.dialog;
+package pi.password.gui.components.dialog;
 
 import java.util.Arrays;
 
