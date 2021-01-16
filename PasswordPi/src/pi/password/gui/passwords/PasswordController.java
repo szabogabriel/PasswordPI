@@ -1,9 +1,13 @@
 package pi.password.gui.passwords;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import pi.password.Main;
 import pi.password.gui.AbstractController;
 import pi.password.gui.list.ListModel;
 import pi.password.gui.list.ListView;
+import pi.password.gui.list.StringDisplayable;
 import pi.password.gui.settings.SettingsController;
 import pi.password.gui.splash.SplashController;
 import pi.password.service.password.PasswordVaultService;
@@ -11,16 +15,16 @@ import pi.password.service.util.ImageUtilService;
 
 public class PasswordController extends AbstractController {
 
-	private ListView view;
-	private ListModel model;
+	private ListView<StringDisplayable> view;
+	private ListModel<StringDisplayable> model;
 	
 	private PasswordVaultService PASSWORDS;
 	
 	public PasswordController(PasswordVaultService passwords) {
 		this.PASSWORDS = passwords;
-		model = new ListModel();
-		view = new ListView("Passwords", Main.getInstance(ImageUtilService.class).getMainBackground(), model);
-		model.setValues(getSortedPasswordKeys());
+		model = new ListModel<>();
+		view = new ListView<>("Passwords", Main.getInstance(ImageUtilService.class).getMainBackground(), model);
+		model.setData(getSortedPasswordKeys().stream().map(d -> new StringDisplayable(d)).collect(Collectors.toList()));
 	}
 	
 	@Override
@@ -34,58 +38,8 @@ public class PasswordController extends AbstractController {
 	}
 
 	@Override
-	public void handleButtonAPressed() {
-		new SplashController().activate();
-	}
-	
-	@Override
-	public void handleButtonBPressed() {
-		//TODO
-		
-	}
-
-	@Override
-	public void handleButtonCPressed() {
-		//TODO
-		
-	}
-
-	@Override
-	public void handleJoystickUpPressed() {
-		//TODO
-		
-	}
-
-	@Override
-	public void handleJoystickDownPressed() {
-		//TODO 
-	}
-
-	@Override
-	public void handleJoystickLeftPressed() {
-		// not defined
-	}
-
-	@Override
-	public void handleJoystickRightPressed() {
-		// not defined
-	}
-
-	@Override
-	public void handleJoystickCenterPressed() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void handleButtonAReleased() {
 		Main.getInstance(SplashController.class).activate();			
-	}
-
-	@Override
-	public void handleButtonBReleased() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -126,7 +80,7 @@ public class PasswordController extends AbstractController {
 	}
 	
 	private String getSelectedPassword() {
-		String nameSelected = getSortedPasswordKeys()[model.getCurrentSelection()];
+		String nameSelected = getSortedPasswordKeys().get(model.getCurrentSelection());
 		String ret = PASSWORDS
 				.listPasswordEntities()
 				.parallelStream()
@@ -137,7 +91,7 @@ public class PasswordController extends AbstractController {
 		return ret;
 	}
 	
-	private String[] getSortedPasswordKeys() {
-		return PASSWORDS.listPasswordEntityNames().stream().sorted().toArray(String[]::new);
+	private List<String> getSortedPasswordKeys() {
+		return PASSWORDS.listPasswordEntityNames().stream().sorted().collect(Collectors.toList());
 	}
 }

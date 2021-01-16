@@ -34,38 +34,6 @@ public class ScreenlockController extends AbstractController {
 	}
 
 	@Override
-	public void handleButtonAPressed() {
-	}
-
-	@Override
-	public void handleButtonBPressed() {
-	}
-
-	@Override
-	public void handleButtonCPressed() {
-	}
-
-	@Override
-	public void handleJoystickUpPressed() {
-	}
-
-	@Override
-	public void handleJoystickDownPressed() {
-	}
-
-	@Override
-	public void handleJoystickLeftPressed() {
-	}
-
-	@Override
-	public void handleJoystickRightPressed() {
-	}
-
-	@Override
-	public void handleJoystickCenterPressed() {
-	}
-
-	@Override
 	public void handleButtonAReleased() {
 		model.addSequence(HatKey.KEY_A);
 	}

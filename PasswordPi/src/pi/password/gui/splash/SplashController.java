@@ -28,53 +28,6 @@ public class SplashController extends AbstractController {
 	}
 	
 	@Override
-	public void handleButtonAPressed() {
-		
-	}
-
-	@Override
-	public void handleButtonBPressed() {
-		//TODO
-		
-	}
-
-	@Override
-	public void handleButtonCPressed() {
-		//TODO
-		
-	}
-
-	@Override
-	public void handleJoystickUpPressed() {
-		//TODO
-		
-	}
-
-	@Override
-	public void handleJoystickDownPressed() {
-		//TODO
-		
-	}
-
-	@Override
-	public void handleJoystickLeftPressed() {
-		//TODO
-		
-	}
-
-	@Override
-	public void handleJoystickRightPressed() {
-		//TODO
-		
-	}
-
-	@Override
-	public void handleJoystickCenterPressed() {
-		//TODO
-		
-	}
-
-	@Override
 	public void handleButtonAReleased() {
 		model.setBacklight(!model.getBacklight());
 	}

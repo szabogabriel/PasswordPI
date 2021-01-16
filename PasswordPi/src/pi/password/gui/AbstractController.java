@@ -34,35 +34,51 @@ public abstract class AbstractController {
 	
 	public abstract void reactivateHandler();
 	
-	public abstract void handleButtonAPressed();
+	public void handleButtonAPressed() {
+	}
 	
-	public abstract void handleButtonBPressed();
+	public void handleButtonBPressed() {
+	}
 	
-	public abstract void handleButtonCPressed();
+	public void handleButtonCPressed() {
+	}
 	
-	public abstract void handleJoystickUpPressed();
+	public void handleJoystickUpPressed() {
+	}
 	
-	public abstract void handleJoystickDownPressed();
+	public void handleJoystickDownPressed() {
+	}
 	
-	public abstract void handleJoystickLeftPressed();
+	public void handleJoystickLeftPressed() {
+	}
 	
-	public abstract void handleJoystickRightPressed();
+	public void handleJoystickRightPressed() {
+	}
 	
-	public abstract void handleJoystickCenterPressed();
+	public void handleJoystickCenterPressed() {
+	}
 
-	public abstract void handleButtonAReleased();
+	public void handleButtonAReleased() {
+	}
 	
-	public abstract void handleButtonBReleased();
+	public void handleButtonBReleased() {
+	}
 	
-	public abstract void handleButtonCReleased();
+	public void handleButtonCReleased() {
+	}
 	
-	public abstract void handleJoystickUpReleased();
+	public void handleJoystickUpReleased() {
+	}
 	
-	public abstract void handleJoystickDownReleased();
+	public void handleJoystickDownReleased() {
+	}
 	
-	public abstract void handleJoystickLeftReleased();
+	public void handleJoystickLeftReleased() {
+	}
 	
-	public abstract void handleJoystickRightReleased();
+	public void handleJoystickRightReleased() {
+	}
 	
-	public abstract void handleJoystickCenterReleased();
+	public void handleJoystickCenterReleased() {
+	}
 }

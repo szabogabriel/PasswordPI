@@ -23,50 +23,6 @@ public class DialogController extends AbstractController {
 	}
 
 	@Override
-	public void handleButtonAPressed() {
-	}
-
-	@Override
-	public void handleButtonBPressed() {
-	}
-
-	@Override
-	public void handleButtonCPressed() {
-	}
-
-	@Override
-	public void handleJoystickUpPressed() {
-	}
-
-	@Override
-	public void handleJoystickDownPressed() {
-	}
-
-	@Override
-	public void handleJoystickLeftPressed() {
-	}
-
-	@Override
-	public void handleJoystickRightPressed() {
-	}
-
-	@Override
-	public void handleJoystickCenterPressed() {
-	}
-
-	@Override
-	public void handleButtonAReleased() {
-	}
-
-	@Override
-	public void handleButtonBReleased() {
-	}
-
-	@Override
-	public void handleButtonCReleased() {
-	}
-
-	@Override
 	public void handleJoystickUpReleased() {
 		model.handleSelectionDown();
 	}
@@ -74,14 +30,6 @@ public class DialogController extends AbstractController {
 	@Override
 	public void handleJoystickDownReleased() {
 		model.handleSelectionUp();
-	}
-
-	@Override
-	public void handleJoystickLeftReleased() {
-	}
-
-	@Override
-	public void handleJoystickRightReleased() {
 	}
 
 	@Override

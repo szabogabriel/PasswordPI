@@ -4,6 +4,6 @@ public interface ListModelUpdateListener {
 	
 	void selectionChanged();
 	
-	void contentChanged();
-
+	void dataChanged();
+	
 }

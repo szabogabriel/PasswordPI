@@ -1,10 +1,15 @@
 package pi.password.gui.list;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
 import pi.password.gui.AbstractModel;
 
-public class ListModel extends AbstractModel {
+public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 	
-	private String[] values = new String [] {};
+	private List<T> elements = new ArrayList<>();
+	
 	private int selected = 0;
 	
 	private ListModelUpdateListener listener;
@@ -17,24 +22,45 @@ public class ListModel extends AbstractModel {
 		this.listener = listener;
 	}
 	
-	public String[] getValues() {
-		return values;
-	}
-	
-	public void setValues(String [] values) {
-		if (values == null) {
-			this.values = new String [] {};
-		} else {
-			this.values = values;
-		}
-		
-		if (listener != null) {
-			listener.contentChanged();
+	public void addData(T data) {
+		if (data != null) {
+			elements.add(data);
+			
+			castEvent(l -> l.dataChanged());
 		}
 	}
 	
-	public String getSelectedValue() {
-		return values[selected];
+	public void setData(T data, int position) {
+		if (position >= 0 && position < elements.size()) {
+			elements.set(position, data);
+			
+			castEvent(l -> l.dataChanged());
+		}
+	}
+	
+	public void removeData(T data) {
+		if (data != null && elements.contains(data)) {
+			elements.remove(data);
+			
+			castEvent(l -> l.dataChanged());
+		}
+	}
+	
+	public void setData(List<T> data) {
+		if (data != null) {
+			elements.clear();
+			elements.addAll(data);
+			
+			castEvent(l -> l.dataChanged());
+		}
+	}
+	
+	public T getSelectedValue() {
+		return elements.get(selected);
+	}
+	
+	public List<T> getValues() {
+		return elements;
 	}
 	
 	public int getCurrentSelection() {
@@ -42,12 +68,10 @@ public class ListModel extends AbstractModel {
 	}
 	
 	public void increaseSelection() {
-		if (selected + 1 < values.length) {
+		if (selected + 1 < elements.size()) {
 			selected++;
 			
-			if (listener != null) {
-				listener.selectionChanged();
-			}
+			castEvent(l -> l.selectionChanged());
 		}
 	}
 	
@@ -55,9 +79,13 @@ public class ListModel extends AbstractModel {
 		if (selected > 0) {
 			selected--;
 			
-			if (listener != null) {
-				listener.selectionChanged();
-			}
+			castEvent(l -> l.selectionChanged());
+		}
+	}
+	
+	private void castEvent(Consumer<ListModelUpdateListener> event) {
+		if (listener != null) {
+			event.accept(listener);
 		}
 	}
 

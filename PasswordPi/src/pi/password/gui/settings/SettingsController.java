@@ -1,24 +1,39 @@
 package pi.password.gui.settings;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import pi.password.Main;
+import pi.password.entity.SettingsEntity;
 import pi.password.gui.AbstractController;
+import pi.password.gui.list.ListModel;
+import pi.password.gui.list.ListView;
 import pi.password.gui.splash.SplashController;
 import pi.password.gui.vaultManager.VaultManagerController;
 import pi.password.service.settings.SettingsService;
 import pi.password.service.settings.SettingsUpdatePropagatorService;
+import pi.password.service.util.ImageUtilService;
 
 public class SettingsController extends AbstractController {
 	
-	private SettingsModel model;
-	private SettingsView view;
+	private ListModel<SettingsEntityDisplayable> model;
+	private ListView<SettingsEntityDisplayable> view;
 	
-	public SettingsController() {
+	private final SettingsService SETTINGS_SERVICE;
+	private final SettingsUpdatePropagatorService SETTINGS_UPDATE_PROPAGATOR_SERVICE;
+	
+	public SettingsController(SettingsService settings, SettingsUpdatePropagatorService settingsUpdate) {
+		this.SETTINGS_SERVICE = settings;
+		this.SETTINGS_UPDATE_PROPAGATOR_SERVICE = settingsUpdate;
+		
+		model = new ListModel<SettingsEntityDisplayable>();
+		view = new ListView<SettingsEntityDisplayable>("Settings", Main.getInstance(ImageUtilService.class).getSettingsBackground(), model);
+		
+		model.setData(getSortedSettings().stream().map(e -> new SettingsEntityDisplayable(e)).collect(Collectors.toList()));
 	}
 	
 	@Override
 	public void activateHandler() {
-		view = new SettingsView();
-		model = new SettingsModel(view, Main.getInstance(SettingsService.class), Main.getInstance(SettingsUpdatePropagatorService.class));
 		view.paint();
 	}
 	
@@ -28,38 +43,6 @@ public class SettingsController extends AbstractController {
 	}
 	
 	@Override
-	public void handleButtonAPressed() {
-	}
-
-	@Override
-	public void handleButtonBPressed() {
-	}
-
-	@Override
-	public void handleButtonCPressed() {
-	}
-
-	@Override
-	public void handleJoystickUpPressed() {
-	}
-
-	@Override
-	public void handleJoystickDownPressed() {
-	}
-
-	@Override
-	public void handleJoystickLeftPressed() {
-	}
-
-	@Override
-	public void handleJoystickRightPressed() {
-	}
-
-	@Override
-	public void handleJoystickCenterPressed() {
-	}
-
-	@Override
 	public void handleButtonAReleased() {
 		Main.getInstance(SplashController.class).activate();
 	}
@@ -67,10 +50,6 @@ public class SettingsController extends AbstractController {
 	@Override
 	public void handleButtonBReleased() {
 		Main.getInstance(VaultManagerController.class).activate();
-	}
-
-	@Override
-	public void handleButtonCReleased() {
 	}
 
 	@Override
@@ -85,17 +64,103 @@ public class SettingsController extends AbstractController {
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		model.handleSelectionDecrease();
+		SettingsEntity settings = model.getSelectedValue().getEntity();
+		int currentOrder = model.getCurrentSelection();
+		SettingsEntity newSettings = null;
+		
+		switch (settings.getKey().getType()) {
+		case NUMBERS:
+			newSettings = new SettingsEntity(settings.getKey(), Integer.toString(settings.getValueInteger() - 1));
+			break;
+		case OPTIONS:
+			String[] vals = settings.getKey().getValues();
+			int currentValIndex = -1;
+			while (!vals[++currentValIndex].equals(settings.getValue()));
+			if (currentValIndex - 1 >= 0) {
+				newSettings = new SettingsEntity(settings.getKey(), vals[currentValIndex - 1]);
+			}
+			break;
+		case PLAINTEXT:
+			// TODO: handle text input
+			break;
+		default:
+			break;
+		}
+		
+		if (newSettings != null) {
+			model.setData(new SettingsEntityDisplayable(newSettings), currentOrder);
+			SETTINGS_UPDATE_PROPAGATOR_SERVICE.handleSettingUpdate(newSettings);
+		}
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		model.handleSelectionIncrease();
+		SettingsEntity settings = model.getSelectedValue().getEntity();
+		int currentOrder = model.getCurrentSelection();
+		SettingsEntity newSettings = null;
+		
+		switch (settings.getKey().getType()) {
+		case NUMBERS:
+			newSettings = new SettingsEntity(settings.getKey(), Integer.toString(settings.getValueInteger() + 1));
+			break;
+		case OPTIONS:
+			String[] vals = settings.getKey().getValues();
+			int currentValIndex = -1;
+			while (!vals[++currentValIndex].equals(settings.getValue()));
+			if (currentValIndex + 1 < vals.length) {
+				newSettings = new SettingsEntity(settings.getKey(), vals[currentValIndex + 1]);
+			}
+			break;
+		case PLAINTEXT:
+			// TODO: handle text input
+			break;
+		default:
+			break;
+		}
+		
+		if (newSettings != null) {
+			model.setData(new SettingsEntityDisplayable(newSettings), currentOrder);
+			SETTINGS_UPDATE_PROPAGATOR_SERVICE.handleSettingUpdate(newSettings);
+		}
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		model.handleSelectionConfirm();
+		SettingsEntity settings = model.getSelectedValue().getEntity();
+		int currentOrder = model.getCurrentSelection();
+		SettingsEntity newSettings = null;
+		
+		switch (settings.getKey().getType()) {
+		case NUMBERS:
+			break;
+		case OPTIONS:
+			String[] vals = settings.getKey().getValues();
+			if (vals.length == 2) {
+				if (vals[0].equals(settings.getValue())) {
+					newSettings = new SettingsEntity(settings.getKey(), vals[1]);
+				} else {
+					newSettings = new SettingsEntity(settings.getKey(), vals[0]);
+				}
+			}
+			break;
+		case PLAINTEXT:
+			// TODO: handle text input finish
+			break;
+		default:
+			break;
+		}
+		
+		if (newSettings != null) {
+			model.setData(new SettingsEntityDisplayable(newSettings), currentOrder);
+			SETTINGS_UPDATE_PROPAGATOR_SERVICE.handleSettingUpdate(newSettings);
+		}
+	}
+	
+	private List<SettingsEntity> getSortedSettings() {
+		return SETTINGS_SERVICE.getSettings()
+			.stream()
+			.sorted((s1, s2) -> s1.getKey().ordinal() - s2.getKey().ordinal())
+			.collect(Collectors.toList());
 	}
 
 }
