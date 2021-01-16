@@ -1,4 +1,4 @@
-package pi.password.gui.list;
+package pi.password.gui.commons.list;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
