@@ -3,8 +3,9 @@ package pi.password.gui.dialog;
 import java.util.Arrays;
 
 import pi.password.Main;
+import pi.password.gui.AbstractController;
 import pi.password.gui.AbstractModel;
-import pi.password.gui.splash.SplashController;
+import pi.password.service.hat.KeyInputService;
 
 public class DialogModel extends AbstractModel {
 
@@ -14,6 +15,8 @@ public class DialogModel extends AbstractModel {
 	private final DialogCallback CALLBACK;
 	
 	private int selection = 0;
+	
+	private AbstractController previousController = Main.getInstance(KeyInputService.class).getCurrentButtonHandler();
 	
 	public DialogModel(String message, DialogType type, DialogView view, DialogCallback callback) {
 		this.VIEW = view;
@@ -55,7 +58,8 @@ public class DialogModel extends AbstractModel {
 	
 	public void handleOk() {
 		CALLBACK.handleDialogResult(TYPE.getResultOptions()[selection]);
-		Main.getInstance(SplashController.class).activate();
+		Main.getInstance(KeyInputService.class).setButtonHandler(previousController);
+		previousController.reactivateHandler();
 	}
 
 }

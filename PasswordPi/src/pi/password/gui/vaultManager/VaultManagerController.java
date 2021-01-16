@@ -20,6 +20,11 @@ public class VaultManagerController extends AbstractController {
 	}
 	
 	@Override
+	public void reactivateHandler() {
+		model.reactivate();
+	}
+	
+	@Override
 	public void handleButtonAPressed() {
 	}
 

@@ -27,6 +27,11 @@ public class ScreenlockController extends AbstractController {
 			Main.getInstance(SplashController.class).activate();
 		}
 	}
+	
+	@Override
+	public void reactivateHandler() {
+		view.paint();
+	}
 
 	@Override
 	public void handleButtonAPressed() {

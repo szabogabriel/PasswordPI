@@ -15,6 +15,11 @@ public class PasswordController extends AbstractController {
 		view = new PasswordView();
 		model = new PasswordModel(getPasswordVault(), view);
 	}
+	
+	@Override
+	public void reactivateHandler() {
+		view.paint();
+	}
 
 	@Override
 	public void handleButtonAPressed() {

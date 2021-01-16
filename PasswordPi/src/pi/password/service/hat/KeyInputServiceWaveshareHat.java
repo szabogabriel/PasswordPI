@@ -56,4 +56,9 @@ public class KeyInputServiceWaveshareHat implements KeyInputService {
 	public void setButtonHandler(AbstractController buttonHandler) {
 		this.handler = buttonHandler;
 	}
+
+	@Override
+	public AbstractController getCurrentButtonHandler() {
+		return handler;
+	}
 }

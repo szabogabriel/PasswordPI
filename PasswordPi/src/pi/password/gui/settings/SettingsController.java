@@ -23,6 +23,11 @@ public class SettingsController extends AbstractController {
 	}
 	
 	@Override
+	public void reactivateHandler() {
+		view.paint();
+	}
+	
+	@Override
 	public void handleButtonAPressed() {
 	}
 

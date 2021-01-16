@@ -46,6 +46,14 @@ public class VaultManagerModel extends AbstractModel {
 		this.VIEW_LIST.paint();
 	}
 	
+	public void reactivate() {
+		if (editMode) {
+			VIEW_EDIT.paint();
+		} else {
+			VIEW_LIST.paint();
+		}
+	}
+	
 	public void increaseSelection() {
 		if (editMode) {
 			increaseSelectedCharacter();

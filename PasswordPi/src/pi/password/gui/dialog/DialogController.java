@@ -16,6 +16,11 @@ public class DialogController extends AbstractController {
 	public void activateHandler() {
 		view.paint();
 	}
+	
+	@Override
+	public void reactivateHandler() {
+		view.paint();
+	}
 
 	@Override
 	public void handleButtonAPressed() {

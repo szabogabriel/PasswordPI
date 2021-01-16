@@ -32,6 +32,8 @@ public abstract class AbstractController {
 	
 	public abstract void activateHandler();
 	
+	public abstract void reactivateHandler();
+	
 	public abstract void handleButtonAPressed();
 	
 	public abstract void handleButtonBPressed();
