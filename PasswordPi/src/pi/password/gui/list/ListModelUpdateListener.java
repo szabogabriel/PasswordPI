@@ -1,4 +1,4 @@
-package pi.password.gui.commons.list;
+package pi.password.gui.list;
 
 public interface ListModelUpdateListener {
 	

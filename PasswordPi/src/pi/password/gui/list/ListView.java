@@ -1,4 +1,4 @@
-package pi.password.gui.commons.list;
+package pi.password.gui.list;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -21,6 +21,7 @@ public class ListView extends AbstractView implements ListModelUpdateListener {
 		super(background);
 		this.TITLE = title;
 		this.MODEL = model;
+		model.setListener(this);
 	}
 	
 	private void setSelection(int newSelected) {
@@ -50,7 +51,7 @@ public class ListView extends AbstractView implements ListModelUpdateListener {
 
 	@Override
 	public void selectionChanged() {
-		int currentSelection = MODEL.getCurrentSelected();
+		int currentSelection = MODEL.getCurrentSelection();
 		setSelection(currentSelection);
 		paint();
 	}

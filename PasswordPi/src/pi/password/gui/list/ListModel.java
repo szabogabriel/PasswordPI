@@ -1,4 +1,4 @@
-package pi.password.gui.commons.list;
+package pi.password.gui.list;
 
 import pi.password.gui.AbstractModel;
 
@@ -33,7 +33,11 @@ public class ListModel extends AbstractModel {
 		}
 	}
 	
-	public int getCurrentSelected() {
+	public String getSelectedValue() {
+		return values[selected];
+	}
+	
+	public int getCurrentSelection() {
 		return this.selected;
 	}
 	

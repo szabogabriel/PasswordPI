@@ -2,18 +2,30 @@ package pi.password.gui.passwords;
 
 import pi.password.Main;
 import pi.password.gui.AbstractController;
+import pi.password.gui.list.ListModel;
+import pi.password.gui.list.ListView;
 import pi.password.gui.settings.SettingsController;
 import pi.password.gui.splash.SplashController;
+import pi.password.service.password.PasswordVaultService;
+import pi.password.service.util.ImageUtilService;
 
 public class PasswordController extends AbstractController {
 
-	private PasswordView view;
-	private PasswordModel model;
+	private ListView view;
+	private ListModel model;
+	
+	private PasswordVaultService PASSWORDS;
+	
+	public PasswordController(PasswordVaultService passwords) {
+		this.PASSWORDS = passwords;
+		model = new ListModel();
+		view = new ListView("Passwords", Main.getInstance(ImageUtilService.class).getMainBackground(), model);
+		model.setValues(getSortedPasswordKeys());
+	}
 	
 	@Override
 	public void activateHandler() {
-		view = new PasswordView();
-		model = new PasswordModel(getPasswordVault(), view);
+		view.paint();
 	}
 	
 	@Override
@@ -107,10 +119,25 @@ public class PasswordController extends AbstractController {
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		String selected = model.getSelectedPassword();
+		String selected = getSelectedPassword();
 		if (selected != null) {
 			getKeyboardService().sendText(selected);
 		}
 	}
 	
+	private String getSelectedPassword() {
+		String nameSelected = getSortedPasswordKeys()[model.getCurrentSelection()];
+		String ret = PASSWORDS
+				.listPasswordEntities()
+				.parallelStream()
+				.filter(e -> e.getName().equals(nameSelected))
+				.map(e -> e.getPassword())
+				.findAny()
+				.orElse(null);
+		return ret;
+	}
+	
+	private String[] getSortedPasswordKeys() {
+		return PASSWORDS.listPasswordEntityNames().stream().sorted().toArray(String[]::new);
+	}
 }
