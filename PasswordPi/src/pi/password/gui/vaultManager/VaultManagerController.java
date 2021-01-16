@@ -1,108 +1,94 @@
 package pi.password.gui.vaultManager;
 
+import pi.password.Main;
 import pi.password.gui.AbstractController;
+import pi.password.gui.settings.SettingsController;
+import pi.password.gui.splash.SplashController;
 
 public class VaultManagerController extends AbstractController {
 	
+	private VaultManagerModel model;
+	private VaultManagerListView view_list;
+	private VaultManagerEditView view_edit;
+	
 	@Override
 	public void activateHandler() {
-		//TODO
+		view_list = new VaultManagerListView();
+		view_edit = new VaultManagerEditView();
+		model = new VaultManagerModel(getDialogService(), getPasswordVault(), getPasswordAlphabet(), view_list, view_edit);
+		view_list.paint();
 	}
 	
 	@Override
 	public void handleButtonAPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleButtonBPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleButtonCPressed() {
-		//TODO
-		
 	}
 
 	@Override
 	public void handleJoystickUpPressed() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void handleJoystickDownPressed() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void handleJoystickLeftPressed() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void handleJoystickRightPressed() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void handleJoystickCenterPressed() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void handleButtonAReleased() {
-		// TODO Auto-generated method stub
-		
+		Main.getInstance(SplashController.class).activate();
 	}
 
 	@Override
 	public void handleButtonBReleased() {
-		// TODO Auto-generated method stub
-		
+		Main.getInstance(SplashController.class).activate();
 	}
 
 	@Override
 	public void handleButtonCReleased() {
-		// TODO Auto-generated method stub
-		
+		Main.getInstance(SettingsController.class).activate();
 	}
 
 	@Override
 	public void handleJoystickUpReleased() {
-		// TODO Auto-generated method stub
-		
+		model.decreaseSelection();
 	}
 
 	@Override
 	public void handleJoystickDownReleased() {
-		// TODO Auto-generated method stub
-		
+		model.increaseSelection();
 	}
 
 	@Override
 	public void handleJoystickLeftReleased() {
-		// TODO Auto-generated method stub
-		
+		model.prevCharacter();
 	}
 
 	@Override
 	public void handleJoystickRightReleased() {
-		// TODO Auto-generated method stub
-		
+		model.nextCharacter();
 	}
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		// TODO Auto-generated method stub
-		
+		model.confirmSelection();
 	}
 
 }

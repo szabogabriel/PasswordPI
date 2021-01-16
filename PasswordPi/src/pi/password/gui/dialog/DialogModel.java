@@ -24,7 +24,7 @@ public class DialogModel extends AbstractModel {
 		VIEW.setValues(getOptions());
 		VIEW.setSelection(selection);
 	}
-
+	
 	public String getMessage() {
 		return MESSAGE;
 	}

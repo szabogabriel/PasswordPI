@@ -22,6 +22,7 @@ import pi.password.service.hat.DisplayServiceWaveshareHat;
 import pi.password.service.hat.KeyInputServiceWaveshareHat;
 import pi.password.service.keyboard.KeyboardServiceUs;
 import pi.password.service.lock.LockServiceFileSystem;
+import pi.password.service.password.PasswordAlphabetServiceImpl;
 import pi.password.service.password.PasswordVaultServiceFileSystem;
 import pi.password.service.settings.SettingsServiceFilesystem;
 import pi.password.service.settings.SettingsUpdatePropagatorServiceImpl;
@@ -50,6 +51,7 @@ public enum RuntimeConfig {
 	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.service.keyboard.KeyboardService", KeyboardServiceUs.class.getCanonicalName()),
 	DI_TYPE_KEYBOARD_SERVICE("type.pi.password.service.keyboard.KeyboardService", ServiceClassType.MULTITON.toString()),
 	DI_IMPL_LOCK_SERVICE("impl.pi.password.service.lock.LockService", LockServiceFileSystem.class.getCanonicalName()),
+	DI_IMPL_PASSWORD_ALPHABET("impl.pi.password.service.password.PasswordAlphabetService", PasswordAlphabetServiceImpl.class.getCanonicalName()),
 	DI_IMPL_PASSWORD_VAULT("impl.pi.password.service.password.PasswordVaultService", PasswordVaultServiceFileSystem.class.getCanonicalName()),
 	DI_IMPL_SETTINGS_SERVICE("impl.pi.password.service.settings.SettingsService", SettingsServiceFilesystem.class.getCanonicalName()),
 	DI_IMPL_SETTINGS_UPDATE_SERVICE("impl.pi.password.service.settings.SettingsUpdatePropagatorService", SettingsUpdatePropagatorServiceImpl.class.getCanonicalName()),
@@ -63,6 +65,8 @@ public enum RuntimeConfig {
 	
 	ICON_WIFI_ON("icon.wifi.on", "img/icon_wifi_on.png"),
 	ICON_WIFI_OFF("icon.wifi.off", "img/icon_wifi_off.png"),
+	
+	PASSWORD_ALPHABET("password.alphabet", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/?.,$#@%^&{}[]()<>;:"),
 	
 	WORKING_DIRECTORY("working.dir", "."),
 	

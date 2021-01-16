@@ -4,6 +4,7 @@ import pi.password.Main;
 import pi.password.gui.AbstractController;
 import pi.password.gui.passwords.PasswordController;
 import pi.password.gui.settings.SettingsController;
+import pi.password.gui.vaultManager.VaultManagerController;
 
 public class SplashController extends AbstractController {
 	
@@ -75,8 +76,8 @@ public class SplashController extends AbstractController {
 
 	@Override
 	public void handleButtonBReleased() {
-		// TODO Auto-generated method stub
-		
+		turnOnBacklight();
+		Main.getInstance(VaultManagerController.class).activate();
 	}
 
 	@Override

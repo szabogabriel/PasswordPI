@@ -71,7 +71,9 @@ public class PasswordVaultServiceFileSystem implements PasswordVaultService {
 	public Optional<PasswordEntity> findPasswordEntity(String name) {
 		Optional<PasswordEntity> ret = Optional.empty();
 		if (isKnownPasswordEntity(name)) {
-			Optional.of(PROPERTIES.getProperty(name));
+			String psswd = PROPERTIES.getProperty(name);
+			PasswordEntity tmp = new PasswordEntity(name, psswd);
+			ret = Optional.of(tmp);
 		}
 		return ret;
 	}
