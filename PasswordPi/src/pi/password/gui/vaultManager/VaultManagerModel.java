@@ -218,7 +218,7 @@ public class VaultManagerModel extends AbstractModel {
 	
 	private void startEditMode() {
 		String nameSelected = getSortedPasswordKeys()[selected];
-		String name = "";
+		String name = " ";
 		String password = "";
 		
 		oldPasswordEntity = null;
