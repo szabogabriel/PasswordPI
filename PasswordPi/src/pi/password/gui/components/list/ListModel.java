@@ -10,12 +10,12 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 	
 	private List<T> elements = new ArrayList<>();
 	
-	private int selected = 0;
+	private int selected = -1;
 	
 	private ListModelUpdateListener listener;
 	
 	public ListModel() {
-		this.selected = 0;
+		this.selected = -1;
 	}
 	
 	public void setListener(ListModelUpdateListener listener) {
@@ -26,6 +26,8 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 		if (data != null) {
 			elements.add(data);
 			
+			updateSelection();
+			
 			castEvent(l -> l.dataChanged());
 		}
 	}
@@ -33,6 +35,8 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 	public void setData(T data, int position) {
 		if (position >= 0 && position < elements.size()) {
 			elements.set(position, data);
+			
+			updateSelection();
 			
 			castEvent(l -> l.dataChanged());
 		}
@@ -42,6 +46,8 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 		if (data != null && elements.contains(data)) {
 			elements.remove(data);
 			
+			updateSelection();
+			
 			castEvent(l -> l.dataChanged());
 		}
 	}
@@ -50,6 +56,8 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 		if (data != null) {
 			elements.clear();
 			elements.addAll(data);
+			
+			updateSelection();
 			
 			castEvent(l -> l.dataChanged());
 		}
@@ -68,6 +76,10 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 	}
 	
 	public void increaseSelection() {
+		increaseSelection(true);
+	}
+	
+	public void increaseSelection(boolean castEvent) {
 		if (selected + 1 < elements.size()) {
 			int tmp = selected + 1;
 			while (tmp < elements.size() && !elements.get(tmp).isSelectable()) {
@@ -76,12 +88,66 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 			
 			if (tmp < elements.size()) {
 				selected = tmp;
-				castEvent(l -> l.selectionChanged());
+				
+				if (castEvent) {
+					castEvent(l -> l.selectionChanged());
+				}
 			}
 		}
 	}
 	
 	public void decreaseSelection() {
+		decreaseSelection(true);
+	}
+	
+	private void updateSelection() {
+		int oldSelected = selected;
+		
+		if (selected == -1) {
+			if (isSelectableAvailable()) {
+				while (!elements.get(++selected).isSelectable());
+			}
+		} else {
+			if (elements.size() <= selected) {
+				selected = getLastSelectable();
+			} else {
+				if (!elements.get(selected).isSelectable()) {
+					int tmp = selected;
+					while (tmp < elements.size() && !elements.get(tmp).isSelectable()) tmp++;
+					if (tmp < elements.size()) {
+						selected = tmp;
+					} else {
+						while (tmp >= 0 && !elements.get(tmp).isSelectable()) tmp--;
+						selected = tmp;
+					}
+				}
+			}
+		}
+		
+		if (oldSelected != selected) {
+			castEvent(l -> l.selectionChanged());
+		}
+	}
+	
+	private int getLastSelectable() {
+		for (int i = elements.size() - 1; i >= 0; i--) {
+			if (elements.get(i).isSelectable()) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	private boolean isSelectableAvailable() {
+		for (T it : elements) {
+			if (it.isSelectable()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void decreaseSelection(boolean castEvent) {
 		if (selected > 0) {
 			int tmp = selected - 1;
 			while (tmp >= 0 && !elements.get(tmp).isSelectable()) {
@@ -90,7 +156,10 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 			
 			if (tmp >= 0) {
 				selected = tmp;
-				castEvent(l -> l.selectionChanged());
+				
+				if (castEvent) {
+					castEvent(l -> l.selectionChanged());
+				}
 			}
 		}
 	}

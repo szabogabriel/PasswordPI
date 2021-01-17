@@ -59,7 +59,7 @@ public class DialogModel extends AbstractModel {
 	public void handleOk() {
 		CALLBACK.handleDialogResult(TYPE.getResultOptions()[selection]);
 		Main.getInstance(KeyInputService.class).setButtonHandler(previousController);
-		previousController.reactivateHandler();
+		previousController.reactivate();
 	}
 
 }

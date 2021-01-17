@@ -30,6 +30,11 @@ public abstract class AbstractController {
 		activateHandler();
 	}
 	
+	public void reactivate() {
+		Main.getInstance(KeyInputService.class).setButtonHandler(this);
+		reactivateHandler();
+	}
+	
 	public abstract void activateHandler();
 	
 	public abstract void reactivateHandler();

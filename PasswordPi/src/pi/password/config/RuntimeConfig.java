@@ -18,7 +18,7 @@ import com.waveshare.keyboard.hat.HatKeyboardImpl;
 import pi.password.gui.passwords.PasswordController;
 import pi.password.gui.screenlock.ScreenlockController;
 import pi.password.gui.splash.SplashController;
-import pi.password.gui.vaultManager.VaultManagerController;
+import pi.password.gui.vaultManager.VaultManagerListController;
 import pi.password.service.alphabet.AlphabetService;
 import pi.password.service.alphabet.AlphabetServiceImpl;
 import pi.password.service.gui.DialogService;
@@ -61,8 +61,8 @@ public enum RuntimeConfig {
 	DI_TYPE_GUI_SETTINGS("type." + ScreenlockController.class.getCanonicalName(), ServiceClassType.MULTITON.toString()),
 	DI_IMPL_GUI_SPLASH("impl." + SplashController.class.getCanonicalName(), SplashController.class.getCanonicalName()),
 	DI_TYPE_GUI_SPLASH("type." + SplashController.class.getCanonicalName(), ServiceClassType.MULTITON.toString()),
-	DI_IMPL_GUI_VAULT("impl." + VaultManagerController.class.getCanonicalName(), VaultManagerController.class.getCanonicalName()),
-	DI_TYPE_GUI_VAULT("type." + VaultManagerController.class.getCanonicalName(), ServiceClassType.MULTITON.toString()),
+	DI_IMPL_GUI_VAULT("impl." + VaultManagerListController.class.getCanonicalName(), VaultManagerListController.class.getCanonicalName()),
+	DI_TYPE_GUI_VAULT("type." + VaultManagerListController.class.getCanonicalName(), ServiceClassType.MULTITON.toString()),
 	DI_IMPL_IMAGE_UTIL_SERVICE("impl." + ImageUtilService.class.getCanonicalName(), ImageUtilServiceFileSystem.class.getCanonicalName()),
 	DI_IMPL_KEY_INPUT_SERVICE("impl." + KeyInputService.class.getCanonicalName(), KeyInputServiceWaveshareHat.class.getCanonicalName()),
 	DI_IMPL_KEYBOARD_SERVICE("impl." + KeyboardService.class.getCanonicalName(), KeyboardServiceUs.class.getCanonicalName()),

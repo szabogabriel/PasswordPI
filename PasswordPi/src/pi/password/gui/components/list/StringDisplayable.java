@@ -5,7 +5,7 @@ import java.awt.Color;
 import pi.password.service.hat.DisplayService;
 import pi.password.service.hat.DisplayServiceWaveshareHat.TextAlign;
 
-public class StringDisplayable implements ListBodyDisplayable{
+public class StringDisplayable implements ListBodyDisplayable {
 	
 	
 	private final String VALUE;
@@ -26,6 +26,10 @@ public class StringDisplayable implements ListBodyDisplayable{
 		this.VALUE = value;
 		this.COLOR = color;
 		this.SELECTABLE = selectable;
+	}
+	
+	public String getValue() {
+		return VALUE;
 	}
 	
 	@Override

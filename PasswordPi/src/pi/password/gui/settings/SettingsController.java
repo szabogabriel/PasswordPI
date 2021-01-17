@@ -9,7 +9,7 @@ import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
 import pi.password.gui.splash.SplashController;
-import pi.password.gui.vaultManager.VaultManagerController;
+import pi.password.gui.vaultManager.VaultManagerListController;
 import pi.password.service.settings.SettingsService;
 import pi.password.service.settings.SettingsUpdatePropagatorService;
 import pi.password.service.util.ImageUtilService;
@@ -49,7 +49,7 @@ public class SettingsController extends AbstractController {
 
 	@Override
 	public void handleButtonBReleased() {
-		Main.getInstance(VaultManagerController.class).activate();
+		Main.getInstance(VaultManagerListController.class).activate();
 	}
 
 	@Override

@@ -110,7 +110,7 @@ public class TextEditorModel extends AbstractModel {
 	public void confirmCurrentStatus() {
 		CALLBACK.handleTextEditorResult(new String(content));
 		Main.getInstance(KeyInputService.class).setButtonHandler(previousController);
-		previousController.reactivateHandler();
+		previousController.reactivate();
 	}
 	
 	private void castEvent(Consumer<TextEditorChangeListener> event) {
