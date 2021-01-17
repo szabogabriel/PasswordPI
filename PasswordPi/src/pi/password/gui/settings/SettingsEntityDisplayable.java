@@ -23,4 +23,9 @@ public class SettingsEntityDisplayable implements ListBodyDisplayable {
 		display.displayKeyValue(ENTITY.getKey().getPrintableName(), ENTITY.getValue(), Color.WHITE, Color.GRAY, row);		
 	}
 
+	@Override
+	public boolean isSelectable() {
+		return true;
+	}
+
 }

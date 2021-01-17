@@ -69,17 +69,29 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 	
 	public void increaseSelection() {
 		if (selected + 1 < elements.size()) {
-			selected++;
+			int tmp = selected + 1;
+			while (tmp < elements.size() && !elements.get(tmp).isSelectable()) {
+				tmp++;
+			}
 			
-			castEvent(l -> l.selectionChanged());
+			if (tmp < elements.size()) {
+				selected = tmp;
+				castEvent(l -> l.selectionChanged());
+			}
 		}
 	}
 	
 	public void decreaseSelection() {
 		if (selected > 0) {
-			selected--;
+			int tmp = selected - 1;
+			while (tmp >= 0 && !elements.get(tmp).isSelectable()) {
+				tmp--;
+			}
 			
-			castEvent(l -> l.selectionChanged());
+			if (tmp >= 0) {
+				selected = tmp;
+				castEvent(l -> l.selectionChanged());
+			}
 		}
 	}
 	

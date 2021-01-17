@@ -7,15 +7,34 @@ import pi.password.service.hat.DisplayServiceWaveshareHat.TextAlign;
 
 public class StringDisplayable implements ListBodyDisplayable{
 	
-	private String VALUE;
+	
+	private final String VALUE;
+	
+	private final Color COLOR;
+	
+	private final boolean SELECTABLE;
 	
 	public StringDisplayable(String value) {
+		this(value, Color.WHITE);
+	}
+	
+	public StringDisplayable(String value, Color color) {
+		this(value, color, true);
+	}
+	
+	public StringDisplayable(String value, Color color, boolean selectable) {
 		this.VALUE = value;
+		this.COLOR = color;
+		this.SELECTABLE = selectable;
 	}
 	
 	@Override
 	public void display(DisplayService display, int row, int fontSelect) {
-		display.displayText(VALUE, Color.WHITE, row, TextAlign.LEFT, fontSelect);		
+		display.displayText(VALUE, COLOR, row, TextAlign.LEFT, fontSelect);		
 	}
-	
+
+	@Override
+	public boolean isSelectable() {
+		return SELECTABLE;
+	}
 }
