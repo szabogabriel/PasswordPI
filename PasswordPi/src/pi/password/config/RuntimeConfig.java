@@ -17,12 +17,13 @@ import pi.password.gui.passwords.PasswordController;
 import pi.password.gui.screenlock.ScreenlockController;
 import pi.password.gui.splash.SplashController;
 import pi.password.gui.vaultManager.VaultManagerController;
-import pi.password.service.dialog.DialogServiceImpl;
+import pi.password.service.alphabet.AlphabetServiceImpl;
+import pi.password.service.gui.DialogServiceImpl;
+import pi.password.service.gui.TextEditorServiceImpl;
 import pi.password.service.hat.DisplayServiceWaveshareHat;
 import pi.password.service.hat.KeyInputServiceWaveshareHat;
 import pi.password.service.keyboard.KeyboardServiceUs;
 import pi.password.service.lock.LockServiceFileSystem;
-import pi.password.service.password.PasswordAlphabetServiceImpl;
 import pi.password.service.password.PasswordVaultServiceFileSystem;
 import pi.password.service.settings.SettingsServiceFilesystem;
 import pi.password.service.settings.SettingsUpdatePropagatorServiceImpl;
@@ -32,9 +33,10 @@ import pi.password.service.webserver.WebserverServiceImpl;
 
 public enum RuntimeConfig {
 	
+	DI_IMPL_ALPHABET("impl.pi.password.service.alphabet.AlphabetService", AlphabetServiceImpl.class.getCanonicalName()),
 	DI_IMPL_LCD_DISPLAY("impl.com.waveshare.display.LcdDisplay", BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl.com.waveshare.keyboard.HatKeyboard", HatKeyboardImpl.class.getCanonicalName()),
-	DI_IMPL_DIALOG_SERVICE("impl.pi.password.service.dialog.DialogService", DialogServiceImpl.class.getCanonicalName()),
+	DI_IMPL_DIALOG_SERVICE("impl.pi.password.service.gui.DialogService", DialogServiceImpl.class.getCanonicalName()),
 	DI_IMPL_DISPLAY_SERVICE("impl.pi.password.service.hat.DisplayService", DisplayServiceWaveshareHat.class.getCanonicalName()),
 	DI_IMPL_GUI_PASSWORD("impl.pi.password.gui.passwords.PasswordController", PasswordController.class.getCanonicalName()),
 	DI_TYPE_GUI_PASSWORD("type.pi.password.gui.passwords.PasswordController", ServiceClassType.MULTITON.toString()),
@@ -51,10 +53,10 @@ public enum RuntimeConfig {
 	DI_IMPL_KEYBOARD_SERVICE("impl.pi.password.service.keyboard.KeyboardService", KeyboardServiceUs.class.getCanonicalName()),
 	DI_TYPE_KEYBOARD_SERVICE("type.pi.password.service.keyboard.KeyboardService", ServiceClassType.MULTITON.toString()),
 	DI_IMPL_LOCK_SERVICE("impl.pi.password.service.lock.LockService", LockServiceFileSystem.class.getCanonicalName()),
-	DI_IMPL_PASSWORD_ALPHABET("impl.pi.password.service.password.PasswordAlphabetService", PasswordAlphabetServiceImpl.class.getCanonicalName()),
 	DI_IMPL_PASSWORD_VAULT("impl.pi.password.service.password.PasswordVaultService", PasswordVaultServiceFileSystem.class.getCanonicalName()),
 	DI_IMPL_SETTINGS_SERVICE("impl.pi.password.service.settings.SettingsService", SettingsServiceFilesystem.class.getCanonicalName()),
 	DI_IMPL_SETTINGS_UPDATE_SERVICE("impl.pi.password.service.settings.SettingsUpdatePropagatorService", SettingsUpdatePropagatorServiceImpl.class.getCanonicalName()),
+	DI_IMPL_TEXT_EDITOR_SERVICE("impl.pi.password.service.gui.TextEditorService", TextEditorServiceImpl.class.getCanonicalName()),
 	DI_IMPL_TEMPLATE_SERVICE("impl.pi.password.service.template.TemplateService", TemplateServiceMustache.class.getCanonicalName()),
 	DI_IMPL_WEBSERVER_SERVICE("impl.pi.password.service.webserver.WebserverService", WebserverServiceImpl.class.getCanonicalName()),
 	
@@ -66,7 +68,8 @@ public enum RuntimeConfig {
 	ICON_WIFI_ON("icon.wifi.on", "img/icon_wifi_on.png"),
 	ICON_WIFI_OFF("icon.wifi.off", "img/icon_wifi_off.png"),
 	
-	PASSWORD_ALPHABET("password.alphabet", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/?.,$#@%^&{}[]()<>;:"),
+	ALPHABET_PASSWORD("alphabet.password", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/?.,$#@%^&{}[]()<>;:"),
+	ALPHABET_REGULAR("alphabet.regular", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.?()"),
 	
 	WORKING_DIRECTORY("working.dir", "."),
 	

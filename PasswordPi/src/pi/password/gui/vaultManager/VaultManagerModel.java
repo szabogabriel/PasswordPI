@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import pi.password.entity.PasswordEntity;
 import pi.password.gui.AbstractModel;
-import pi.password.service.dialog.DialogService;
-import pi.password.service.password.PasswordAlphabetService;
+import pi.password.service.alphabet.AlphabetService;
+import pi.password.service.gui.DialogService;
 import pi.password.service.password.PasswordVaultService;
 
 public class VaultManagerModel extends AbstractModel {
@@ -19,7 +19,7 @@ public class VaultManagerModel extends AbstractModel {
 	
 	private final DialogService DIALOG;
 	private final PasswordVaultService PASSWORDS;
-	private final PasswordAlphabetService ALPHABET;
+	private final AlphabetService ALPHABET;
 	
 	private final VaultManagerListView VIEW_LIST;
 	private final VaultManagerEditView VIEW_EDIT;
@@ -32,7 +32,7 @@ public class VaultManagerModel extends AbstractModel {
 	private PasswordEntity oldPasswordEntity;
 	private PasswordEntity newPasswordEntity;
 		
-	public VaultManagerModel(DialogService dialog, PasswordVaultService vault, PasswordAlphabetService alphabetService, VaultManagerListView viewList, VaultManagerEditView viewEdit) {
+	public VaultManagerModel(DialogService dialog, PasswordVaultService vault, AlphabetService alphabetService, VaultManagerListView viewList, VaultManagerEditView viewEdit) {
 		this.DIALOG = dialog;
 		this.PASSWORDS = vault;
 		this.ALPHABET = alphabetService;
@@ -136,7 +136,7 @@ public class VaultManagerModel extends AbstractModel {
 	private void descreaseSelectedCharacter() {
 		char[] tmp = currentlyEditedText.toCharArray();
 		char currentChar = tmp[currentlyEditedChar];
-		char newChar = ALPHABET.getNextChar(currentChar);
+		char newChar = ALPHABET.getPasswordNextChar(currentChar);
 		tmp[currentlyEditedChar] = newChar;
 		currentlyEditedText = new String(tmp);
 		
@@ -146,7 +146,7 @@ public class VaultManagerModel extends AbstractModel {
 	private void increaseSelectedCharacter() {
 		char[] tmp = currentlyEditedText.toCharArray();
 		char currentChar = tmp[currentlyEditedChar];
-		char newChar = ALPHABET.getPrevChar(currentChar);
+		char newChar = ALPHABET.getPasswordPrevChar(currentChar);
 		tmp[currentlyEditedChar] = newChar;
 		currentlyEditedText = new String(tmp);
 		

@@ -19,7 +19,7 @@ import pi.password.config.RuntimeConfig;
 import pi.password.entity.SettingsEntity;
 import pi.password.entity.SettingsEntity.Keys;
 import pi.password.enums.Templates;
-import pi.password.service.dialog.DialogService;
+import pi.password.service.gui.DialogService;
 import pi.password.service.password.PasswordVaultService;
 import pi.password.service.settings.SettingsService;
 import pi.password.service.template.TemplateService;

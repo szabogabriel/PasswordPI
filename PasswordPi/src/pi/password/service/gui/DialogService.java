@@ -1,4 +1,4 @@
-package pi.password.service.dialog;
+package pi.password.service.gui;
 
 import java.util.Optional;
 

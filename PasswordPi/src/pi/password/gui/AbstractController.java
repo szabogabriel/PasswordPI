@@ -1,10 +1,10 @@
 package pi.password.gui;
 
 import pi.password.Main;
-import pi.password.service.dialog.DialogService;
+import pi.password.service.alphabet.AlphabetService;
+import pi.password.service.gui.DialogService;
 import pi.password.service.hat.KeyInputService;
 import pi.password.service.keyboard.KeyboardService;
-import pi.password.service.password.PasswordAlphabetService;
 import pi.password.service.password.PasswordVaultService;
 
 public abstract class AbstractController {
@@ -21,8 +21,8 @@ public abstract class AbstractController {
 		return Main.getInstance(PasswordVaultService.class);
 	}
 	
-	protected PasswordAlphabetService getPasswordAlphabet() {
-		return Main.getInstance(PasswordAlphabetService.class);
+	protected AlphabetService getPasswordAlphabet() {
+		return Main.getInstance(AlphabetService.class);
 	}
 	
 	public void activate() {
