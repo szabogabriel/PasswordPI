@@ -37,7 +37,7 @@ public class VaultManagerEditController extends AbstractController {
 		this.PARENT = parentController;
 		this.TEXT_EDITOR_SERVICE = textEditorService;
 		this.ORIGINAL_NAME = name;
-		this.password = PASSWORDS.findPasswordEntity(name).get().getPassword();
+		this.password = (name.trim().length() < 1) ? "" : PASSWORDS.findPasswordEntity(name).get().getPassword();
 		this.model = new ListModel<>();
 		this.view = new ListView<>("Vault", Main.getInstance(ImageUtilService.class).getVaultBackground(), model);
 		
