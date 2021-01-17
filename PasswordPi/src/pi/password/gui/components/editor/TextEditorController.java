@@ -36,11 +36,11 @@ public class TextEditorController extends AbstractController {
 	}
 	
 	public void handleJoystickUpReleased() {
-		model.decreaseCurrentCharacter();
+		model.increaseCurrentCharacter();
 	}
 	
 	public void handleJoystickDownReleased() {
-		model.increaseCurrentCharacter();
+		model.decreaseCurrentCharacter();
 	}
 	
 	public void handleJoystickLeftReleased() {
