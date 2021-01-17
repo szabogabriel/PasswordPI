@@ -5,6 +5,8 @@ public enum DialogResult {
 	YES ("Yes"),
 	NO ("No"),
 	OK ("Ok"),
+	EDIT ("Edit"),
+	DELETE ("Delete"),
 	CANCEL ("Cancel"),
 	;
 	

@@ -35,6 +35,17 @@ public class DialogServiceImpl implements DialogService {
 		controller.activate();
 	}
 	
+	@Override
+	public Optional<Boolean> showEditDeleteCancelDialog(String message) {
+		DialogCallbackResultHolder result = new DialogCallbackResultHolder();
+		DialogController controller = new DialogController(message, DialogType.EDIT_DELETE_CANCEL, result);
+		controller.activate();
+		
+		result.waitForResult();
+		
+		return result.getResult();
+	}
+	
 	private class DialogCallbackResultHolder implements DialogCallback {
 
 		private DialogResult result = null;
@@ -68,6 +79,11 @@ public class DialogServiceImpl implements DialogService {
 			case YES:
 				ret = Optional.of(Boolean.TRUE);
 				break;
+			case DELETE:
+				ret = Optional.of(Boolean.FALSE);
+				break;
+			case EDIT:
+				ret = Optional.of(Boolean.TRUE);
 			default:
 				break;
 			}

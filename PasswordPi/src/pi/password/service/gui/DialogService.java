@@ -8,6 +8,8 @@ public interface DialogService {
 	
 	Optional<Boolean> showYesNoCancelDialog(String message);
 	
+	Optional<Boolean> showEditDeleteCancelDialog(String message);
+	
 	void showMessage(String message);
 
 }
