@@ -39,7 +39,7 @@ public class ListView<T extends ListBodyDisplayable> extends AbstractView implem
 		
 		for (int i = 0 ; i < MAX_ROW_NUM; i++) {
 			if (MODEL.getValues().size() + offset > i) {
-				MODEL.getValues().get(i).display(DISPLAY, i, -1);
+				MODEL.getValues().get(i + offset).display(DISPLAY, i, -1);
 				
 				if (selected == i + offset) {
 					DISPLAY.drawSelection(selected - offset);
