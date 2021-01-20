@@ -21,6 +21,8 @@ import pi.password.gui.splash.SplashController;
 import pi.password.gui.vaultManager.VaultManagerListController;
 import pi.password.service.alphabet.AlphabetService;
 import pi.password.service.alphabet.AlphabetServiceImpl;
+import pi.password.service.crypto.EncryptionService;
+import pi.password.service.crypto.EncryptionServiceImpl;
 import pi.password.service.gui.DialogService;
 import pi.password.service.gui.DialogServiceImpl;
 import pi.password.service.gui.TextEditorService;
@@ -49,6 +51,7 @@ import pi.password.service.webserver.WebserverServiceImpl;
 public enum RuntimeConfig {
 	
 	DI_IMPL_ALPHABET("impl." + AlphabetService.class.getCanonicalName(), AlphabetServiceImpl.class.getCanonicalName()),
+	DI_IMPL_ENCRYPTION("impl." + EncryptionService.class.getCanonicalName(), EncryptionServiceImpl.class.getCanonicalName()),
 	DI_IMPL_LCD_DISPLAY("impl." + LcdDisplay.class.getCanonicalName(), BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl." + HatKeyboard.class.getCanonicalName(), HatKeyboardImpl.class.getCanonicalName()),
 	DI_IMPL_DIALOG_SERVICE("impl." + DialogService.class.getCanonicalName(), DialogServiceImpl.class.getCanonicalName()),
