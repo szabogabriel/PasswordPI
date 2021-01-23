@@ -19,6 +19,10 @@ public class Main {
 		return DI.getServiceImpl(clss).orElse(null);
 	}
 	
+	public static void lock() {
+		//TODO: lock the device
+	}
+	
 	public static void main(String[] args) throws ClassNotFoundException {
 		init();
 		getInstance(MasterLockController.class).activate();

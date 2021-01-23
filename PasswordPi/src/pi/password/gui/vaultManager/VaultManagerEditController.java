@@ -7,6 +7,7 @@ import pi.password.Main;
 import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
+import pi.password.gui.splash.SplashController;
 import pi.password.gui.vaultManager.VaultManagerEditDisplayable.Type;
 import pi.password.service.gui.TextEditorService;
 import pi.password.service.password.PasswordVaultService;
@@ -52,6 +53,21 @@ public class VaultManagerEditController extends AbstractController {
 	@Override
 	public void reactivateHandler() {
 		view.paint();
+	}
+	
+	@Override
+	public void handleButtonAReleased() {
+		Main.getInstance(SplashController.class).activate();
+	}
+	
+	@Override
+	public void handleButtonBReleased() {
+		//TODO: delete
+	}
+	
+	@Override
+	public void handleButtonCReleased() {
+		Main.lock();
 	}
 	
 	@Override

@@ -41,10 +41,15 @@ public class PasswordController extends AbstractController {
 	public void handleButtonAReleased() {
 		Main.getInstance(SplashController.class).activate();			
 	}
+	
+	@Override
+	public void handleButtonBReleased() {
+		//TODO: delete
+	}
 
 	@Override
 	public void handleButtonCReleased() {
-		Main.getInstance(SettingsController.class).activate();
+		Main.lock();
 	}
 
 	@Override
