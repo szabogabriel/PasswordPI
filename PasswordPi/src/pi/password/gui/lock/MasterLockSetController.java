@@ -48,7 +48,7 @@ public class MasterLockSetController extends AbstractController {
 			model.addData(new StringDisplayable("", Color.GRAY, true, TextAlign.LEFT, this::toPassword));
 			model.addData(new StringDisplayable("Repeat password", Color.WHITE, false, TextAlign.CENTER));
 			model.addData(new StringDisplayable("", Color.GRAY, true, TextAlign.LEFT, this::toPassword));
-			model.addData(new StringDisplayable("OK", Color.WHITE, true, TextAlign.CENTER));
+			model.addData(new StringDisplayable("OK", Color.GREEN, true, TextAlign.CENTER));
 		}
 	}
 
@@ -102,7 +102,7 @@ public class MasterLockSetController extends AbstractController {
 	}
 	
 	private void setTextBox(String content, int position) {
-		StringDisplayable tmp = new StringDisplayable(content, Color.WHITE, true, TextAlign.LEFT, this::toPassword);
+		StringDisplayable tmp = new StringDisplayable(content, Color.GRAY, true, TextAlign.LEFT, this::toPassword);
 		model.setData(tmp, position);
 	}
 
