@@ -84,7 +84,6 @@ public class LockServiceFileSystem implements LockService {
 
 	@Override
 	public boolean unlockMaster(String key) {
-		//TODO: the logic here only changes the password, but we still need to migrate the stored data!!!
 		boolean ret = false;
 		masterKey = null;
 		Optional<File> masterLockFile = getMasterLockFile();
@@ -138,6 +137,7 @@ public class LockServiceFileSystem implements LockService {
 
 	@Override
 	public boolean updateMasterKey(String oldKey, String newKey) {
+		//TODO: the logic here only changes the password, but we still need to migrate the stored data!!!
 		boolean ret = false;
 		
 		if (unlockMaster(oldKey)) {
