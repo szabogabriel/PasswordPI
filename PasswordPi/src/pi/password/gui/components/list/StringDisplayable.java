@@ -14,6 +14,8 @@ public class StringDisplayable implements ListBodyDisplayable {
 	
 	private final boolean SELECTABLE;
 	
+	private final TextAlign ALIGN;
+	
 	public StringDisplayable(String value) {
 		this(value, Color.WHITE);
 	}
@@ -23,9 +25,14 @@ public class StringDisplayable implements ListBodyDisplayable {
 	}
 	
 	public StringDisplayable(String value, Color color, boolean selectable) {
+		this(value, color, selectable, TextAlign.LEFT);
+	}
+	
+	public StringDisplayable(String value, Color color, boolean selectable, TextAlign align) {
 		this.VALUE = value;
 		this.COLOR = color;
 		this.SELECTABLE = selectable;
+		this.ALIGN = align;
 	}
 	
 	public String getValue() {
@@ -34,7 +41,7 @@ public class StringDisplayable implements ListBodyDisplayable {
 	
 	@Override
 	public void display(DisplayService display, int row, int fontSelect) {
-		display.displayText(VALUE, COLOR, row, TextAlign.LEFT, fontSelect);		
+		display.displayText(VALUE, COLOR, row, ALIGN, fontSelect);		
 	}
 
 	@Override
