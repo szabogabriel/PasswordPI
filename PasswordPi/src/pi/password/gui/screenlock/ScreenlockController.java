@@ -5,6 +5,8 @@ import com.waveshare.keyboard.HatKey;
 import pi.password.Main;
 import pi.password.gui.AbstractController;
 import pi.password.gui.splash.SplashController;
+import pi.password.service.gui.DialogService;
+import pi.password.service.gui.TextEditorService;
 import pi.password.service.lock.LockService;
 
 public class ScreenlockController extends AbstractController {
@@ -12,10 +14,14 @@ public class ScreenlockController extends AbstractController {
 	private ScreenlockView view;
 	private ScreenlockModel model;
 	
-	private LockService lockService;
+	private final DialogService DIALOG_SERVICE;
+	private final TextEditorService TEXT_EDITOR_SERVICE;
+	private final LockService LOCK_SERVICE;
 	
-	public ScreenlockController(LockService lockService) {
-		this.lockService = lockService;
+	public ScreenlockController(DialogService dialogService, TextEditorService textEditorService, LockService lockService) {
+		this.DIALOG_SERVICE = dialogService;
+		this.TEXT_EDITOR_SERVICE = textEditorService;
+		this.LOCK_SERVICE = lockService;
 	}
 	
 	@Override
@@ -23,9 +29,9 @@ public class ScreenlockController extends AbstractController {
 		view = new ScreenlockView();
 		model = new ScreenlockModel(view);
 		
-		if (!lockService.isLocked()) {
-			Main.getInstance(SplashController.class).activate();
-		}
+		unlockScreen();
+		
+		activateSplashScreen();
 	}
 	
 	@Override
@@ -70,7 +76,21 @@ public class ScreenlockController extends AbstractController {
 
 	@Override
 	public void handleJoystickCenterReleased() {
-		new SplashController().activate();	
+		activateSplashScreen();
 	}
-
+	
+	private void unlockScreen() {
+		String lockPassword = "";
+		
+		do {
+			if (LOCK_SERVICE.isLocked()) {
+				//TODO try unlocking it.
+			}
+		} while (!LOCK_SERVICE.unlock(lockPassword));
+	}
+	
+	private void activateSplashScreen() {
+		Main.getInstance(SplashController.class).activate();
+	}
+	
 }

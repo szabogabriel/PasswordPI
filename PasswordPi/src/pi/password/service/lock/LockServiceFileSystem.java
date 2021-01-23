@@ -62,6 +62,7 @@ public class LockServiceFileSystem implements LockService {
 
 	@Override
 	public boolean unlockMaster(String key) {
+		//TODO: the logic here only changes the password, but we still need to migrate the stored data!!!
 		boolean ret = false;
 		masterKey = null;
 		Optional<File> masterLockFile = getMasterLockFile();
@@ -82,6 +83,8 @@ public class LockServiceFileSystem implements LockService {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		} else {
+			ret = true;
 		}
 		
 		return ret;
@@ -98,9 +101,11 @@ public class LockServiceFileSystem implements LockService {
 		boolean ret = false;
 		
 		if (unlockMaster(oldKey)) {
-			File tmp = getMasterLockFile().get();
+			Optional<File> tmp = getMasterLockFile();
 			
-			tmp.delete();
+			if (tmp.isPresent()) {
+				tmp.get().delete();
+			}
 			
 			String salt = ENCRYPTION.generateSalt();
 			

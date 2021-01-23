@@ -5,7 +5,7 @@ import com.jdi.ServiceFactoryImpl;
 
 import pi.password.config.JdiConfigService;
 import pi.password.entity.SettingsEntity.Keys;
-import pi.password.gui.screenlock.ScreenlockController;
+import pi.password.gui.screenlock.MasterLockController;
 import pi.password.service.hat.DisplayService;
 import pi.password.service.hat.KeyInputService;
 import pi.password.service.settings.SettingsService;
@@ -21,7 +21,7 @@ public class Main {
 	
 	public static void main(String[] args) throws ClassNotFoundException {
 		init();
-		getInstance(ScreenlockController.class).activate();
+		getInstance(MasterLockController.class).activate();
 	}
 	
 	private static void init() {
