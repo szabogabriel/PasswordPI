@@ -38,7 +38,7 @@ This project is a hardware password manager. It acts as a keyboard emulator for 
   
   - Persistence is currently done via property files.
   
-  - The master password locking is only prepared but not tested. It also doesn't encrypt the password vault in its current implementation.
+  - The master locking is implemented. Only the hash of the master password is stored. The passwords are encrypted by a key computed based on the master password.
   
   - Web interface is implemented. It can be activated directly on the device and also approval of all the requests and changes performed via the web interface.
   
@@ -62,23 +62,19 @@ The package structure resembles a Spring Boot application. The biggest differenc
 
 There are two types of configuration present in the system. Runtime configuration is configurable via the `runtime.properties` file. These are mainly technical values used mainly by the dependency injection library. This is available either directly via the `RuntimeConfig` enum or via the `JdiConfigService` class. The second type of configuration are the settings available via the HAT or the web interface for the user to be changed. These settings are managed via the `SettingsService` service class.
 
-The GUI is according to the MVC pattern. However, every component describes the whole screen, not just the smaller parts, like for example a text field, or a button. The main reason for this was the absence of a GUI framework to be used. AWT and Swing were problematic. It would require a custom display implementation, which would be then set via an environment variable. However, since the LCD HAT mock also uses Swing, it needs access to the OS-native display implementation. Apache Pivot was also promising, but then I decided to create my own simple framework. This later on proved to be the correct way, since "classic" GUI framework would consume most of the display's resolution (128x128) for borders and paddings. The current framework is basically a simple menu-system with background images. It enables simple editing (boolean and numeric values). The two biggest points currently missing are the text input and text scrolling.
+The GUI is according to the MVC pattern. However, every component describes the whole screen, not just the smaller parts, like for example a text field, or a button. The main reason for this was the absence of a GUI framework to be used. AWT and Swing were problematic. It would require a custom display implementation, which would be then set via an environment variable. However, since the LCD HAT mock also uses Swing, it needs access to the OS-native display implementation. Apache Pivot was also promising, but then I decided to create my own simple framework. This later on proved to be the correct way, since "classic" GUI framework would consume most of the display's resolution (128x128) for borders and paddings. The current framework is basically a simple menu-system with background images. It enables simple editing (boolean and numeric values), text input - both for plaintext and password with different alphabets, list view with support for custom list elements, dialog boxes of different types (Ok, Yes/No, Yes/No/Cancel).
 
 The web interface is done via the HTTP server implementation available directly in the JDK. It is a simple but effective implementation with low memory and CPU footprint. It requires lower level development (e.g. manually parsing the FORM post data). It uses Mustache templates and caches every resource (css, js, jpeg etc.) in memory. Currently it is around 640kB, so it is safe to do so. Switching to HTTPS would be possible (and necessary), but not yet done. However, since all the changes must be approved on the device, it is still safe to leave it currently as is. Also, currently no password is sent to the frontend.
 
 ## Known issues with the system
 
-  - The GUI is sometimes not refreshed correctly. This is due to the "optimization" of the double buffering mechanism in the LCD HAT library. It enabled to reduce the CPU load from 80-85% to about 1% idle, but the price was, that some changes are missed.
+  - The GUI is blinking rather heavily. This is due to the "optimization" of the double buffering mechanism in the LCD HAT library. It enabled to reduce the CPU load from 80-85% to about 1% idle. The problem is however, that double buffering can't really be done, because we are not refreshing the screen, if there is no change (technically this is not correct, because there is a fixed refresh once every x milliseconds, but this is just a minor detail).
   
   - The code on some part is a bit messy (especially the web interface part). A nice refactoring would be beneficial.
 
 ## Future TODOs
 
-  - Use master password to encrypt the stored passwords and lock the application.
-
   - HTTPS support.
-  
-  - Extend the GUI editing functionalities available on the device thus enabling offline password management.
   
   - Database instead of properties files.
   
