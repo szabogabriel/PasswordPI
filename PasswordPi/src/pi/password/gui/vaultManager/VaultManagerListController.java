@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import pi.password.Main;
+import pi.password.enums.LocalizedTexts;
 import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
@@ -19,7 +20,7 @@ import pi.password.service.util.ThreadUtil;
 
 public class VaultManagerListController extends AbstractController {
 	
-	private static final String NEW_PASSWORD_STRING = "[New]";
+	private static final String NEW_PASSWORD_STRING = LocalizedTexts.VIEW_VAULT_LIST_NEW.toString();
 
 	private ListView<StringDisplayable> view;
 	private ListModel<StringDisplayable> model;
@@ -33,7 +34,7 @@ public class VaultManagerListController extends AbstractController {
 		this.DIALOG = dialog;
 		this.TEXT_EDITOR_SERVICE = editor;
 		model = new ListModel<>();
-		view = new ListView<>("Vault", Main.getInstance(ImageUtilService.class).getVaultBackground(), model);
+		view = new ListView<>(LocalizedTexts.VIEW_VAULT_LIST_TITLE.toString(), Main.getInstance(ImageUtilService.class).getVaultBackground(), model);
 		updateModelData();
 	}
 	
@@ -96,7 +97,7 @@ public class VaultManagerListController extends AbstractController {
 			String currentName = getCurrentSelectedName();
 			
 			if (!NEW_PASSWORD_STRING.equals(currentName)) {
-				Optional<Boolean> ret = DIALOG.showEditDeleteCancelDialog("Choose action for " + currentName);
+				Optional<Boolean> ret = DIALOG.showEditDeleteCancelDialog(LocalizedTexts.VIEW_VAULT_LIST_DIALOG_TEXTS.toString() + currentName);
 				
 				if (ret.isPresent()) {
 					if (ret.get()) {
@@ -116,7 +117,7 @@ public class VaultManagerListController extends AbstractController {
 		ThreadUtil.createBackgroundJob(() -> {
 			String name = getCurrentSelectedName();
 			
-			if (DIALOG.showYesNoDialog("Do you really want to remove " + name + " ?")) {
+			if (DIALOG.showYesNoDialog(LocalizedTexts.VIEW_VAULT_LIST_DIALOG_REMOVE.toString() + name + "?")) {
 				PASSWORDS.remove(name);
 				updateModelData();
 			}

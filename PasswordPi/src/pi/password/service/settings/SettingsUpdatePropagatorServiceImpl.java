@@ -1,6 +1,7 @@
 package pi.password.service.settings;
 
 import pi.password.entity.SettingsEntity;
+import pi.password.enums.LocalizedTexts;
 import pi.password.service.webserver.WebserverService;
 
 public class SettingsUpdatePropagatorServiceImpl implements SettingsUpdatePropagatorService {
@@ -14,6 +15,9 @@ public class SettingsUpdatePropagatorServiceImpl implements SettingsUpdatePropag
 	@Override
 	public void handleSettingUpdate(SettingsEntity entity) {
 		switch (entity.getKey()) {
+		case LOCALE:
+			LocalizedTexts.loadLocale(entity.getValue());
+			break;
 		case KEYSTROKE_LENGTH:
 			break;
 		case TYPE_DELAY_MAX:

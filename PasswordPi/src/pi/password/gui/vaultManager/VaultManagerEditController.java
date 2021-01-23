@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import pi.password.Main;
+import pi.password.enums.LocalizedTexts;
 import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
@@ -40,7 +41,7 @@ public class VaultManagerEditController extends AbstractController {
 		this.ORIGINAL_NAME = name;
 		this.password = (name.trim().length() < 1) ? "" : PASSWORDS.findPasswordEntity(name).get().getPassword();
 		this.model = new ListModel<>();
-		this.view = new ListView<>("Vault", Main.getInstance(ImageUtilService.class).getVaultBackground(), model);
+		this.view = new ListView<>(LocalizedTexts.VIEW_VAULT_EDIT_TITLE.toString(), Main.getInstance(ImageUtilService.class).getVaultBackground(), model);
 		
 		initModelData();
 	}
@@ -81,7 +82,7 @@ public class VaultManagerEditController extends AbstractController {
 		
 		if (displayableName.equals(selected)) {
 			ThreadUtil.createBackgroundJob(() -> {
-				Optional<String> newName = TEXT_EDITOR_SERVICE.editPlaintext("Change", "Enter new name", displayableName.getValue());
+				Optional<String> newName = TEXT_EDITOR_SERVICE.editPlaintext(LocalizedTexts.VIEW_VAULT_EDIT_DIALOG_TITLE.toString(), LocalizedTexts.VIEW_VAULT_EDIT_DIALOG_ENTER_NAME.toString(), displayableName.getValue());
 				
 				if (newName.isPresent()) {
 					displayableName.setValue(newName.get());
@@ -91,7 +92,7 @@ public class VaultManagerEditController extends AbstractController {
 		} else
 		if (displayablePassword.equals(selected)) {
 			ThreadUtil.createBackgroundJob(() -> {
-				Optional<String> newPsswd = TEXT_EDITOR_SERVICE.editPassword("Change", "New password for " + displayableName.getValue(), displayablePassword.getValue());
+				Optional<String> newPsswd = TEXT_EDITOR_SERVICE.editPassword(LocalizedTexts.VIEW_VAULT_EDIT_DIALOG_TITLE.toString(), LocalizedTexts.VIEW_VAULT_EDIT_DIALOG_ENTER_PASSWORD.toString() + displayableName.getValue(), displayablePassword.getValue());
 				
 				if (newPsswd.isPresent()) {
 					displayablePassword.setValue(newPsswd.get());
@@ -116,15 +117,15 @@ public class VaultManagerEditController extends AbstractController {
 	private void initModelData() {
 		List<VaultManagerEditDisplayable> data = new ArrayList<>();
 
-		data.add(new VaultManagerEditDisplayable("Name", Type.KEY));
+		data.add(new VaultManagerEditDisplayable(LocalizedTexts.VIEW_VAULT_EDIT_BODY_NAME.toString(), Type.KEY));
 		displayableName = new VaultManagerEditDisplayable(ORIGINAL_NAME, Type.VALUE);
 		data.add(displayableName);
-		data.add(new VaultManagerEditDisplayable("Password", Type.KEY));
+		data.add(new VaultManagerEditDisplayable(LocalizedTexts.VIEW_VAULT_EDIT_BODY_PASSWORD.toString(), Type.KEY));
 		displayablePassword = new VaultManagerEditDisplayable(password, Type.PASSWORD);
 		data.add(displayablePassword);
-		displayableSave = new VaultManagerEditDisplayable("Save", Type.OPTION); 
+		displayableSave = new VaultManagerEditDisplayable(LocalizedTexts.VIEW_VAULT_EDIT_BODY_SAVE.toString(), Type.OPTION); 
 		data.add(displayableSave);
-		displayableCancel = new VaultManagerEditDisplayable("Cancel", Type.OPTION);
+		displayableCancel = new VaultManagerEditDisplayable(LocalizedTexts.VIEW_VAULT_EDIT_BODY_CANCEL.toString(), Type.OPTION);
 		data.add(displayableCancel);
 		
 		model.setData(data);

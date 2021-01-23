@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Optional;
 
 import pi.password.Main;
+import pi.password.enums.LocalizedTexts;
 import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
@@ -40,15 +41,15 @@ public class MasterLockSetController extends AbstractController {
 			activateNextScreen();
 		} else {
 			model = new ListModel<StringDisplayable>();
-			view = new ListView<StringDisplayable>("LOCKED", IMAGE_UTIL.getMainBackground(), model);
+			view = new ListView<StringDisplayable>(LocalizedTexts.VIEW_NEW_MASTER_TITLE.toString(), IMAGE_UTIL.getMainBackground(), model);
 			view.paint();
 			
-			model.addData(new StringDisplayable("Set new master", Color.WHITE, false, TextAlign.CENTER));
-			model.addData(new StringDisplayable("Password", Color.WHITE, false, TextAlign.CENTER));
+			model.addData(new StringDisplayable(LocalizedTexts.VIEW_NEW_MASTER_LINE_1.toString(), Color.WHITE, false, TextAlign.CENTER));
+			model.addData(new StringDisplayable(LocalizedTexts.VIEW_NEW_MASTER_LINE_2.toString(), Color.WHITE, false, TextAlign.CENTER));
 			model.addData(new StringDisplayable("", Color.GRAY, true, TextAlign.LEFT, this::toPassword));
-			model.addData(new StringDisplayable("Repeat password", Color.WHITE, false, TextAlign.CENTER));
+			model.addData(new StringDisplayable(LocalizedTexts.VIEW_NEW_MASTER_REPEAT.toString(), Color.WHITE, false, TextAlign.CENTER));
 			model.addData(new StringDisplayable("", Color.GRAY, true, TextAlign.LEFT, this::toPassword));
-			model.addData(new StringDisplayable("OK", Color.GREEN, true, TextAlign.CENTER));
+			model.addData(new StringDisplayable(LocalizedTexts.VIEW_NEW_MASTER_CONFIRM.toString(), Color.GREEN, true, TextAlign.CENTER));
 		}
 	}
 
@@ -70,7 +71,7 @@ public class MasterLockSetController extends AbstractController {
 		
 		if (selection == TEXT_BOX_1_POSITION) {
 			ThreadUtil.createBackgroundJob(() -> {
-				Optional<String> ret = TEXT_EDITOR_SERVICE.editPassword("Master", "Enter master password", getTextBoxContent(TEXT_BOX_1_POSITION));
+				Optional<String> ret = TEXT_EDITOR_SERVICE.editPassword(LocalizedTexts.VIEW_NEW_MASTER_DIALOG_HEADER.toString(), LocalizedTexts.VIEW_NEW_MASTER_ENTER_MASTER.toString(), getTextBoxContent(TEXT_BOX_1_POSITION));
 				if (ret.isPresent()) {
 					setTextBox(ret.get(), TEXT_BOX_1_POSITION);
 				}
@@ -78,7 +79,7 @@ public class MasterLockSetController extends AbstractController {
 		} else 
 		if (selection == TEXT_BOX_2_POSITION) {
 			ThreadUtil.createBackgroundJob(() -> {
-				Optional<String> ret = TEXT_EDITOR_SERVICE.editPassword("Master", "Repeat master password", getTextBoxContent(TEXT_BOX_2_POSITION));
+				Optional<String> ret = TEXT_EDITOR_SERVICE.editPassword(LocalizedTexts.VIEW_NEW_MASTER_DIALOG_HEADER.toString(), LocalizedTexts.VIEW_NEW_MASTER_REPEAT_MASTER.toString(), getTextBoxContent(TEXT_BOX_2_POSITION));
 				if (ret.isPresent()) {
 					setTextBox(ret.get(), TEXT_BOX_2_POSITION);
 				}

@@ -3,6 +3,7 @@ package pi.password.gui.splash;
 import java.awt.Color;
 
 import pi.password.Main;
+import pi.password.enums.LocalizedTexts;
 import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
@@ -20,9 +21,9 @@ public class SplashController extends AbstractController {
 	private final SystemUtil SYSTEM_UTIL;
 	
 	private final StringDisplayable EMPTY_DISPLAYABLE = new StringDisplayable("", Color.WHITE, false, TextAlign.CENTER);
-	private final StringDisplayable PASSWORDS_DISPLAYABLE = new StringDisplayable("Passswords", Color.WHITE, true, TextAlign.CENTER);
-	private final StringDisplayable VAULT_DISPLAYABLE = new StringDisplayable("Vault", Color.WHITE, true, TextAlign.CENTER);
-	private final StringDisplayable SETTINGS_DISPLAYABLE = new StringDisplayable("Settings", Color.WHITE, true, TextAlign.CENTER);
+	private final StringDisplayable PASSWORDS_DISPLAYABLE = new StringDisplayable(LocalizedTexts.VIEW_SPLASH_BODY_PASSWORD.toString(), Color.WHITE, true, TextAlign.CENTER);
+	private final StringDisplayable VAULT_DISPLAYABLE = new StringDisplayable(LocalizedTexts.VIEW_SPLASH_BODY_VAULT.toString(), Color.WHITE, true, TextAlign.CENTER);
+	private final StringDisplayable SETTINGS_DISPLAYABLE = new StringDisplayable(LocalizedTexts.VIEW_SPLASH_BODY_SETTINGS.toString(), Color.WHITE, true, TextAlign.CENTER);
 	
 	private ListView<StringDisplayable> view;
 	private ListModel<StringDisplayable> model;
@@ -45,7 +46,7 @@ public class SplashController extends AbstractController {
 		model.addData(VAULT_DISPLAYABLE);
 		model.addData(EMPTY_DISPLAYABLE);
 		model.addData(SETTINGS_DISPLAYABLE);
-		view = new ListView<StringDisplayable>(SYSTEM_UTIL.getIpAddress().orElse("Offline"), IMAGE_SERVICE.getMainBackground(), model);
+		view = new ListView<StringDisplayable>(SYSTEM_UTIL.getIpAddress().orElse(LocalizedTexts.VIEW_SPLASH_TITLE_OFFLINE.toString()), IMAGE_SERVICE.getMainBackground(), model);
 		view.paint();
 	}
 	

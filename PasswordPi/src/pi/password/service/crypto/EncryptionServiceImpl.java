@@ -33,8 +33,8 @@ public class EncryptionServiceImpl implements EncryptionService {
 		Cipher cDec = null;
 		try {
 			digest = MessageDigest.getInstance("SHA-256");
-			cEnc = Cipher.getInstance("AES");
-			cDec = Cipher.getInstance("AES");
+			cEnc = Cipher.getInstance(ALGORITHM);
+			cDec = Cipher.getInstance(ALGORITHM);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
 			e.printStackTrace();
 		}

@@ -3,6 +3,7 @@ package pi.password.gui.lock;
 import java.util.Optional;
 
 import pi.password.Main;
+import pi.password.enums.LocalizedTexts;
 import pi.password.gui.AbstractController;
 import pi.password.gui.components.background.BackgroundView;
 import pi.password.gui.splash.SplashController;
@@ -42,7 +43,7 @@ public class MasterLockController extends AbstractController {
 	private void handleMasterUnlock() {
 		Optional<String> masterPassword;
 		do {
-			masterPassword = TEXT_EDITOR_SERVICE.editPassword("LOCKED", "Enter master password", "", false);
+			masterPassword = TEXT_EDITOR_SERVICE.editPassword(LocalizedTexts.VIEW_NEW_MASTER_TITLE.toString(), LocalizedTexts.VIEW_NEW_MASTER_ENTER_MASTER.toString(), "", false);
 		} while (!masterPassword.isPresent() || !LOCK_SERVICE.unlockMaster(masterPassword.get()));
 		
 		if (LOCK_SERVICE.isLockSet()) {

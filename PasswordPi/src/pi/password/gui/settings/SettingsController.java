@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import pi.password.Main;
 import pi.password.entity.SettingsEntity;
+import pi.password.enums.LocalizedTexts;
 import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
@@ -26,7 +27,7 @@ public class SettingsController extends AbstractController {
 		this.SETTINGS_UPDATE_PROPAGATOR_SERVICE = settingsUpdate;
 		
 		model = new ListModel<SettingsEntityDisplayable>();
-		view = new ListView<SettingsEntityDisplayable>("Settings", Main.getInstance(ImageUtilService.class).getSettingsBackground(), model);
+		view = new ListView<SettingsEntityDisplayable>(LocalizedTexts.VIEW_SETTINGS_TITLE.toString(), Main.getInstance(ImageUtilService.class).getSettingsBackground(), model);
 		
 		model.setData(getSortedSettings().stream().map(e -> new SettingsEntityDisplayable(e)).collect(Collectors.toList()));
 	}
@@ -43,11 +44,14 @@ public class SettingsController extends AbstractController {
 	
 	@Override
 	public void handleButtonAReleased() {
+		saveSettings();
 		Main.getInstance(SplashController.class).activate();
+		
 	}
 
 	@Override
 	public void handleButtonCReleased() {
+		saveSettings();
 		Main.lock();
 	}
 
@@ -153,6 +157,12 @@ public class SettingsController extends AbstractController {
 			model.setData(new SettingsEntityDisplayable(newSettings), currentOrder);
 			SETTINGS_UPDATE_PROPAGATOR_SERVICE.handleSettingUpdate(newSettings);
 		}
+	}
+	
+	private void saveSettings() {
+		model.getValues().stream()
+			.map(e -> e.getEntity())
+			.forEach(e -> SETTINGS_SERVICE.setValue(e));
 	}
 	
 	private List<SettingsEntity> getSortedSettings() {

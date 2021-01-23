@@ -1,13 +1,15 @@
 package pi.password.gui.components.dialog;
 
+import pi.password.enums.LocalizedTexts;
+
 public enum DialogResult {
 	
-	YES ("Yes"),
-	NO ("No"),
-	OK ("Ok"),
-	EDIT ("Edit"),
-	DELETE ("Delete"),
-	CANCEL ("Cancel"),
+	YES (LocalizedTexts.DIALOG_RESULT_YES.toString()),
+	NO (LocalizedTexts.DIALOG_RESULT_NO.toString()),
+	OK (LocalizedTexts.DIALOG_RESULT_OK.toString()),
+	EDIT (LocalizedTexts.DIALOG_RESULT_EDIT.toString()),
+	DELETE (LocalizedTexts.DIALOG_RESULT_DELETE.toString()),
+	CANCEL (LocalizedTexts.DIALOG_RESULT_CANCEL.toString()),
 	;
 	
 	private final String PRINTABLE_VALUE;

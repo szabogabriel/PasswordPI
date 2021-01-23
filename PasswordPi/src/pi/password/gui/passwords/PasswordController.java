@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import pi.password.Main;
+import pi.password.enums.LocalizedTexts;
 import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
 import pi.password.gui.components.list.StringDisplayable;
-import pi.password.gui.settings.SettingsController;
 import pi.password.gui.splash.SplashController;
 import pi.password.service.password.PasswordVaultService;
 import pi.password.service.util.ImageUtilService;
@@ -23,7 +23,7 @@ public class PasswordController extends AbstractController {
 	public PasswordController(PasswordVaultService passwords) {
 		this.PASSWORDS = passwords;
 		model = new ListModel<>();
-		view = new ListView<>("Passwords", Main.getInstance(ImageUtilService.class).getMainBackground(), model);
+		view = new ListView<>(LocalizedTexts.VIEW_PASSWORDS_TITLE.toString(), Main.getInstance(ImageUtilService.class).getMainBackground(), model);
 		model.setData(getSortedPasswordKeys().stream().map(d -> new StringDisplayable(d)).collect(Collectors.toList()));
 	}
 	

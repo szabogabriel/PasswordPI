@@ -4,7 +4,9 @@ import com.jdi.ServiceFactory;
 import com.jdi.ServiceFactoryImpl;
 
 import pi.password.config.JdiConfigService;
+import pi.password.entity.SettingsEntity;
 import pi.password.entity.SettingsEntity.Keys;
+import pi.password.enums.LocalizedTexts;
 import pi.password.gui.lock.MasterLockController;
 import pi.password.gui.lock.MasterLockSetController;
 import pi.password.service.hat.DisplayService;
@@ -52,6 +54,8 @@ public class Main {
 		if (settings.getSetting(Keys.WEBSERVER_ENABLED).get().getValueBoolean()) {
 			web.startWebserver();
 		}
+		
+		LocalizedTexts.loadLocale(settings.getSetting(SettingsEntity.Keys.LOCALE).get().getValue());
 	}
 	
 }
