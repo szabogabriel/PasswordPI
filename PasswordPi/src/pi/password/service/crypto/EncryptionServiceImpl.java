@@ -17,7 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class EncryptionServiceImpl implements EncryptionService {
 	
 	private static final String ALGORITHM = "AES";
-	private static final int SALT_LENGTH = 12;
+	private static final int SALT_LENGTH = 32;
 	private static final char [] SALT_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
 
 	private final Encoder ENCODER = Base64.getEncoder();

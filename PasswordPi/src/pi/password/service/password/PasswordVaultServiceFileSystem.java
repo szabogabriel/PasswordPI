@@ -16,16 +16,22 @@ import javax.swing.Timer;
 
 import pi.password.config.RuntimeConfig;
 import pi.password.entity.PasswordEntity;
+import pi.password.service.crypto.EncryptionService;
+import pi.password.service.lock.LockService;
 
 public class PasswordVaultServiceFileSystem implements PasswordVaultService {
 
+	private final EncryptionService ENCRYPTION_SERVICE;
+	private final LockService LOCK_SERVICE;
 	private final File VAULT;
 
 	private Properties PROPERTIES;
 	
 	private long lastLoaded;
-
-	public PasswordVaultServiceFileSystem() {
+	
+	public PasswordVaultServiceFileSystem(EncryptionService encryptionService, LockService lockService) {
+		this.ENCRYPTION_SERVICE = encryptionService;
+		this.LOCK_SERVICE = lockService;
 		VAULT = new File(RuntimeConfig.VAULT_FILESYSTEM_FILE.toString());
 		PROPERTIES = new Properties();
 		loadPasswords();
@@ -63,7 +69,8 @@ public class PasswordVaultServiceFileSystem implements PasswordVaultService {
 
 	@Override
 	public Set<PasswordEntity> listPasswordEntities() {
-		return PROPERTIES.keySet().stream().map(k -> new PasswordEntity(k.toString(), PROPERTIES.get(k).toString()))
+		return PROPERTIES.keySet().stream()
+				.map(k -> createPasswordEntity(k.toString(), PROPERTIES.get(k).toString()))
 				.collect(Collectors.toSet());
 	}
 
@@ -72,7 +79,7 @@ public class PasswordVaultServiceFileSystem implements PasswordVaultService {
 		Optional<PasswordEntity> ret = Optional.empty();
 		if (isKnownPasswordEntity(name)) {
 			String psswd = PROPERTIES.getProperty(name);
-			PasswordEntity tmp = new PasswordEntity(name, psswd);
+			PasswordEntity tmp = createPasswordEntity(name, psswd);
 			ret = Optional.of(tmp);
 		}
 		return ret;
@@ -87,14 +94,17 @@ public class PasswordVaultServiceFileSystem implements PasswordVaultService {
 	public void update(String name, String password) {
 		checkForUpdates();
 		
-		PROPERTIES.put(name, password);
+		PROPERTIES.put(name, encryptPassword(password));
 		
 		saveProperties();
 	}
 
 	@Override
 	public List<String> listPasswordEntityNames() {
-		return PROPERTIES.keySet().stream().map(o -> o.toString()).sorted().collect(Collectors.toList());
+		return PROPERTIES.keySet().stream()
+				.map(o -> o.toString())
+				.sorted()
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -109,11 +119,31 @@ public class PasswordVaultServiceFileSystem implements PasswordVaultService {
 	public boolean add(String name, String password) {
 		boolean ret = false;
 		if (!PROPERTIES.contains(name)) {
-			PROPERTIES.put(name, password);
+			PROPERTIES.put(name, encryptPassword(password));
 			saveProperties();
 			ret = true;
 		}
 		return ret;
+	}
+	
+	private PasswordEntity createPasswordEntity(String name, String password) {
+		String encryptedPassword = decryptPassword(password);
+		PasswordEntity ret = new PasswordEntity(name, encryptedPassword);
+		return ret;
+	}
+	
+	private String decryptPassword(String encryptedPassword) {
+		String ret = new String(ENCRYPTION_SERVICE.decrypt(ENCRYPTION_SERVICE.decodeFromBase64(encryptedPassword), masterKey()));
+		return ret;
+	}
+	
+	private String encryptPassword(String password) {
+		String ret = ENCRYPTION_SERVICE.encodeToBase64(ENCRYPTION_SERVICE.encrpyt(password.getBytes(), masterKey()));
+		return ret;
+	}
+	
+	private String masterKey() {
+		return LOCK_SERVICE.getMasterKeyForEncryption();
 	}
 
 }

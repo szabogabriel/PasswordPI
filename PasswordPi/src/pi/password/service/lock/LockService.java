@@ -22,4 +22,6 @@ public interface LockService {
 	
 	boolean updateMasterKey(String oldKey, String newKey);
 	
+	String getMasterKeyForEncryption();
+	
 }

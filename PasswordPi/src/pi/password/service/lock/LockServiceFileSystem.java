@@ -18,6 +18,7 @@ public class LockServiceFileSystem implements LockService {
 	private final EncryptionService ENCRYPTION;
 	
 	private String masterKey = null;
+	private String masterSalt = null;
 	
 	private boolean isScreenLocked;
 	
@@ -50,7 +51,7 @@ public class LockServiceFileSystem implements LockService {
 		if (isLockSet()) {
 			try {
 				String storedData = new String(Files.readAllBytes(getScreenLockFile().get().toPath()));
-				String computed = ENCRYPTION.encodeToBase64(ENCRYPTION.encrpyt(key.getBytes(), masterKey));
+				String computed = ENCRYPTION.encodeToBase64(ENCRYPTION.encrpyt(key.getBytes(), getMasterKeyForEncryption()));
 				
 				if (storedData != null && storedData.equals(computed)) {
 					isScreenLocked = false;
@@ -93,9 +94,9 @@ public class LockServiceFileSystem implements LockService {
 			
 			try {
 				// salt derived by the file name
-				String salt = tmp.getName().substring(0, tmp.getName().indexOf(MASTER_LOCK_FILE_POSTFIX));
+				masterSalt = tmp.getName().substring(0, tmp.getName().indexOf(MASTER_LOCK_FILE_POSTFIX));
 				String savedHash = new String(Files.readAllBytes(tmp.toPath()));
-				String countedHash = ENCRYPTION.encodeToBase64(ENCRYPTION.hashData(combinePasswordWithSalt(key, salt)));
+				String countedHash = ENCRYPTION.encodeToBase64(ENCRYPTION.hashData(combinePasswordWithSalt(key, masterSalt)));
 				
 				if (savedHash != null && savedHash.equals(countedHash)) {
 					ret = true;
@@ -124,7 +125,7 @@ public class LockServiceFileSystem implements LockService {
 		}
 		
 		if (fileToWrite != null) {
-			String encryptedNewKey = ENCRYPTION.encodeToBase64(ENCRYPTION.encrpyt(newKey.getBytes(), masterKey));
+			String encryptedNewKey = ENCRYPTION.encodeToBase64(ENCRYPTION.encrpyt(newKey.getBytes(), getMasterKeyForEncryption()));
 			try {
 				Files.write(fileToWrite.toPath(), encryptedNewKey.getBytes());
 			} catch (IOException e) {
@@ -146,11 +147,11 @@ public class LockServiceFileSystem implements LockService {
 				tmp.get().delete();
 			}
 			
-			String salt = ENCRYPTION.generateSalt();
+			masterSalt = ENCRYPTION.generateSalt();
 			
-			File newMasterFile = new File(LOCK_DIR.getAbsoluteFile() + "/" + salt + MASTER_LOCK_FILE_POSTFIX);
+			File newMasterFile = new File(LOCK_DIR.getAbsoluteFile() + "/" + masterSalt + MASTER_LOCK_FILE_POSTFIX);
 			
-			String newHash = ENCRYPTION.encodeToBase64(ENCRYPTION.hashData(combinePasswordWithSalt(newKey, salt)));
+			String newHash = ENCRYPTION.encodeToBase64(ENCRYPTION.hashData(combinePasswordWithSalt(newKey, masterSalt)));
 			
 			try {
 				Files.write(newMasterFile.toPath(), newHash.getBytes());
@@ -164,6 +165,15 @@ public class LockServiceFileSystem implements LockService {
 		}
 		
 		return ret;
+	}
+	
+	@Override
+	public String getMasterKeyForEncryption() {
+		String ret = masterKey + masterSalt;
+		while (ret.length() < 33) {
+			ret += masterKey + masterSalt;
+		}
+		return ret.substring(0, 32);
 	}
 	
 	private String combinePasswordWithSalt(String password, String salt) {
