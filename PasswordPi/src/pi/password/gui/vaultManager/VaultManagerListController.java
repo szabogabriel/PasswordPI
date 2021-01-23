@@ -10,7 +10,6 @@ import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
 import pi.password.gui.components.list.StringDisplayable;
-import pi.password.gui.settings.SettingsController;
 import pi.password.gui.splash.SplashController;
 import pi.password.service.gui.DialogService;
 import pi.password.service.gui.TextEditorService;
@@ -52,10 +51,19 @@ public class VaultManagerListController extends AbstractController {
 	public void handleButtonAReleased() {
 		Main.getInstance(SplashController.class).activate();			
 	}
+	
+	@Override
+	public void handleButtonBReleased() {
+		StringDisplayable selected = model.getSelectedValue();
+		
+		if (selected != null && !NEW_PASSWORD_STRING.equals(selected.getValue())) {
+			removePassword();
+		}
+	}
 
 	@Override
 	public void handleButtonCReleased() {
-		Main.getInstance(SettingsController.class).activate();
+		Main.lock();
 	}
 
 	@Override

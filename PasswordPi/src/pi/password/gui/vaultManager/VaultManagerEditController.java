@@ -61,11 +61,6 @@ public class VaultManagerEditController extends AbstractController {
 	}
 	
 	@Override
-	public void handleButtonBReleased() {
-		//TODO: delete
-	}
-	
-	@Override
 	public void handleButtonCReleased() {
 		Main.lock();
 	}
