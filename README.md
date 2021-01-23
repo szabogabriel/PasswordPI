@@ -73,6 +73,11 @@ The web interface is done via the HTTP server implementation available directly 
   - The code on some part is a bit messy (especially the web interface part). A nice refactoring would be beneficial.
 
 ## Future TODOs
+  - Add screenlock (currently only the master lock is present).
+  
+  - Make a unified navigation logic
+  
+  - Add delete option in text input
 
   - HTTPS support.
   
