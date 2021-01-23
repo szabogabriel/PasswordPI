@@ -40,14 +40,15 @@ public class MasterLockSetController extends AbstractController {
 			activateNextScreen();
 		} else {
 			model = new ListModel<StringDisplayable>();
-			model.addData(new StringDisplayable("Set new master", Color.GREEN, false, TextAlign.CENTER));
-			model.addData(new StringDisplayable("Password", Color.GREEN, false, TextAlign.CENTER));
-			model.addData(new StringDisplayable("", Color.WHITE, true, TextAlign.LEFT, this::toPassword));
-			model.addData(new StringDisplayable("Repeat password", Color.GREEN, false, TextAlign.CENTER));
-			model.addData(new StringDisplayable("", Color.WHITE, true, TextAlign.LEFT, this::toPassword));
-			model.addData(new StringDisplayable("OK", Color.GREEN, true, TextAlign.CENTER));
 			view = new ListView<StringDisplayable>("LOCKED", IMAGE_UTIL.getMainBackground(), model);
 			view.paint();
+			
+			model.addData(new StringDisplayable("Set new master", Color.WHITE, false, TextAlign.CENTER));
+			model.addData(new StringDisplayable("Password", Color.WHITE, false, TextAlign.CENTER));
+			model.addData(new StringDisplayable("", Color.GRAY, true, TextAlign.LEFT, this::toPassword));
+			model.addData(new StringDisplayable("Repeat password", Color.WHITE, false, TextAlign.CENTER));
+			model.addData(new StringDisplayable("", Color.GRAY, true, TextAlign.LEFT, this::toPassword));
+			model.addData(new StringDisplayable("OK", Color.WHITE, true, TextAlign.CENTER));
 		}
 	}
 
