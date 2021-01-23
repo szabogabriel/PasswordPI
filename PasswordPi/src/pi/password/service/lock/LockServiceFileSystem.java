@@ -17,32 +17,53 @@ public class LockServiceFileSystem implements LockService {
 	
 	private final EncryptionService ENCRYPTION;
 	
-	private boolean isMasterLocked;
-	
 	private String masterKey = null;
+	
+	private boolean isScreenLocked;
 	
 	public LockServiceFileSystem(EncryptionService encryption) {
 		this.ENCRYPTION = encryption;
-		isMasterLocked = isMasterLocked();
+		isScreenLocked = isLockSet();
 	}
 	
 	@Override
 	public boolean isLockSet() {
-		return false;
+		return getScreenLockFile().isPresent();
 	}
 
 	@Override
 	public boolean isLocked() {
-		return false;
+		return isScreenLocked;
 	}
 
 	@Override
 	public void lock() {
+		if (isLockSet()) {
+			isScreenLocked = true;
+		}
 	}
 	
 	@Override
 	public boolean unlock(String key) {
-		return true;
+		boolean ret = false;
+		
+		if (isLockSet()) {
+			try {
+				String storedData = new String(Files.readAllBytes(getScreenLockFile().get().toPath()));
+				String computed = ENCRYPTION.encodeToBase64(ENCRYPTION.encrpyt(key.getBytes(), masterKey));
+				
+				if (storedData != null && storedData.equals(computed)) {
+					isScreenLocked = false;
+					ret = true;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			ret = true;
+		}
+		
+		return ret;
 	}
 
 	@Override
@@ -92,8 +113,26 @@ public class LockServiceFileSystem implements LockService {
 
 	@Override
 	public boolean updateLockKey(String oldKey, String newKey) {
-		// TODO Auto-generated method stub
-		return false;
+		File fileToWrite = null;
+		
+		if (isLockSet()) {
+			if (unlock(oldKey) && newKey != null) {
+				fileToWrite = getScreenLockFile().get();
+			}
+		} else {
+			fileToWrite = new File(LOCK_DIR.getAbsoluteFile() + "/" + ENCRYPTION.generateSalt() + LOCK_FILE_POSTFIX);
+		}
+		
+		if (fileToWrite != null) {
+			String encryptedNewKey = ENCRYPTION.encodeToBase64(ENCRYPTION.encrpyt(newKey.getBytes(), masterKey));
+			try {
+				Files.write(fileToWrite.toPath(), encryptedNewKey.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return fileToWrite != null;
 	}
 
 	@Override
@@ -131,13 +170,21 @@ public class LockServiceFileSystem implements LockService {
 		return password + salt;
 	}
 	
+	private Optional<File> getScreenLockFile() {
+		return getLockFile(LOCK_FILE_POSTFIX);
+	}
+	
 	private Optional<File> getMasterLockFile() {
+		return getLockFile(MASTER_LOCK_FILE_POSTFIX);
+	}
+	
+	private Optional<File> getLockFile(String postfix) {
 		Optional<File> ret = Arrays.asList(LOCK_DIR.listFiles()).stream()
-			.filter(f -> f.isFile())
-			.filter(f -> f.getName().endsWith(MASTER_LOCK_FILE_POSTFIX))
-			.findAny();
-		
-		return ret;
+				.filter(f -> f.isFile())
+				.filter(f -> f.getName().endsWith(postfix))
+				.findAny();
+			
+			return ret;
 	}
 
 }
