@@ -1,4 +1,4 @@
-package pi.password.gui.screenlock;
+package pi.password.gui.lock;
 
 import java.awt.Color;
 import java.util.ArrayList;

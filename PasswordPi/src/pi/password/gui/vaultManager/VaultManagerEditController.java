@@ -2,12 +2,12 @@ package pi.password.gui.vaultManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import pi.password.Main;
 import pi.password.gui.AbstractController;
 import pi.password.gui.components.list.ListModel;
 import pi.password.gui.components.list.ListView;
-import pi.password.gui.splash.SplashController;
 import pi.password.gui.vaultManager.VaultManagerEditDisplayable.Type;
 import pi.password.service.gui.TextEditorService;
 import pi.password.service.password.PasswordVaultService;
@@ -57,7 +57,7 @@ public class VaultManagerEditController extends AbstractController {
 	
 	@Override
 	public void handleButtonAReleased() {
-		Main.getInstance(SplashController.class).activate();
+		PARENT.reactivate();
 	}
 	
 	@Override
@@ -81,16 +81,22 @@ public class VaultManagerEditController extends AbstractController {
 		
 		if (displayableName.equals(selected)) {
 			ThreadUtil.createBackgroundJob(() -> {
-				String newName = TEXT_EDITOR_SERVICE.editPlaintext("Change", "Enter new name", displayableName.getValue());
-				displayableName.setValue(newName);
-				model.setData(displayableName, 1);	
+				Optional<String> newName = TEXT_EDITOR_SERVICE.editPlaintext("Change", "Enter new name", displayableName.getValue());
+				
+				if (newName.isPresent()) {
+					displayableName.setValue(newName.get());
+					model.setData(displayableName, 1);
+				}
 			});
 		} else
 		if (displayablePassword.equals(selected)) {
 			ThreadUtil.createBackgroundJob(() -> {
-				String newPsswd = TEXT_EDITOR_SERVICE.editPassword("Change", "New password for " + displayableName.getValue(), displayablePassword.getValue());
-				displayablePassword.setValue(newPsswd);
-				model.setData(displayablePassword, 3);
+				Optional<String> newPsswd = TEXT_EDITOR_SERVICE.editPassword("Change", "New password for " + displayableName.getValue(), displayablePassword.getValue());
+				
+				if (newPsswd.isPresent()) {
+					displayablePassword.setValue(newPsswd.get());
+					model.setData(displayablePassword, 3);
+				}
 			});
 		} else 
 		if (displayableSave.equals(selected)) {

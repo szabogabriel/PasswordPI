@@ -15,8 +15,8 @@ import com.waveshare.display.buffered.BufferedLcdDisplay;
 import com.waveshare.keyboard.HatKeyboard;
 import com.waveshare.keyboard.hat.HatKeyboardImpl;
 
+import pi.password.gui.lock.ScreenlockController;
 import pi.password.gui.passwords.PasswordController;
-import pi.password.gui.screenlock.ScreenlockController;
 import pi.password.gui.splash.SplashController;
 import pi.password.gui.vaultManager.VaultManagerListController;
 import pi.password.service.alphabet.AlphabetService;

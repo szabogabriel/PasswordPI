@@ -1,7 +1,5 @@
 package pi.password.gui.components.list;
 
-import java.awt.Color;
-
 import pi.password.service.hat.DisplayService;
 
 public interface ListBodyDisplayable {

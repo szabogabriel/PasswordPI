@@ -1,5 +1,6 @@
 package pi.password.gui.components.editor;
 
+import pi.password.Main;
 import pi.password.gui.AbstractController;
 import pi.password.service.alphabet.AlphabetService;
 
@@ -8,9 +9,16 @@ public class TextEditorController extends AbstractController {
 	private TextEditorView view;
 	private TextEditorModel model;
 	
+	private boolean closable = false;
+	
 	public TextEditorController(String title, String editorDescription, String initValue, TextEditorType type, TextEditorCallback callback, AlphabetService alphabet) {
+	
+	}
+		
+	public TextEditorController(String title, String editorDescription, String initValue, TextEditorType type, TextEditorCallback callback, AlphabetService alphabet, boolean closable) {
 		model = new TextEditorModel(initValue, type, callback, alphabet);
 		view = new TextEditorView(title, editorDescription, model);
+		this.closable = closable;
 	}
 	
 	@Override
@@ -24,15 +32,20 @@ public class TextEditorController extends AbstractController {
 	}
 	
 	public void handleButtonAReleased() {
-		//TODO - go to splash screen maybe?
+		if (closable) {
+			model.closeEditor();
+		}
 	}
 	
 	public void handleButtonBReleased() {
-		//TODO - go to splash screen maybe?
+		model.deleteCurrentChar();
 	}
 	
 	public void handleButtonCReleased() {
-		//TODO - activate settings maybe?
+		if (closable) {
+			model.closeEditor();
+			Main.lock();
+		}
 	}
 	
 	public void handleJoystickUpReleased() {

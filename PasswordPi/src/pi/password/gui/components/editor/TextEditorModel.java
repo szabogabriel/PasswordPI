@@ -1,5 +1,6 @@
 package pi.password.gui.components.editor;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import pi.password.Main;
@@ -15,6 +16,8 @@ public class TextEditorModel extends AbstractModel {
 	
 	private final AlphabetService ALPHABET;
 	
+	private final boolean CLOSABLE;
+	
 	private char[] content;
 	
 	private int currentEditChar = 0;
@@ -24,6 +27,11 @@ public class TextEditorModel extends AbstractModel {
 	private TextEditorChangeListener listener;
 	
 	public TextEditorModel(String initValue, TextEditorType type, TextEditorCallback callback, AlphabetService alphabet) {
+		this(initValue, type, callback, alphabet, true);
+	}
+	
+	public TextEditorModel(String initValue, TextEditorType type, TextEditorCallback callback, AlphabetService alphabet, boolean closable) {
+		this.CLOSABLE = closable;
 		this.TYPE = type;
 		this.CALLBACK = callback;
 		this.ALPHABET = alphabet;
@@ -83,6 +91,22 @@ public class TextEditorModel extends AbstractModel {
 		}
 	}
 	
+	public void deleteCurrentChar() {
+		StringBuilder sb = new StringBuilder();
+		
+		if (content.length > 1) {
+			sb.append(new String(content));
+			sb.deleteCharAt(currentEditChar);
+			content = sb.toString().toCharArray();
+			
+			if (currentEditChar == content.length) {
+				currentEditChar--;
+			}
+		}
+		
+		castEvent(l -> l.contentChanged());
+	}
+	
 	public void increaseCurrentCharacter() {
 		char current = content[currentEditChar];
 		current = getNextChar(current);
@@ -108,9 +132,19 @@ public class TextEditorModel extends AbstractModel {
 	}
 	
 	public void confirmCurrentStatus() {
-		CALLBACK.handleTextEditorResult(new String(content));
+		closeEditor(Optional.of(new String(content)));
+	}
+	
+	public void closeEditor() {
+		closeEditor(Optional.empty());
+	}
+	
+	private void closeEditor(Optional<String> result) {
+		CALLBACK.handleTextEditorResult(result);
 		Main.getInstance(KeyInputService.class).setButtonHandler(previousController);
-		previousController.reactivate();
+		if (CLOSABLE) {
+			previousController.reactivate();
+		}
 	}
 	
 	private void castEvent(Consumer<TextEditorChangeListener> event) {

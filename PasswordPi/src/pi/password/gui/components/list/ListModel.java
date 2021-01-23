@@ -105,7 +105,9 @@ public class ListModel<T extends ListBodyDisplayable> extends AbstractModel {
 		
 		if (selected == -1) {
 			if (isSelectableAvailable()) {
-				while (!elements.get(++selected).isSelectable());
+				do {
+					selected++;
+				} while (!elements.get(selected).isSelectable());
 			}
 		} else {
 			if (elements.size() <= selected) {
