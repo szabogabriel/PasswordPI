@@ -9,12 +9,13 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.Properties;
 
-import com.jdi.ServiceClassType;
+import com.jdi.domain.ServiceClassType;
 import com.waveshare.display.LcdDisplay;
 import com.waveshare.display.buffered.BufferedLcdDisplay;
 import com.waveshare.keyboard.HatKeyboard;
 import com.waveshare.keyboard.hat.HatKeyboardImpl;
 
+import pi.password.gui.developer.DeveloperController;
 import pi.password.gui.lock.ScreenlockController;
 import pi.password.gui.passwords.PasswordController;
 import pi.password.gui.splash.SplashController;
@@ -43,6 +44,7 @@ import pi.password.service.settings.SettingsUpdatePropagatorService;
 import pi.password.service.settings.SettingsUpdatePropagatorServiceImpl;
 import pi.password.service.template.TemplateService;
 import pi.password.service.template.TemplateServiceMustache;
+import pi.password.service.util.CgiService;
 import pi.password.service.util.ImageUtilService;
 import pi.password.service.util.ImageUtilServiceFileSystem;
 import pi.password.service.webserver.WebserverService;
@@ -51,11 +53,15 @@ import pi.password.service.webserver.WebserverServiceImpl;
 public enum RuntimeConfig {
 	
 	DI_IMPL_ALPHABET("impl." + AlphabetService.class.getCanonicalName(), AlphabetServiceImpl.class.getCanonicalName()),
+	DI_IMPL_CGI_SERVICE("impl." + CgiService.class.getCanonicalName(), CgiService.class.getCanonicalName()),
+	DI_TYPE_CGI_SERVICE("type." + CgiService.class.getCanonicalName(), ServiceClassType.SINGLETON.toString()),
 	DI_IMPL_ENCRYPTION("impl." + EncryptionService.class.getCanonicalName(), EncryptionServiceImpl.class.getCanonicalName()),
 	DI_IMPL_LCD_DISPLAY("impl." + LcdDisplay.class.getCanonicalName(), BufferedLcdDisplay.class.getCanonicalName()),
 	DI_IMPL_HAT_KEYBOARD("impl." + HatKeyboard.class.getCanonicalName(), HatKeyboardImpl.class.getCanonicalName()),
 	DI_IMPL_DIALOG_SERVICE("impl." + DialogService.class.getCanonicalName(), DialogServiceImpl.class.getCanonicalName()),
 	DI_IMPL_DISPLAY_SERVICE("impl." + DisplayService.class.getCanonicalName(), DisplayServiceWaveshareHat.class.getCanonicalName()),
+	DI_IMPL_GUI_DEVELOPER("impl." + DeveloperController.class.getCanonicalName(), DeveloperController.class.getCanonicalName()),
+	DI_TYPE_GUI_DEVELOPER("type." + DeveloperController.class.getCanonicalName(), ServiceClassType.MULTITON.toString()),
 	DI_IMPL_GUI_PASSWORD("impl." + PasswordController.class.getCanonicalName(), PasswordController.class.getCanonicalName()),
 	DI_TYPE_GUI_PASSWORD("type." + PasswordController.class.getCanonicalName(), ServiceClassType.MULTITON.toString()),
 	DI_IMPL_GUI_SCREENLOCK("impl." + ScreenlockController.class.getCanonicalName(), ScreenlockController.class.getCanonicalName()),
@@ -86,8 +92,8 @@ public enum RuntimeConfig {
 	ICON_WIFI_ON("icon.wifi.on", "img/icon_wifi_on.png"),
 	ICON_WIFI_OFF("icon.wifi.off", "img/icon_wifi_off.png"),
 	
-	ALPHABET_PASSWORD("alphabet.password", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/?.,$#@%^&{}[]()<>;:"),
-	ALPHABET_REGULAR("alphabet.regular", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.?()"),
+	ALPHABET_PASSWORD("alphabet.password", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/?!.,$#@%^&{}[]()<>;:"),
+	ALPHABET_REGULAR("alphabet.regular", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.?!()"),
 	
 	WORKING_DIRECTORY("working.dir", "."),
 	

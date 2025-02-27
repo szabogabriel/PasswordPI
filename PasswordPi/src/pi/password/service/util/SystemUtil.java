@@ -10,9 +10,11 @@ public class SystemUtil {
 	public Optional<String> getIpAddress() {
 		StringBuilder ret = new StringBuilder();
         try {
+        	boolean added = false;
 			for (String ipAddress : NetworkInfo.getIPAddresses()) {
-			    if (!ipAddress.contains("127.0.0.1") && !ipAddress.contains(":")) {
+			    if (!ipAddress.contains("127.0.0.1") && !ipAddress.contains(":") && !added) {
 			    	ret.append(ipAddress);
+			    	added = true;
 			    }
 			}
 		} catch (IOException | InterruptedException e) {

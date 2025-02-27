@@ -2,7 +2,7 @@ package pi.password.config;
 
 import java.util.Optional;
 
-import com.jdi.ConfigService;
+import com.jdi.config.ConfigService;
 
 public class JdiConfigService implements ConfigService {
 

@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.jdi.ConfigService;
+import com.jdi.config.ConfigService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
@@ -63,6 +63,7 @@ public class WebserverServiceImpl implements WebserverService {
 		Optional<String> ipAddress = SYSTEM_UTIL.getIpAddress();
 		if (!running && ipAddress.isPresent() && port > 0) {
 			try {
+				System.out.println("Webserver connecting to " + ipAddress);
 				InetSocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(ipAddress.get()), port);
 
 				server = HttpServer.create(socketAddress, port);

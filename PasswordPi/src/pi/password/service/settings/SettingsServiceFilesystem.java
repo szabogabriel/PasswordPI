@@ -11,7 +11,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.jdi.ConfigService;
+import com.jdi.config.ConfigService;
 
 import pi.password.config.RuntimeConfig;
 import pi.password.entity.SettingsEntity;

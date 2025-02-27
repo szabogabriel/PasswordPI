@@ -3,8 +3,6 @@ package pi.password.entity;
 import java.util.Arrays;
 import java.util.Optional;
 
-import com.sun.corba.se.impl.io.TypeMismatchException;
-
 import pi.password.enums.LocalizedTexts;
 
 public class SettingsEntity {
@@ -129,6 +127,22 @@ public class SettingsEntity {
 				return new String [] {LocalizedTexts.SETTINGS_VALUE_OFF.toString(), LocalizedTexts.SETTINGS_VALUE_ON.toString()};
 			}
 		},
+		DEVELOPER_MODE(Type.OPTIONS) {
+			@Override
+			public String getPrintableName() {
+				return LocalizedTexts.SETTINGS_KEY_DEVELOPER_MODE.toString();
+			}
+
+			@Override
+			public String getDefaultValue() {
+				return LocalizedTexts.SETTINGS_VALUE_OFF.toString();
+			}
+
+			@Override
+			public String[] getValues() {
+				return new String [] {LocalizedTexts.SETTINGS_VALUE_OFF.toString(), LocalizedTexts.SETTINGS_VALUE_ON.toString()};
+			}
+		},
 		;
 
 		private final Type type;
@@ -183,6 +197,6 @@ public class SettingsEntity {
 			}
 			return ret;
 		}
-		throw new TypeMismatchException("The setting " + key.getPrintableName() + " is not of type " + Type.NUMBERS + ".");
+		throw new IllegalArgumentException("The setting " + key.getPrintableName() + " is not of type " + Type.NUMBERS + ".");
 	}
 }

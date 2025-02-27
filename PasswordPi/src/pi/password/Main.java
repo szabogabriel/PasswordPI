@@ -1,7 +1,7 @@
 package pi.password;
 
-import com.jdi.ServiceFactory;
-import com.jdi.ServiceFactoryImpl;
+import com.jdi.services.ServiceFactory;
+import com.jdi.services.impl.ServiceFactoryImpl;
 
 import pi.password.config.JdiConfigService;
 import pi.password.entity.SettingsEntity;

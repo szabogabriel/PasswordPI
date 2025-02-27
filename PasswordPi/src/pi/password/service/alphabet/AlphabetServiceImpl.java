@@ -1,6 +1,6 @@
 package pi.password.service.alphabet;
 
-import com.jdi.ConfigService;
+import com.jdi.config.ConfigService;
 
 import pi.password.config.RuntimeConfig;
 

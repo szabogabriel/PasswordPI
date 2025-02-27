@@ -16,6 +16,7 @@ public enum LocalizedTexts {
 	SETTINGS_KEY_WEBSERVER_STRICT("settings.key.webserver.strict", "Web strict"),
 	SETTINGS_KEY_WEBSERVER_PORT("settings.key.webserver.port", "Web port"),
 	SETTINGS_KEY_WEBSERVER_ENABLED("settings.key.webserver.enabled", "Webserver"),
+	SETTINGS_KEY_DEVELOPER_MODE("settings.key.developer.mode", "Dev-mode"),
 	SETTINGS_VALUE_ON("settings.value.on", "On"),
 	SETTINGS_VALUE_OFF("settings.value.off", "Off"),
 	
@@ -43,6 +44,7 @@ public enum LocalizedTexts {
 	VIEW_SPLASH_BODY_PASSWORD("view.splash.body.passwords", "Passwords"),
 	VIEW_SPLASH_BODY_VAULT("view.splash.body.vault", "Vault"),
 	VIEW_SPLASH_BODY_SETTINGS("view.splash.body.settings", "Settings"),
+	VIEW_SPLASH_BODY_DEV_UTILS("view.splash.body.dev.utils", "Dev utils"),
 	
 	VIEW_VAULT_EDIT_TITLE("view.vault.edit.title", "Vault"),
 	VIEW_VAULT_EDIT_DIALOG_TITLE("view.vault.edit.dialog.title", "Change"),
